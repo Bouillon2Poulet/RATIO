@@ -84,7 +84,7 @@ public :
 
 
 	/// \brief affectation operator
-	Rational & operator=(const Rational &r);
+	void operator=(const Rational &r);
 
 
 	/// \brief add 2 Rationals

@@ -1,20 +1,41 @@
-// #include <random>
+#include <random>
 // #include <vector>
 // #include <string>
 // #include <algorithm>
 
-// #include <gtest/gtest.h>
+#include <gtest/gtest.h>
 
-// #include "VectorD.hpp"
+#include "Rational.hpp"
 
 
-// /////////////////////////////////////////////////////
-// // constructors
+/////////////////////////////////////////////////////
+// constructors
 
-// TEST (VectorDConstructor, defaultConstructor) { 
-// 	VectorD vec;
-// 	ASSERT_EQ (vec.size(), 0);
-// }
+TEST (RationalConstructor, defaultConstructor) { 
+	Rational r;
+	ASSERT_EQ (r.n(),0);
+    ASSERT_EQ (r.d(),1);
+}
+
+TEST (RationalConstructor, directConstructor) { 
+
+    const size_t maxSize = 150;  // max value for both _n et _d
+    std::mt19937 generator(0);
+	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
+	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
+	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+
+	// run many times the same test with different values
+	for(int run=0; run<100; ++run){
+
+		// define a vector dimension
+        int n = uniformDistributionValue(-int(maxSize),maxSize);
+        unsigned int d = uniformIntDistribution(0,maxSize);;
+
+        Rational r(n,d);
+		ASSERT_EQ (std::gcd(r.n(),r.d()),1);
+	}
+}
 
 
 

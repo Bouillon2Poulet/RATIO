@@ -31,17 +31,13 @@ Rational::Rational(const Rational & r) : _n(r._n), _d(r._d) {
 
 //Operators
 
-Rational & Rational::operator=(const Rational &r){
-	_n = r._n;
-	_d = r._d;
+void Rational::operator=(const Rational &r){
+	_n = r.n();
+	_d = r.d();
 }
 
 Rational Rational::Rational::operator+(const Rational &r) const{
 	return Rational(_n*r._d+r._n*_d,_d*r._d);
-}
-
-Rational Rational::Rational::operator+(const Rational &r) const{
-	return Rational(_n*r._d-r._n*_d,_d*r._d);
 }
 
 Rational Rational::Rational::operator-() const {
