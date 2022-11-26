@@ -48,6 +48,14 @@ Rational Rational::Rational::operator-() const {
 	return Rational(-1*_n,_d);
 }
 
+Rational Rational::Rational::operator*(const Rational &r) const {
+	return Rational(_n*r._n,_d*r._d);
+}
+
+Rational Rational::Rational::operator/(const Rational &r) const{
+	return Rational(_n*r._d,_d*r._n);
+}
+
 // VectorD VectorD::operator+(const VectorD &v) const
 // {
 // 	if(v.size() != this->size())

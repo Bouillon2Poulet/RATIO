@@ -89,7 +89,7 @@ public :
 	Rational operator+(const Rational &r) const;
 
 	/// \brief substract 2 Rationals
-	/// \param r : rational to substract to the calling rational
+	/// \param r : Rational to substract to the calling Rational
 	/// \return the substract of the current vector and the argument vector
 	Rational operator-(const Rational &vec) const;
 
@@ -98,6 +98,15 @@ public :
 	/// \return the minus the calling Rational
 	Rational operator-() const;
 
+	/// \brief multiply 2 Rationals
+	/// \param r : Rational to multiply to the calling Rational
+	/// \return the product of the current vector and the argument vector
+	Rational operator*(const Rational &r) const;
+
+	/// \brief divide 2 Rationals
+	/// \param r : Rational to divide to the calling Rational
+	/// \return the quotient of the current vector and the argument vector
+	Rational operator/(const Rational &r) const;
 	/*
 	/// \brief scale a vector with a constant value
 	/// \param value : scale factor
