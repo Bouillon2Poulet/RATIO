@@ -31,24 +31,22 @@ Rational::Rational(const Rational & r) : _n(r._n), _d(r._d) {
 
 //Operators
 
-// VectorD & VectorD::operator=(const VectorD &v){
-// 	if(&v == this) return *this;
+Rational & Rational::operator=(const Rational &r){
+	_n = r._n;
+	_d = r._d;
+}
 
-// 	_data = v._data;
+Rational Rational::Rational::operator+(const Rational &r) const{
+	return Rational(_n*r._d+r._n*_d,_d*r._d);
+}
 
-// 	return *this;
-// }
+Rational Rational::Rational::operator+(const Rational &r) const{
+	return Rational(_n*r._d-r._n*_d,_d*r._d);
+}
 
-
-// double& VectorD::operator[](const size_t& i){
-// 	return _data[i];
-// }
-
-
-// const double& VectorD::operator[](const size_t& i) const {
-// 	return _data[i];
-// }
-
+Rational Rational::Rational::operator-() const {
+	return Rational(-1*_n,_d);
+}
 
 // VectorD VectorD::operator+(const VectorD &v) const
 // {

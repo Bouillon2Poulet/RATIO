@@ -72,40 +72,33 @@ public :
 		return _n;
 	}
 
-	/// \brief return the numerator of a Rational
+	/// \brief return the denominator of a Rational
 	inline unsigned int d() const {
 		return _d;
 	}
 
-	/*
+
 
 	/// \brief affectation operator
-	VectorD & operator=(const VectorD &v);
+	Rational & operator=(const Rational &r);
 
-	/// \brief operator to access to the ist element of a vector
-	/// \param  i: index of the targeted vector component
-	/// \return vector[i] 
-	double& operator[](const size_t& i);
 
-	/// \brief operator to access to the ist element of a vector (const version)
-	/// \param i: index of the targeted vector component
-	/// \return vector[i] (constant reference)
-	const double& operator[](const size_t& i) const;
+	/// \brief add 2 Rationals
+	/// \param r : rational to add to the calling rational
+	/// \return the sum of the current Rational and the argument Rational
+	Rational operator+(const Rational &r) const;
 
-	/// \brief add 2 vectors of same size
-	/// \param vec : vector to add to the calling vector (should have the same dimension as the calling vector)
-	/// \return the sum of the current vector and the argument vector
-	VectorD operator+(const VectorD &vec) const;
+	/// \brief substract 2 Rationals
+	/// \param r : rational to substract to the calling rational
+	/// \return the substract of the current vector and the argument vector
+	Rational operator-(const Rational &vec) const;
 
-	/// \brief substract a vector to *this (where the two vectors have the same size)
-	/// \param vec : vector to substract to the calling vector (should have the same dimension as the calling vector)
-	/// \return the sum of the current vector and the argument vector
-	VectorD operator-(const VectorD &vec) const;
 
 	/// \brief unary minus
-	/// \return the minus the calling vector 
-	VectorD operator-() const;
+	/// \return the minus the calling Rational
+	Rational operator-() const;
 
+	/*
 	/// \brief scale a vector with a constant value
 	/// \param value : scale factor
 	/// \return the scaled vector
