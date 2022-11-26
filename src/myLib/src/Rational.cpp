@@ -1,27 +1,30 @@
-#include "VectorD.hpp"
+#include "Rational.hpp"
 
-#include <fstream>
-#include <cstdlib>    // size_t
-#include <algorithm>  // transform
-#include <numeric>    // inner_product
-#include <cmath>      // sqrt
-#include <stdexcept>  // special exceptions
-#include <string>     // for exceptions
+// #include <fstream>
+// #include <cstdlib>    // size_t
+// #include <algorithm>  // transform
+// #include <numeric>    // inner_product
+// #include <cmath>      // sqrt
+// #include <stdexcept>  // special exceptions
+// #include <string>     // for exceptions
 
 
-VectorD::VectorD(const size_t size) : _data(size) {
+//Constructors
+
+Rational::Rational() : _n(0), _d(1) {
 }
 
-
-VectorD::VectorD(const VectorD & v) : _data(v._data){
+Rational::Rational(const unsigned int n, const int d) : _n(n), _d(d) {
 }
 
-
-VectorD::VectorD(const size_t size, const double &value) : VectorD(size)
-{
-	std::fill(_data.begin(), _data.end(), value);
+Rational::Rational(const unsigned int value){
+	//Faire la conversion int -> rationnel 
 }
 
+Rational::Rational(const Rational & r) : _n(r._n), _d(r._d){
+}
+
+//Operators
 
 VectorD & VectorD::operator=(const VectorD &v){
 	if(&v == this) return *this;

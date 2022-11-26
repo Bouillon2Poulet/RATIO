@@ -7,8 +7,8 @@
 #include <fstream>
 
 
-#ifndef __VECTORD__HPP
-#define __VECTORD__HPP
+#ifndef __RATIONAL__HPP
+#define __RATIONAL__HPP
 
 
 // Doxygen menu
@@ -35,36 +35,39 @@
 
 
 
-/// \class VectorD
-/// \brief class defining a vector for linear algebra operations.
-class VectorD {
+/// \class Rational
+/// \brief class defining a number by its rational form
+class Rational {
 
 public:
 
-	/// \brief constructor from a size and default constructor
-	/// \param size : the size of the requested vector (optional)
-    VectorD(const size_t size = 0);
+	/// \brief default constructor, creates a Rational equal to zero
+    Rational();
 
-	/// \brief constructor from a size that fills the vector with a constant
-	/// \param size : the size of the requested vector
-	/// \param value : the constant value used to fill the vector
-    VectorD(const size_t size, const double &value);
+	/// \brief constructor from numerator and denominator, PGCD(n,d) = 1
+	/// \param n : the const value used as numerator, can be negative
+	/// \param d : the const value used as denominator
+    Rational(const unsigned int n, const int d);
+
+	/// \brief constructor from an int that is converted into a Rational
+	/// \param value : the const value converted into a Rational
+    Rational(const unsigned int value);
 
 	/// \brief copy-constructor
-	/// \param v : the source vector to be copied
-	VectorD(const VectorD & v);
+	/// \param r : the source rational to be copied
+	Rational(const Rational & r);
 
     /// \brief destructor
-    ~VectorD() = default;
+    ~Rational() = default;
 
 
 private :
-  
-    std::vector<double> _data;     /*!< components of the vector */
 
+	unsigned int _n; /*!< numerator, can be negative */
+	int _d; /*!< denominator, can not be equal to zero */
 
 public :
-	
+	/*
 	/// \brief return the size of a Vector
 	inline size_t size() const {
 		return _data.size();
@@ -144,5 +147,5 @@ public :
     /// \param v : the vector to output
     /// \return the output stream containing the vector data
     std::ostream& operator<< (std::ostream& stream, const VectorD& v);
-
+*/
 #endif
