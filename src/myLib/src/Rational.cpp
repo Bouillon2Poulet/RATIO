@@ -1,5 +1,5 @@
 #include "Rational.hpp"
-// COUCOU ROM1 LE PAIN
+// SALUT MATHOU SAVA ????
 
 // #include <fstream>
 // #include <cstdlib>    // size_t
