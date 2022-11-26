@@ -47,11 +47,11 @@ public:
 	/// \brief constructor from numerator and denominator, PGCD(n,d) = 1
 	/// \param n : the const value used as numerator, can be negative
 	/// \param d : the const value used as denominator
-    Rational(const unsigned int n, const int d);
+    Rational(const int n, const unsigned int d);
 
 	/// \brief constructor from an int that is converted into a Rational
 	/// \param value : the const value converted into a Rational
-    Rational(const unsigned int value);
+    Rational(const int value);
 
 	/// \brief copy-constructor
 	/// \param r : the source rational to be copied
@@ -63,15 +63,21 @@ public:
 
 private :
 
-	unsigned int _n; /*!< numerator, can be negative */
-	int _d; /*!< denominator, can not be equal to zero */
+	int _n; /*!< numerator, can be negative */
+	unsigned int _d; /*!< denominator, can not be equal to zero */
 
 public :
-	/*
-	/// \brief return the size of a Vector
-	inline size_t size() const {
-		return _data.size();
+	/// \brief return the numerator of a Rational
+	inline int n() const {
+		return _n;
 	}
+
+	/// \brief return the numerator of a Rational
+	inline unsigned int d() const {
+		return _d;
+	}
+
+	/*
 
 	/// \brief affectation operator
 	VectorD & operator=(const VectorD &v);
@@ -132,20 +138,20 @@ public :
 
     /// \brief display the elements of the vector
     void display() const;
-
+*/
 };
 
 
-	/// \brief scale a vector with a constant value
-	/// \param value : scale factor
-	/// \param vec is the vector to be scaled
-	/// \return the scaled vector
-	VectorD operator*(const double value, const VectorD &vec);
+	// /// \brief scale a vector with a constant value
+	// /// \param value : scale factor
+	// /// \param vec is the vector to be scaled
+	// /// \return the scaled vector
+	// VectorD operator*(const double value, const VectorD &vec);
 
-	/// \brief overload the operator << for VectorD
-    /// \param stream : input stream
-    /// \param v : the vector to output
-    /// \return the output stream containing the vector data
-    std::ostream& operator<< (std::ostream& stream, const VectorD& v);
-*/
+	// /// \brief overload the operator << for VectorD
+    // /// \param stream : input stream
+    // /// \param v : the vector to output
+    // /// \return the output stream containing the vector data
+    // std::ostream& operator<< (std::ostream& stream, const VectorD& v);
+
 #endif

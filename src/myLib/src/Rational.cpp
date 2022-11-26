@@ -3,7 +3,7 @@
 // #include <fstream>
 // #include <cstdlib>    // size_t
 // #include <algorithm>  // transform
-// #include <numeric>    // inner_product
+#include <numeric>    // gcd()
 // #include <cmath>      // sqrt
 // #include <stdexcept>  // special exceptions
 // #include <string>     // for exceptions
@@ -14,177 +14,182 @@
 Rational::Rational() : _n(0), _d(1) {
 }
 
-Rational::Rational(const unsigned int n, const int d) : _n(n), _d(d) {
+Rational::Rational(const int n, const unsigned int d) : _n(n), _d(d) {
+	int gcd = std::gcd(_n,_d);
+	if (gcd!=1){
+		_n/=gcd;
+		_d/=gcd;
+	}
 }
 
-Rational::Rational(const unsigned int value){
+Rational::Rational(const int value){
 	//Faire la conversion int -> rationnel 
 }
 
-Rational::Rational(const Rational & r) : _n(r._n), _d(r._d){
+Rational::Rational(const Rational & r) : _n(r._n), _d(r._d) {
 }
 
 //Operators
 
-VectorD & VectorD::operator=(const VectorD &v){
-	if(&v == this) return *this;
+// VectorD & VectorD::operator=(const VectorD &v){
+// 	if(&v == this) return *this;
 
-	_data = v._data;
+// 	_data = v._data;
 
-	return *this;
-}
-
-
-double& VectorD::operator[](const size_t& i){
-	return _data[i];
-}
+// 	return *this;
+// }
 
 
-const double& VectorD::operator[](const size_t& i) const {
-	return _data[i];
-}
+// double& VectorD::operator[](const size_t& i){
+// 	return _data[i];
+// }
 
 
-VectorD VectorD::operator+(const VectorD &v) const
-{
-	if(v.size() != this->size())
-		throw std::length_error("VectorD::operator+: operand with incompatible size : " + std::to_string(this->_data.size()) + " and " + std::to_string(v._data.size()));
-
-	VectorD result(size());
-	std::transform(_data.begin(), _data.end(), v._data.begin(), result._data.begin(), std::plus<double>());
-
-	// if(result.size() !=0)
-	// 	result[0] += 42; // looks like a bug ...
-
-	return result;
-}
+// const double& VectorD::operator[](const size_t& i) const {
+// 	return _data[i];
+// }
 
 
-VectorD VectorD::operator-(const VectorD &v) const
-{
-	if(v.size() != this->size())
-		throw std::length_error("VectorD::operator-: operand with incompatible size : " + std::to_string(this->_data.size()) + " and " + std::to_string(v._data.size()));
+// VectorD VectorD::operator+(const VectorD &v) const
+// {
+// 	if(v.size() != this->size())
+// 		throw std::length_error("VectorD::operator+: operand with incompatible size : " + std::to_string(this->_data.size()) + " and " + std::to_string(v._data.size()));
 
-	VectorD result(size());
-	std::transform(_data.begin(), _data.end(), v._data.begin(), result._data.begin(), std::minus<double>());
+// 	VectorD result(size());
+// 	std::transform(_data.begin(), _data.end(), v._data.begin(), result._data.begin(), std::plus<double>());
 
-	return result;
-}
+// 	// if(result.size() !=0)
+// 	// 	result[0] += 42; // looks like a bug ...
 
-
-VectorD VectorD::operator-() const
-{
-	VectorD result(size());
-	for(size_t i=0; i<size(); ++i)
-		result[i] = -_data[i];
-
-	return result;
-}
+// 	return result;
+// }
 
 
-VectorD VectorD::operator*(const double &value) const
-{
-	VectorD result(*this);
-	for(size_t i=0; i<size(); ++i)
-		result[i] *= value;
+// VectorD VectorD::operator-(const VectorD &v) const
+// {
+// 	if(v.size() != this->size())
+// 		throw std::length_error("VectorD::operator-: operand with incompatible size : " + std::to_string(this->_data.size()) + " and " + std::to_string(v._data.size()));
 
-	return result;
-}
+// 	VectorD result(size());
+// 	std::transform(_data.begin(), _data.end(), v._data.begin(), result._data.begin(), std::minus<double>());
 
-
-double VectorD::norm() const{
-	return sqrt(this->dot(*this));
-}
+// 	return result;
+// }
 
 
-void VectorD::normalize() {
-	double vec_norm = this->norm();
+// VectorD VectorD::operator-() const
+// {
+// 	VectorD result(size());
+// 	for(size_t i=0; i<size(); ++i)
+// 		result[i] = -_data[i];
 
-	if (std::abs(vec_norm) < 1.0e-10)
-		return;
-
-	for (size_t i =0; i<size(); i++) 
-		_data[i] /= vec_norm;
-}
-
-
-double VectorD::dot(const VectorD & v) const {
-
-	if(v.size() != this->size())
-		throw std::length_error("VectorD::dot: operand with incompatible size : " + std::to_string(this->_data.size()) + " and " + std::to_string(v._data.size()));
-
-	return std::inner_product(_data.begin(), _data.end(), v._data.begin(),0.0);
-}
+// 	return result;
+// }
 
 
+// VectorD VectorD::operator*(const double &value) const
+// {
+// 	VectorD result(*this);
+// 	for(size_t i=0; i<size(); ++i)
+// 		result[i] *= value;
 
-void VectorD::save(const std::string &filename) const{
+// 	return result;
+// }
 
-	//open the file
-	std::ofstream myfile;
-	myfile.open(filename, std::ios::out | std::ios::binary);
+
+// double VectorD::norm() const{
+// 	return sqrt(this->dot(*this));
+// }
+
+
+// void VectorD::normalize() {
+// 	double vec_norm = this->norm();
+
+// 	if (std::abs(vec_norm) < 1.0e-10)
+// 		return;
+
+// 	for (size_t i =0; i<size(); i++) 
+// 		_data[i] /= vec_norm;
+// }
+
+
+// double VectorD::dot(const VectorD & v) const {
+
+// 	if(v.size() != this->size())
+// 		throw std::length_error("VectorD::dot: operand with incompatible size : " + std::to_string(this->_data.size()) + " and " + std::to_string(v._data.size()));
+
+// 	return std::inner_product(_data.begin(), _data.end(), v._data.begin(),0.0);
+// }
+
+
+
+// void VectorD::save(const std::string &filename) const{
+
+// 	//open the file
+// 	std::ofstream myfile;
+// 	myfile.open(filename, std::ios::out | std::ios::binary);
 	
-	if(!myfile.is_open()){
-		throw std::ios_base::failure("VectorD::save: error: can not open file: " + filename);
-	}
+// 	if(!myfile.is_open()){
+// 		throw std::ios_base::failure("VectorD::save: error: can not open file: " + filename);
+// 	}
 
-	// write the vector size
-	myfile << size() << std::endl;
+// 	// write the vector size
+// 	myfile << size() << std::endl;
 
-	for(size_t i=0; i<size(); ++i)
-		myfile << _data[i] << " ";
+// 	for(size_t i=0; i<size(); ++i)
+// 		myfile << _data[i] << " ";
 
-	myfile.close();
-}
-
-
-void VectorD::load(const std::string &filename){
-
-	//open the file
-	std::ifstream myfile;
-	myfile.open(filename, std::ios::in | std::ios::binary); 
-	if(!myfile.is_open()){
-		throw std::ios_base::failure("VectorD::load: error: can not open file: " + filename);
-	}
-
-	// read the vector size
-	size_t vectorSize;
-	myfile >> vectorSize;
-	if(vectorSize != size())
-		*this = VectorD(vectorSize);
-
-	// read the data
-	for(size_t i=0; i<vectorSize; ++i)
-		myfile >> _data[i];
-
-	// close file
-	myfile.close();
-}
+// 	myfile.close();
+// }
 
 
-void VectorD::display() const {
-	for(size_t i=0; i< _data.size(); ++i)
-		std::cout << _data[i] << " ";
-	std::cout << std::endl;
-}
+// void VectorD::load(const std::string &filename){
+
+// 	//open the file
+// 	std::ifstream myfile;
+// 	myfile.open(filename, std::ios::in | std::ios::binary); 
+// 	if(!myfile.is_open()){
+// 		throw std::ios_base::failure("VectorD::load: error: can not open file: " + filename);
+// 	}
+
+// 	// read the vector size
+// 	size_t vectorSize;
+// 	myfile >> vectorSize;
+// 	if(vectorSize != size())
+// 		*this = VectorD(vectorSize);
+
+// 	// read the data
+// 	for(size_t i=0; i<vectorSize; ++i)
+// 		myfile >> _data[i];
+
+// 	// close file
+// 	myfile.close();
+// }
 
 
-std::ostream& operator<< (std::ostream& stream, const VectorD& v) {
-	if(v.size() == 0){
-		stream << "Not initialized yet -> size is 0";
-		return stream;
-	}
+// void VectorD::display() const {
+// 	for(size_t i=0; i< _data.size(); ++i)
+// 		std::cout << _data[i] << " ";
+// 	std::cout << std::endl;
+// }
+
+
+// std::ostream& operator<< (std::ostream& stream, const VectorD& v) {
+// 	if(v.size() == 0){
+// 		stream << "Not initialized yet -> size is 0";
+// 		return stream;
+// 	}
 			
-	stream << "(";
-	for(unsigned int i=0; i<v.size()-1; ++i)
-		stream << v[i] << " , ";
+// 	stream << "(";
+// 	for(unsigned int i=0; i<v.size()-1; ++i)
+// 		stream << v[i] << " , ";
  
- 	stream << v[v.size()-1] << ")";
+//  	stream << v[v.size()-1] << ")";
 
-	return stream;
-}
+// 	return stream;
+// }
 
 
-VectorD operator*(const double value, const VectorD &vec){
-	return vec * value;
-}
+// VectorD operator*(const double value, const VectorD &vec){
+// 	return vec * value;
+// }

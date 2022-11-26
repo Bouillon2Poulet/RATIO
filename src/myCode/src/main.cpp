@@ -1,17 +1,15 @@
 #include <iostream>
 
-#include "VectorD.hpp"
+#include "Rational.hpp"
 
 
 int main(int argc, char **argv) {
 
-    VectorD v(3);
+    Rational r(2,3);
+    Rational d(-4,10);
 
-    v[0] = 1.0;
-    v[1] = 0.3; 
-    v[2] = 5.2;
-
-    std::cout << "v : " << v << std::endl;
+    std::cout << "r.n : " << r.n() << std::endl;
+    std::cout << "d.n : " << d.n() << std::endl;
 
     return 0;
 }

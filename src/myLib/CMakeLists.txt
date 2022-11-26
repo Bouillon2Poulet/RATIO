@@ -22,7 +22,7 @@ endif()
 add_library(VectorD ${source_files} ${header_files})
 
 # compilation flags
-target_compile_features(VectorD PRIVATE cxx_std_11) # use at least c++ 11
+target_compile_features(VectorD PRIVATE cxx_std_17) # use at least c++ 11
 if (MSVC)
     target_compile_options(VectorD PRIVATE /W3)
 else()
