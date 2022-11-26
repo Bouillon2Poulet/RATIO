@@ -1,4 +1,5 @@
 #include "Rational.hpp"
+// COUCOU ROM1 LE PAIN
 
 // #include <fstream>
 // #include <cstdlib>    // size_t

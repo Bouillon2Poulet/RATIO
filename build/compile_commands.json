@@ -1,17 +1,12 @@
 [
 {
-  "directory": "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build/INTERFACE",
-  "command": "/usr/bin/g++   -I/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include  -g   -Wall -Wextra -Wpedantic -pedantic-errors -std=gnu++17 -o CMakeFiles/VectorD.dir/src/Rational.cpp.o -c /media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/src/Rational.cpp",
-  "file": "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/src/Rational.cpp"
+  "directory": "C:/Users/mathi/Documents/GitHub/RATIO/build/INTERFACE",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/VectorD.dir/includes_CXX.rsp -g -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles/VectorD.dir/src/Rational.cpp.obj -c C:/Users/mathi/Documents/GitHub/RATIO/src/myLib/src/Rational.cpp",
+  "file": "C:/Users/mathi/Documents/GitHub/RATIO/src/myLib/src/Rational.cpp"
 },
 {
-  "directory": "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build/myCode",
-  "command": "/usr/bin/g++   -I/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include  -g   -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles/samples.dir/src/main.cpp.o -c /media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myCode/src/main.cpp",
-  "file": "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myCode/src/main.cpp"
-},
-{
-  "directory": "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build/myTest",
-  "command": "/usr/bin/g++   -I/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include  -g   -o CMakeFiles/myUnitTests.dir/src/sample_test.cpp.o -c /media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myTest/src/sample_test.cpp",
-  "file": "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myTest/src/sample_test.cpp"
+  "directory": "C:/Users/mathi/Documents/GitHub/RATIO/build/myCode",
+  "command": "C:/MinGW/bin/g++.exe  @CMakeFiles/samples.dir/includes_CXX.rsp -g -Wall -Wextra -Wpedantic -pedantic-errors -o CMakeFiles/samples.dir/src/main.cpp.obj -c C:/Users/mathi/Documents/GitHub/RATIO/src/myCode/src/main.cpp",
+  "file": "C:/Users/mathi/Documents/GitHub/RATIO/src/myCode/src/main.cpp"
 }
 ]

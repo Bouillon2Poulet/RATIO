@@ -1,6 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/samples.dir/src/main.cpp.o"
-  "samples"
+  "CMakeFiles/samples.dir/src/main.cpp.obj"
+  "CMakeFiles/samples.dir/src/main.cpp.obj.d"
+  "libsamples.dll.a"
+  "samples.exe"
+  "samples.exe.manifest"
   "samples.pdb"
 )
 
