@@ -1,0 +1,2 @@
+/usr/bin/ar qc libVectorD.a  CMakeFiles/VectorD.dir/src/Rational.cpp.o
+/usr/bin/ranlib libVectorD.a
