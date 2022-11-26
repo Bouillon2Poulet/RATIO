@@ -1,0 +1,5 @@
+add_test( RationalConstructor.defaultConstructor /media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build/myTest/myUnitTests [==[--gtest_filter=RationalConstructor.defaultConstructor]==] --gtest_also_run_disabled_tests)
+set_tests_properties( RationalConstructor.defaultConstructor PROPERTIES WORKING_DIRECTORY /media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build/myTest)
+add_test( RationalConstructor.directConstructor /media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build/myTest/myUnitTests [==[--gtest_filter=RationalConstructor.directConstructor]==] --gtest_also_run_disabled_tests)
+set_tests_properties( RationalConstructor.directConstructor PROPERTIES WORKING_DIRECTORY /media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build/myTest)
+set( myUnitTests_TESTS RationalConstructor.defaultConstructor RationalConstructor.directConstructor)

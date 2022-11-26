@@ -1,0 +1,1 @@
+/usr/bin/g++  -g   CMakeFiles/myUnitTests.dir/src/sample_test.cpp.o  -o myUnitTests  ../INTERFACE/libVectorD.a /usr/lib/x86_64-linux-gnu/libgtest.a /usr/lib/x86_64-linux-gnu/libgtest_main.a /usr/lib/x86_64-linux-gnu/libgtest.a -lpthread 
