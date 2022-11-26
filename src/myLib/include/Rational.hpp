@@ -77,6 +77,10 @@ public :
 		return _d;
 	}
 
+	/// \brief return the invert of a Rational
+	inline Rational invert() const {
+		return Rational(_d,_n);
+	}
 
 
 	/// \brief affectation operator

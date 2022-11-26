@@ -53,7 +53,7 @@ Rational Rational::Rational::operator*(const Rational &r) const {
 }
 
 Rational Rational::Rational::operator/(const Rational &r) const{
-	return Rational(_n*r._d,_d*r._n);
+	return *this*r.invert();
 }
 
 // VectorD VectorD::operator+(const VectorD &v) const
