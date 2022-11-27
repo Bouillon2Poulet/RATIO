@@ -19,6 +19,10 @@ cstdlib
 -
 fstream
 -
+internal.hpp
+/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include/internal.hpp
+
+/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include/internal.hpp
 
 /media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myTest/src/sample_test.cpp
 random
@@ -27,4 +31,6 @@ gtest/gtest.h
 -
 Rational.hpp
 /media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myTest/src/Rational.hpp
+internal.hpp
+/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myTest/src/internal.hpp
 
