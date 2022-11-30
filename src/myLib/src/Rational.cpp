@@ -53,6 +53,8 @@ Rational Rational::Rational::operator/(const Rational &r) const{
 	return *this*r.invert();
 }
 
+
+
 // VectorD VectorD::operator+(const VectorD &v) const
 // {
 // 	if(v.size() != this->size())
