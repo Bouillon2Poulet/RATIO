@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myCode/src/main.cpp
+iostream
+-
+Rational.hpp
+/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myCode/src/Rational.hpp
+internal.hpp
+/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myCode/src/internal.hpp
+
+/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include/Rational.hpp
+iostream
+-
+string
+-
+cmath
+-
+vector
+-
+cstdlib
+-
+fstream
+-
+internal.hpp
+/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include/internal.hpp
+
+/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include/internal.hpp
+
