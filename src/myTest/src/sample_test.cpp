@@ -188,6 +188,16 @@ TEST (StreamOperators, coutOperator){
 		ASSERT_EQ (stream.str(),std::to_string(-2)+"/"s+std::to_string(3));
 }
 
+TEST (RationalOperators, EqualcomparisonOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	ASSERT_EQ(r1==r2,false);
+
+	Rational r3(-4,6);
+	ASSERT_EQ(r2==r3,true);
+}
+
+
 //Methods
 TEST (RationalMethods, absMethod){
 	Rational r1(-2,3);

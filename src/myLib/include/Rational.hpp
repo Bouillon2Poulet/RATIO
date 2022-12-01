@@ -138,6 +138,31 @@ public :
 	/// \param r : Rational to divide to the calling Rational
 	void operator/=(const Rational &r);
 
+	/// \brief compare if 2 Rationals are equals
+	/// \param r : Rational to divide to the calling Rational
+	bool operator==(const Rational &r);
+
+	/// \brief compare if 2 Rationals are different
+	/// \param r : Rational to divide to the calling Rational
+	bool operator!=(const Rational &r);
+
+	/// \brief compare the size of two rationals
+	/// \param r : Rational to divide to the calling Rational
+	bool operator>(const Rational &r);
+
+	/// \brief compare the size of two rationals
+	/// \param r : Rational to divide to the calling Rational
+	bool operator>=(const Rational &r);
+
+	/// \brief compare the size of two rationals
+	/// \param r : Rational to divide to the calling Rational
+	bool operator<(const Rational &r);
+
+	/// \brief compare the size of two rationals
+	/// \param r : Rational to divide to the calling Rational
+	bool operator<=(const Rational &r);
+
+
 
 	//////////////////////Others methods
 

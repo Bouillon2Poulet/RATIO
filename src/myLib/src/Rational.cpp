@@ -81,6 +81,30 @@ void Rational::Rational::operator/=(const Rational &r) {
 	*this=result;
 }
 
+bool Rational::Rational::operator==(const Rational &r){
+return (_n==r._n && _d==r._d)?true:false;
+}
+
+bool Rational::Rational::operator!=(const Rational &r){
+return (_n!=r._n && _d!=r._d)?true:false;
+}
+
+bool Rational::Rational::operator<(const Rational &r){
+	return (_n*r._d<_d*r._n) ? true : false;
+}
+
+bool Rational::Rational::operator<=(const Rational &r){
+	return (_n*r._d<=_d*r._n) ? true : false;
+}
+
+bool Rational::Rational::operator>(const Rational &r){
+return (_n*r._d>_d*r._n) ? true : false;
+}
+
+bool Rational::Rational::operator>=(const Rational &r){
+return (_n*r._d>=_d*r._n) ? true : false;
+}
+
 //Methods
 Rational Rational::abs() const {
 	return Rational(std::abs(_n),_d);
