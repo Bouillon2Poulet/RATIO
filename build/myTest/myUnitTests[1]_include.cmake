@@ -1,5 +1,0 @@
-if(EXISTS "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build/myTest/myUnitTests[1]_tests.cmake")
-  include("/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build/myTest/myUnitTests[1]_tests.cmake")
-else()
-  add_test(myUnitTests_NOT_BUILT myUnitTests_NOT_BUILT)
-endif()
