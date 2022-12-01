@@ -6,6 +6,7 @@
 // #include <algorithm>  // transform
 #include <numeric>    // gcd()
 #include <cmath>      // sqrt
+#include <cstdint>
 // #include <stdexcept>  // special exceptions
 // #include <string>     // for exceptions
 
@@ -108,12 +109,15 @@ float Rational::tan() const {
 
 Rational Rational::floatToRational(const float& f, const uint nbIter){
 	const float fPos = std::abs(f);
+	
 	if(fPos == 0. || nbIter == 0 ) return Rational(0,1);
 	if(fPos<1){
 		return ((floatToRational(1*sign(f)/fPos,nbIter)).invert());
 	}
 	if(fPos>=1){
 		const uint uintPart = std::floor(fPos);
+		Rational returnTest = Rational(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
+		if (returnTest.n() > cstdint::INT_MAX|| returnTest.n() >)
 		return Rational(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
 	}
 }
