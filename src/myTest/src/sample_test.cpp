@@ -1,4 +1,6 @@
 #include <random>
+#include <string>
+using namespace std::string_literals;
 // #include <vector>
 // #include <string>
 // #include <algorithm>
@@ -6,7 +8,7 @@
 #include <gtest/gtest.h>
 
 #include "Rational.hpp"
-
+#include "internal.hpp"
 
 /////////////////////////////////////////////////////
 // constructors
@@ -18,298 +20,220 @@ TEST (RationalConstructor, defaultConstructor) {
 }
 
 TEST (RationalConstructor, directConstructor) { 
+	Rational r1(-2,3);
+	ASSERT_EQ(r1.n(),-2);
+	ASSERT_EQ(r1.d(),3);
 
-    const size_t maxSize = 150;  // max value for both _n et _d
-    std::mt19937 generator(0);
-	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
-	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
-	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
+	Rational r2(-4,6);
+	ASSERT_EQ(r2.n(),-2);
+	ASSERT_EQ(r2.d(),3);
 
-	// run many times the same test with different values
-	for(int run=0; run<100; ++run){
-
-		// define a vector dimension
-        int n = uniformDistributionValue(-int(maxSize),maxSize);
-        unsigned int d = uniformIntDistribution(0,maxSize);;
-
-        Rational r(n,d);
-		ASSERT_EQ (std::gcd(r.n(),r.d()),1);
-	}
+	// ASSERT_THROW(Rational(-0.5f, 0.5f), std::exception);
+	// ASSERT_THROW(Rational(2, -2), std::exception);
 }
 
-
-
-// /////////////////////////////////////////////////////
-// // arithmetic
-
-// TEST (VectorDArithmetic, plus) {
-
-// 	const size_t maxSize = 1000;  // max size of the tested vectors
-// 	std::mt19937 generator(0);
-// 	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
-// 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
-// 	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
-
-// 	// run many times the same test with different values
-// 	for(int run=0; run<100; ++run){
-
-// 		// define a vector dimension
-// 		const size_t dim = uniformIntDistribution(generator);
-
-// 		// generate random data
-// 		std::vector<double> data1(dim), data2(dim);
-// 		std::generate(data1.begin(), data1.end(), gen);
-// 		std::generate(data2.begin(), data2.end(), gen);
-
-// 		// build the corresponding VectorD
-// 		VectorD vec1(dim), vec2(dim), vec3(dim);
-// 		for(size_t i=0; i<dim; ++i){
-// 			vec1[i] = data1[i];
-// 			vec2[i] = data2[i];
-// 		}
-
-// 		vec3 = vec1 + vec2;
-// 		ASSERT_EQ (vec3.size(), dim);
-
-// 		for(size_t i=0; i<dim; ++i){
-// 	    	ASSERT_DOUBLE_EQ (vec3[i], data1[i] + data2[i]);    // EXPECT_DOUBLE_EQ would be fine too
-// 		}
-// 	}
-// }
-
-
-// TEST (VectorDArithmetic, minus) {
-
-// 	const size_t maxSize = 1000;  // max size of the tested vectors
-// 	std::mt19937 generator(0);
-// 	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
-// 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
-// 	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
-
-// 	// run many times the same test with different values
-// 	for(int run=0; run<100; ++run){
-
-// 		// define a vector dimension
-// 		const size_t dim = uniformIntDistribution(generator);
-
-// 		// generate random data
-// 		std::vector<double> data1(dim), data2(dim);
-// 		std::generate(data1.begin(), data1.end(), gen);
-// 		std::generate(data2.begin(), data2.end(), gen);
-
-// 		// build the corresponding VectorD
-// 		VectorD vec1(dim), vec2(dim), vec3(dim);
-// 		for(size_t i=0; i<dim; ++i){
-// 			vec1[i] = data1[i];
-// 			vec2[i] = data2[i];
-// 		}
-
-// 		vec3 = vec1 - vec2;
-// 		ASSERT_EQ (vec3.size(), dim);
-
-// 		for(size_t i=0; i<dim; ++i){
-// 	    	ASSERT_DOUBLE_EQ (vec3[i], data1[i] - data2[i]);  // EXPECT_DOUBLE_EQ would be fine too
-// 		}
-// 	}
-// }
-
-// TEST (VectorDArithmetic, dot) {
-// //1.
-// 	VectorD vec1(3), vec2(3);
-// 	vec1[0]=1.0;
-// 	vec1[1]=4.0;
-// 	vec1[2]=5.0;
-
-// 	vec2[0]=7.0;
-// 	vec2[1]=0.0;
-// 	vec2[2]=3.0;
-
-// 	ASSERT_EQ(vec1.dot(vec2),22);
-
-// //2.
-// 	const size_t maxSize = 1000;  // max size of the tested vectors
-// 	std::mt19937 generator(0);
-// 	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
-// 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
-// 	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
-
-// 	// run many times the same test with different values
-// 	for(int run=0; run<100; ++run){
-
-// 		// define a vector dimension
-// 		const size_t dim = uniformIntDistribution(generator);
-
-// 		// generate random data
-// 		std::vector<double> data1(dim), data2(dim);
-// 		std::generate(data1.begin(), data1.end(), gen);
-// 		std::generate(data2.begin(), data2.end(), gen);
-
-// 		// build the corresponding VectorD
-// 		VectorD vec1(dim), vec2(dim), vec3(dim);
-// 		for(size_t i=0; i<dim; ++i){
-// 			vec1[i] = data1[i];
-// 			vec2[i] = data2[i];
-// 		}
-
-// 		//Verification avec calcul
-// 		double calculatedDot = 0;
-// 		for (int i=0;i<dim;i++){
-// 			calculatedDot+=vec1[i]*vec2[i];
-// 		}
-// 		ASSERT_EQ(vec1.dot(vec2), calculatedDot);
-
-// 		//Commutatif
-// 		ASSERT_EQ(vec1.dot(vec2),vec2.dot(vec1));
-
-// 		//Defini positif 
-// 		ASSERT_GE(vec1.dot(vec1),0.);
-
-// 		//Loi des cosinus
-// 		double cosLaw = 0.5*(vec1.dot(vec1)+vec2.dot(vec2)-(vec1-vec2).dot(vec1-vec2));
-// 		ASSERT_NEAR(vec1.dot(vec2),cosLaw, 1);
-// 	}
-// }
-
-// TEST (VectorDArithmetic, productWithAScalar) {
-// 	const size_t maxSize = 1000;  // max size of the tested vectors
-// 	std::mt19937 generator(0);
-// 	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
-// 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
-// 	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
-
-// 	// run many times the same test with different values
-// 	for(int run=0; run<100; ++run){
-
-// 		// define a vector dimension
-// 		const size_t dim = uniformIntDistribution(generator);
-
-// 		// generate random data
-// 		std::vector<double> data1(dim);
-// 		std::generate(data1.begin(), data1.end(), gen);
-
-// 		// build the corresponding VectorD
-// 		VectorD vec1(dim), vec2(dim);
-// 		for(size_t i=0; i<dim; ++i){
-// 			vec1[i] = data1[i];
-// 		}
-
-// 		double scalar = 5;
-// 		vec2 = vec1*scalar;
-
-// 		for(size_t i=0; i<dim; ++i){
-// 	    	ASSERT_DOUBLE_EQ (vec2[i], vec1[i]*scalar);  // EXPECT_DOUBLE_EQ would be fine too
-// 		}
-// 	}
-// }
-
-// TEST (VectorDArithmetic, copyOperator) {
-
-// 	const size_t maxSize = 1000;  // max size of the tested vectors
-// 	std::mt19937 generator(0);
-// 	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
-// 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
-// 	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
-
-// 	// run many times the same test with different values
-// 	for(int run=0; run<100; ++run){
-
-// 		// define a vector dimension
-// 		const size_t dim = uniformIntDistribution(generator);
-
-// 		// generate random data
-// 		std::vector<double> data1(dim);
-// 		std::generate(data1.begin(), data1.end(), gen);
-
-// 		// build the corresponding VectorD
-// 		VectorD vec1(dim);
-// 		for(size_t i=0; i<dim; ++i){
-// 			vec1[i] = data1[i];
-// 		}
-
-// 		VectorD vec2 = vec1;
-
-// 		for(size_t i=0; i<dim; ++i){
-// 	    	ASSERT_DOUBLE_EQ (vec1[i], vec2[i]);  // EXPECT_DOUBLE_EQ would be fine too
-// 		}
-// 	}
-// }
-
-// /////////////////////////////////////////////////////
-// // exception
-
-// TEST (VectorDException, loadExceptionMessage) {
-// 	const std::string filename = "filename.txt";
-// 	const std::string expectedException = "VectorD::load: error: can not open file: " + filename;
-
-// 	// check the exception message
-//     try{
-// 		VectorD vec;
-//         vec.load(filename);
-//     }
-//     catch( const std::exception &e){
-//         EXPECT_TRUE( std::string(e.what()).find(expectedException) == 0);
-//     }
-// }
-
-
-// TEST (VectorDException, loadExceptionType) {
-
-// 	// check exception type
-// 	VectorD vec;
-// 	EXPECT_THROW(vec.load("filename.txt"), std::ios_base::failure);
-// }
-
-
-// TEST (VectorDException, plusOperator) {
-
-// 	// check exception type
-// 	const size_t maxSize = 1000;  // max size of the tested vectors
-// 	std::mt19937 generator(0);
-// 	std::uniform_int_distribution<int> uniformIntDistribution(1,maxSize);
-// 	std::uniform_real_distribution<double> uniformDistributionValue(-int(maxSize),maxSize);
-// 	auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
-
-// 	// run many times the same test with different values
-// 	for(int run=0; run<100; ++run){
-
-// 		// define a vector dimension
-// 		const size_t dim = uniformIntDistribution(generator);
-
-// 		// generate random data
-// 		std::vector<double> data1(dim);
-// 		std::generate(data1.begin(), data1.end(), gen);
-
-// 		// build the corresponding VectorD
-// 		VectorD vec1(dim),vec2(dim-1);
-// 		for(size_t i=0; i<dim; ++i){
-// 			vec1[i] = data1[i];
-// 		}
-// 		for(size_t i=0; i<dim-1; ++i){
-// 			vec2[i] = vec1[i];
-// 		}
-
-// 		//Exception type
-// 		EXPECT_THROW(VectorD vec3 = vec1+vec2, std::length_error);
-
-// 		//Error message
-// 		const std::string expectedException = "VectorD::operator+: operand with incompatible size : " + std::to_string(vec1.size()) + " and " + std::to_string(vec2.size());
-		
-// 		try{
-// 			VectorD vec3 = vec1+vec2;
-// 		}
-// 		catch( const std::exception &e){
-// 			EXPECT_TRUE( std::string(e.what()).find(expectedException) == 0);
-// 		}
-
-// 	}
-// }
-
-
-
-
-// int main(int argc, char **argv) {
-//   ::testing::InitGoogleTest(&argc, argv);
-//   return RUN_ALL_TESTS();
-// }
-
-
+TEST (RationalConstructor, copyConstructor) { 
+	Rational r1(-2,3);
+	Rational r2(r1);
+	ASSERT_EQ(r2.n(),r1.n());
+	ASSERT_EQ(r2.d(),r1.d());
+}
+
+// Methods
+TEST (RationalMethod, Getters){
+	Rational r(-2,3);
+	ASSERT_EQ(r.n(),-2);
+	ASSERT_EQ(r.d(),3);
+}
+
+TEST (InternalMethod, invertMethod){
+	Rational r1(-2,3);
+	ASSERT_EQ(r1.invert().n(),-3);
+	ASSERT_EQ(r1.invert().d(),2);
+
+	Rational r2(0,1);
+	ASSERT_THROW(Rational r3 = r2.invert(),std::exception);
+}
+
+// Operators
+TEST (RationalOperators, affectionOperator){
+	Rational r1(-2,3);
+	Rational r2 = r1;
+	ASSERT_EQ(r2.n(),-2);
+	ASSERT_EQ(r2.d(),3);
+}
+
+TEST (RationalOperators, plusOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	ASSERT_EQ((r2+r1).n(),-2);
+	ASSERT_EQ((r2+r1).d(),3);
+
+	Rational r3(5,4);
+	ASSERT_EQ((r2+r3).n(),7);
+	ASSERT_EQ((r2+r3).d(),12);
+}
+
+TEST (RationalOperators, plusEqualOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	r2+=r1;
+	ASSERT_EQ(r2.n(),-2);
+	ASSERT_EQ(r2.d(),3);
+
+	Rational r3(5,4);
+	r2+=r3;
+	ASSERT_EQ(r2.n(),7);
+	ASSERT_EQ(r2.d(),12);
+}
+
+TEST (RationalOperators, unaryMinusOperator){
+	Rational r1(-2,3);
+	ASSERT_EQ((-r1).n(),2);
+	ASSERT_EQ((-r1).d(),3);
+
+	Rational r2(2,3);
+	ASSERT_EQ((-r2).n(),-2);
+	ASSERT_EQ((-r2).d(),3);
+}
+
+TEST (RationalOperators, minusOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+
+	ASSERT_EQ((r2-r1).n(),-2);
+	ASSERT_EQ((r2-r1).d(),3);
+
+	Rational r3(5,4);
+	ASSERT_EQ((r2-r3).n(),-23);
+	ASSERT_EQ((r2-r3).d(),12);
+}
+
+TEST (RationalOperators, minusEqualOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	r2-=r1;
+	ASSERT_EQ(r2.n(),-2);
+	ASSERT_EQ(r2.d(),3);
+
+	Rational r3(5,4);
+	r2-=r3;
+	ASSERT_EQ(r2.n(),-23);
+	ASSERT_EQ(r2.d(),12);
+}
+
+TEST (RationalOperators, multiplyOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	ASSERT_EQ((r1*r2).n(),0);
+	ASSERT_EQ((r1*r2).d(),1);
+
+	Rational r3(5,4);
+	ASSERT_EQ((r2*r3).n(),-5);
+	ASSERT_EQ((r2*r3).d(),6);
+}
+
+TEST (RationalOperators, multiplyWithFloatOperator){
+	Rational r1(0,1);
+	ASSERT_EQ((r1*0.66).n(),0);
+	ASSERT_EQ((r1*0.66).d(),1);
+
+	Rational r2(5,4);
+	ASSERT_NEAR((r2*0.66).toFloat(),0.825,0.1);
+}
+
+TEST (RationalOperators, multiplyEqualOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	r2*=r1;
+	ASSERT_EQ(r2.n(),0);
+	ASSERT_EQ(r2.d(),1);
+
+	r2 = Rational(-2,3);
+	Rational r3(5,4);
+	r2*=r3;
+	ASSERT_EQ(r2.n(),-5);
+	ASSERT_EQ(r2.d(),6);
+}
+
+TEST (RationalOperators, divideOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	ASSERT_EQ((r1/r2).n(),0);
+	ASSERT_EQ((r1/r2).d(),1);
+
+	Rational r3(5,4);
+	ASSERT_EQ((r2/r3).n(),-8);
+	ASSERT_EQ((r2/r3).d(),15);
+}
+
+TEST (RationalOperators, divideEqualOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	r1/=r2;
+	ASSERT_EQ(r1.n(),0);
+	ASSERT_EQ(r1.d(),1);
+
+	r2 = Rational(-2,3);
+	Rational r3(5,4);
+	r2/=r3;
+	ASSERT_EQ(r2.n(),-8);
+	ASSERT_EQ(r2.d(),15);
+}
+
+TEST (StreamOperators, coutOperator){
+		Rational r(-2,3);
+		std::stringstream stream;
+		stream<<r;
+		ASSERT_EQ (stream.str(),std::to_string(-2)+"/"s+std::to_string(3));
+}
+
+//Methods
+TEST (RationalMethods, absMethod){
+	Rational r1(-2,3);
+	ASSERT_EQ(r1.abs().n(),2);
+	ASSERT_EQ(r1.abs().d(),3);
+}
+
+TEST (RationalMethods, floorMethod){
+	Rational r1(-2,3);
+	Rational r2(-5,3);
+	Rational r3(5,3);
+	ASSERT_EQ(r1.floor(),0);
+	ASSERT_EQ(r2.floor(),-1);
+	ASSERT_EQ(r3.floor(),1);
+}
+
+TEST (RationalMethods, toFloatMethod){
+	Rational r1(-2,3);
+	Rational r2(0,1);
+	ASSERT_NEAR(r1.toFloat(),-0.666,0.01);
+	ASSERT_NEAR(r2.toFloat(),0,0.01);
+}
+
+TEST (RationalMethods, cosMethod){
+	Rational r1(0,1);
+	Rational r2 = Rational::floatToRational(M_PI/2,10);
+	Rational r3 = Rational::floatToRational(M_PI,10);
+	ASSERT_NEAR(r1.cos(),1,0.01);
+	ASSERT_NEAR(r2.cos(),0,0.01);
+	ASSERT_NEAR(r3.cos(),-1,0.01);
+}
+
+TEST (RationalMethods, sinMethod){
+	Rational r1(0,1);
+	Rational r2 = Rational::floatToRational(M_PI/2,10);
+	Rational r3 = Rational::floatToRational(M_PI,10);
+	ASSERT_NEAR(r1.sin(),0,0.01);
+	ASSERT_NEAR(r2.sin(),1,0.01);
+	ASSERT_NEAR(r3.sin(),0,0.01);
+}
+
+TEST (RationalMethods, tanMethod){
+	Rational r1(0,1);
+	Rational r2 = Rational::floatToRational(M_PI/4,10);
+	Rational r3 = Rational::floatToRational(M_PI,10);
+	ASSERT_NEAR(r1.tan(),0,0.01);
+	ASSERT_NEAR(r2.tan(),1,0.01);
+	ASSERT_NEAR(r3.tan(),0,0.01);
+}

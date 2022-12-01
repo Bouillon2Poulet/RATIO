@@ -3,9 +3,9 @@
 #include <cmath>
 #include <vector>
 #include <cstdlib>
-
 #include <fstream>
 
+#include "internal.hpp"
 
 #ifndef __RATIONAL__HPP
 #define __RATIONAL__HPP
@@ -40,6 +40,7 @@
 class Rational {
 
 public:
+	//////////////////////Constructors
 
 	/// \brief default constructor, creates a Rational equal to zero
     Rational();
@@ -79,9 +80,14 @@ public :
 
 	/// \brief return the invert of a Rational
 	inline Rational invert() const {
-		return Rational(_d,_n);
+		if(_n==0||_d==0){
+			throw std::invalid_argument("_d = 0");
+		}
+
+		return Rational(sign(_n)*_d, std::abs(_n));
 	}
 
+	//////////////////////Operators
 
 	/// \brief affectation operator
 	void operator=(const Rational &r);
@@ -92,72 +98,79 @@ public :
 	/// \return the sum of the current Rational and the argument Rational
 	Rational operator+(const Rational &r) const;
 
-	/// \brief substract 2 Rationals
-	/// \param r : Rational to substract to the calling Rational
-	/// \return the substract of the current vector and the argument vector
-	Rational operator-(const Rational &vec) const;
-
+	/// \brief add a Rational to the calling Rational
+	/// \param r : rational to add to the calling rational
+	void operator+=(const Rational &r);
 
 	/// \brief unary minus
-	/// \return the minus the calling Rational
+	/// \return the of minus the calling Rational
 	Rational operator-() const;
+	
+	/// \brief substract 2 Rationals
+	/// \param r : Rational to substract to the calling Rational
+	/// \return the substract of the current Rational and the argument Rational
+	Rational operator-(const Rational &r) const;
+
+	/// \brief substract a rational to the calling Rational
+	/// \param r : Rational to substract to the calling Rational
+	void operator-=(const Rational &r);
 
 	/// \brief multiply 2 Rationals
 	/// \param r : Rational to multiply to the calling Rational
-	/// \return the product of the current vector and the argument vector
+	/// \return the product of the current Rational and the argument Rational
 	Rational operator*(const Rational &r) const;
+
+	/// \brief multiply a Rational with a float
+	/// \param f : float to multiply to the calling Rational
+	/// \return the product of the current Rational and the argument float
+	Rational operator*(const float &f) const;
+
+	/// \brief multiply a Rational to the calling Rational
+	/// \param r : Rational to multiply to the calling Rational
+	void operator*=(const Rational &r);
 
 	/// \brief divide 2 Rationals
 	/// \param r : Rational to divide to the calling Rational
-	/// \return the quotient of the current vector and the argument vector
+	/// \return the quotient of the current Rational and the argument Rational
 	Rational operator/(const Rational &r) const;
-	/*
-	/// \brief scale a vector with a constant value
-	/// \param value : scale factor
-	/// \return the scaled vector
-	VectorD operator*(const double &value) const;
 
-	/// \brief compute the norm L2 of a vector
-	/// \return the L2 norm of the calling vector
-	/// \bug no bug at all, but I know this function exists, just in case.
-    double norm() const;
+	/// \brief divide a rational to the calling Rational
+	/// \param r : Rational to divide to the calling Rational
+	void operator/=(const Rational &r);
 
-	/// \brief inplace normalize a vector such its norm is 1.
-	/// \test try normalize null vector.
-    void normalize();
 
-    /// \brief compute the inner product between 2 vectors
-    /// \param v : the second vector to consider in the dot product.
-    /// \return : the scalar value corresponding to the dot product. 
-    double dot(const VectorD &v) const;
+	//////////////////////Others methods
 
-    /// \brief save a vector in a file
-    /// \param filename : name of the file (including path) where to save the vector data
-    /// \throw exception if can not open file
-    void save(const std::string &filename) const;
+	/// \brief return the absolute value from the calling Rational
+	Rational abs() const;
 
-    /// \brief load a vector from a file, the size of the vector should be already the good one ...
-    /// \param filename : name of the file (including path) to open and load the vector data
-    /// \throw exception if can not open file
-    /// \todo : make a nice todo list :)
-    void load(const std::string &filename);
+	/// \brief return the integar part from the calling Rational
+	int floor() const;
 
-    /// \brief display the elements of the vector
-    void display() const;
-*/
+	/// \brief convert the calling Rational to a float
+	/// \return the nearest float from the calling Rational
+	float toFloat() const;
+
+	/// \brief return the cos() of the calling Rational (passing by float)
+	float cos() const;
+
+	/// \brief return the sin() of the calling Rational (passing by float)
+	float sin() const;
+
+	/// \brief return the tan() of the calling Rational (passing by float)
+	float tan() const;
+
+	/// \brief recursive way to convert a float to a Rational
+	/// \param f : float to convert to Rationnal
+	/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
+	static Rational floatToRational(const float& f, const uint nbIter);
+	
 };
 
-
-	// /// \brief scale a vector with a constant value
-	// /// \param value : scale factor
-	// /// \param vec is the vector to be scaled
-	// /// \return the scaled vector
-	// VectorD operator*(const double value, const VectorD &vec);
-
-	// /// \brief overload the operator << for VectorD
-    // /// \param stream : input stream
-    // /// \param v : the vector to output
-    // /// \return the output stream containing the vector data
-    // std::ostream& operator<< (std::ostream& stream, const VectorD& v);
+    /// \brief manage display of a Rational using <<
+    /// \param stream : input stream
+    /// \param r : the Rational to output
+    /// \return the output stream containing the Rational data
+    std::ostream& operator<< (std::ostream& stream, const Rational& r);
 
 #endif

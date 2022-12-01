@@ -57,7 +57,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : "-g  "
 				},
 				{
 					"backtrace" : 3,
@@ -74,13 +74,16 @@
 				{
 					"backtrace" : 3,
 					"fragment" : "-pedantic-errors"
+				},
+				{
+					"fragment" : "-std=gnu++17"
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 4,
-					"path" : "C:/Users/mathi/Documents/GitHub/RATIO/src/myLib/include"
+					"path" : "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include"
 				}
 			],
 			"language" : "CXX",
@@ -102,7 +105,7 @@
 		],
 		"prefix" : 
 		{
-			"path" : "C:/Program Files (x86)/RATIO"
+			"path" : "/usr/local"
 		}
 	},
 	"name" : "VectorD",
@@ -125,7 +128,8 @@
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				1
+				1,
+				2
 			]
 		}
 	],
@@ -140,6 +144,11 @@
 		{
 			"backtrace" : 1,
 			"path" : "myLib/include/Rational.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "myLib/include/internal.hpp",
 			"sourceGroupIndex" : 1
 		}
 	],

@@ -5,7 +5,7 @@
 // #include <cstdlib>    // size_t
 // #include <algorithm>  // transform
 #include <numeric>    // gcd()
-// #include <cmath>      // sqrt
+#include <cmath>      // sqrt
 // #include <stdexcept>  // special exceptions
 // #include <string>     // for exceptions
 
@@ -41,19 +41,88 @@ Rational Rational::Rational::operator+(const Rational &r) const{
 	return Rational(_n*r._d+r._n*_d,_d*r._d);
 }
 
+void Rational::Rational::operator+=(const Rational &r) {
+	Rational result = *this+r;
+	*this=result;
+}
+
 Rational Rational::Rational::operator-() const {
 	return Rational(-1*_n,_d);
 }
 
+Rational Rational::Rational::operator-(const Rational &r) const{
+	return Rational(_n*r._d-r._n*_d,_d*r._d);
+}
+
+void Rational::Rational::operator-=(const Rational &r) {
+	Rational result = *this-r;
+	*this=result;
+}
+
 Rational Rational::Rational::operator*(const Rational &r) const {
 	return Rational(_n*r._n,_d*r._d);
+}
+Rational Rational::Rational::operator*(const float &f) const {
+	Rational r = floatToRational(f,10);
+	return Rational(_n*r._n,_d*r._d);
+}
+
+void Rational::Rational::operator*=(const Rational &r) {
+	Rational result = *this*r;
+	*this=result;
 }
 
 Rational Rational::Rational::operator/(const Rational &r) const{
 	return *this*r.invert();
 }
 
+void Rational::Rational::operator/=(const Rational &r) {
+	Rational result = *this/r;
+	*this=result;
+}
 
+//Methods
+Rational Rational::abs() const {
+	return Rational(std::abs(_n),_d);
+}
+
+int Rational::floor() const {
+	return std::floor(_n/(int)_d);
+}
+
+float Rational::toFloat() const {
+	return (float)_n/(float)_d;
+}
+
+float Rational::cos() const {
+	return std::cos(toFloat());	
+}
+
+float Rational::sin() const {
+	return std::sin(toFloat());	
+}
+
+float Rational::tan() const {
+	return std::tan(toFloat());	
+}
+
+Rational Rational::floatToRational(const float& f, const uint nbIter){
+	const float fPos = std::abs(f);
+	if(fPos == 0. || nbIter == 0 ) return Rational(0,1);
+	if(fPos<1){
+		return ((floatToRational(1*sign(f)/fPos,nbIter)).invert());
+	}
+	if(fPos>=1){
+		const uint uintPart = std::floor(fPos);
+		return Rational(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
+	}
+}
+
+
+std::ostream& operator<< (std::ostream& stream, const Rational& r) {	
+	stream << r.n() << "/" << r.d();
+	return stream;
+}
 
 // VectorD VectorD::operator+(const VectorD &v) const
 // {

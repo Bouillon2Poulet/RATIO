@@ -1,6 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/VectorD.dir/src/Rational.cpp.obj"
-  "CMakeFiles/VectorD.dir/src/Rational.cpp.obj.d"
+  "CMakeFiles/VectorD.dir/src/Rational.cpp.o"
   "libVectorD.a"
   "libVectorD.pdb"
 )

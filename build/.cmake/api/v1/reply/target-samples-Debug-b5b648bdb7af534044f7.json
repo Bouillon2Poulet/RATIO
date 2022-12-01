@@ -2,10 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "myCode/samples.exe"
-		},
-		{
-			"path" : "myCode/samples.pdb"
+			"path" : "myCode/samples"
 		}
 	],
 	"backtrace" : 1,
@@ -63,7 +60,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g"
+					"fragment" : "-g  "
 				},
 				{
 					"backtrace" : 3,
@@ -86,7 +83,7 @@
 			[
 				{
 					"backtrace" : 5,
-					"path" : "C:/Users/mathi/Documents/GitHub/RATIO/src/myLib/include"
+					"path" : "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src/myLib/include"
 				}
 			],
 			"language" : "CXX",
@@ -120,16 +117,12 @@
 				"backtrace" : 2,
 				"fragment" : "../INTERFACE/libVectorD.a",
 				"role" : "libraries"
-			},
-			{
-				"fragment" : "-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32",
-				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
 	"name" : "samples",
-	"nameOnDisk" : "samples.exe",
+	"nameOnDisk" : "samples",
 	"paths" : 
 	{
 		"build" : "myCode",

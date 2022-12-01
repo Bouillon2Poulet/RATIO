@@ -9,10 +9,10 @@
 					"childIndexes" : 
 					[
 						1,
-						3
+						3,
+						4
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.13"
@@ -27,7 +27,6 @@
 						2
 					],
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-INTERFACE-Debug-542290c8d28ff5938bc7.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.13"
@@ -42,7 +41,6 @@
 				},
 				{
 					"build" : "INTERFACE/doc",
-					"jsonFile" : "directory-INTERFACE.doc-Debug-8df0e9bddb5326bafcb0.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.13"
@@ -57,7 +55,6 @@
 				},
 				{
 					"build" : "myCode",
-					"jsonFile" : "directory-myCode-Debug-3a4f8ac3cbbfda60e572.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.13"
@@ -65,6 +62,20 @@
 					"parentIndex" : 0,
 					"projectIndex" : 2,
 					"source" : "myCode",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "myTest",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.13"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "myTest",
 					"targetIndexes" : 
 					[
 						2
@@ -82,9 +93,14 @@
 					],
 					"directoryIndexes" : 
 					[
-						0
+						0,
+						4
 					],
-					"name" : "RATIO"
+					"name" : "RATIO",
+					"targetIndexes" : 
+					[
+						2
+					]
 				},
 				{
 					"directoryIndexes" : 
@@ -109,7 +125,7 @@
 					"parentIndex" : 0,
 					"targetIndexes" : 
 					[
-						2
+						3
 					]
 				}
 			],
@@ -118,21 +134,28 @@
 				{
 					"directoryIndex" : 1,
 					"id" : "VectorD::@8f2e06132bc3ad500312",
-					"jsonFile" : "target-VectorD-Debug-544c751d4e7ef560feb7.json",
+					"jsonFile" : "target-VectorD-Debug-4a123c8ac563ff6e6d2e.json",
 					"name" : "VectorD",
 					"projectIndex" : 1
 				},
 				{
 					"directoryIndex" : 2,
 					"id" : "html::@823755c9640417a52d4c",
-					"jsonFile" : "target-html-Debug-d80737aabd75e7da3301.json",
+					"jsonFile" : "target-html-Debug-8869d0e9184dca07efd4.json",
 					"name" : "html",
 					"projectIndex" : 1
 				},
 				{
+					"directoryIndex" : 4,
+					"id" : "myUnitTests::@24bf60b4160d49cb3f42",
+					"jsonFile" : "target-myUnitTests-Debug-2f79df2d6be143c4b71d.json",
+					"name" : "myUnitTests",
+					"projectIndex" : 0
+				},
+				{
 					"directoryIndex" : 3,
 					"id" : "samples::@004304d0377af7c59813",
-					"jsonFile" : "target-samples-Debug-794d4d2eae27e1f0c7b0.json",
+					"jsonFile" : "target-samples-Debug-b5b648bdb7af534044f7.json",
 					"name" : "samples",
 					"projectIndex" : 2
 				}
@@ -142,12 +165,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/mathi/Documents/GitHub/RATIO/build",
-		"source" : "C:/Users/mathi/Documents/GitHub/RATIO/src"
+		"build" : "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/build",
+		"source" : "/media/rom1/B2121A81121A4AAD/Users/romai/Documents/GIT/RATIO/src"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 4
+		"minor" : 0
 	}
 }
