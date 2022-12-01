@@ -6,7 +6,8 @@
 // #include <algorithm>  // transform
 #include <numeric>    // gcd()
 #include <cmath>      // sqrt
-#include <cstdint>
+#include <bits/stdc++.h>
+#include <string>
 // #include <stdexcept>  // special exceptions
 // #include <string>     // for exceptions
 
@@ -108,17 +109,39 @@ float Rational::tan() const {
 }
 
 Rational Rational::floatToRational(const float& f, const uint nbIter){
+	std::cout<<"CONVERSION START "<<f<<std::endl;
 	const float fPos = std::abs(f);
 	
 	if(fPos == 0. || nbIter == 0 ) return Rational(0,1);
 	if(fPos<1){
-		return ((floatToRational(1*sign(f)/fPos,nbIter)).invert());
+		std::cout<<"?"<<f<<std::endl;
+		
+		Rational returnTest = floatToRational(1*sign(f)/fPos,nbIter).invert();
+		std::cout<<returnTest.n()<<std::endl<<returnTest.d()<<std::endl<<std::endl;
+
+		while (returnTest.n() > INT_MAX|| returnTest.d() > UINT_MAX){
+			std::string decimalsToString = std::to_string(fPos);
+			decimalsToString.pop_back();
+			float decimalsWithoutLast = std::stof(decimalsToString);
+			std::cout<<"!!!DEPASSEMENT"<<std::endl<<f<<std::endl<<decimalsWithoutLast;
+			Rational returnTest = floatToRational(1*sign(f)/decimalsWithoutLast,nbIter).invert();
+		}
+		return (floatToRational(1*sign(f)/fPos,nbIter)).invert();
 	}
 	if(fPos>=1){
+		std::cout<<"aa"<<f<<std::endl;
 		const uint uintPart = std::floor(fPos);
 		Rational returnTest = Rational(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
-		if (returnTest.n() > cstdint::INT_MAX|| returnTest.n() >)
-		return Rational(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
+		std::cout<<returnTest.n()<<std::endl<<returnTest.d()<<std::endl<<std::endl;
+
+		while (returnTest.n() > INT_MAX|| returnTest.d() > UINT_MAX){
+			std::string decimalsToString = std::to_string(fPos-uintPart);
+			decimalsToString.pop_back();
+			float decimalsWithoutLast = std::stof(decimalsToString);
+			std::cout<<"!!!DEPASSEMENT"<<std::endl<<f<<std::endl<<decimalsWithoutLast;
+			returnTest = Rational(sign(f)*uintPart,1)+floatToRational(sign(f)*decimalsWithoutLast,nbIter-1);
+		}
+		return returnTest;
 	}
 }
 

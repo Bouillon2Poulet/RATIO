@@ -19,17 +19,17 @@ int main(int argc, char **argv) {
     // std::cout<<Rational::floatToRational(-0.666666666,10)<<std::endl;
     // std::cout<<"!!!"<<Rational::floatToRational(-10.459,10)<<std::endl;
 
-    std::cout<<Rational::floatToRational(152486.36885,5)<<std::endl;
-    std::cout<<Rational::floatToRational(152486.36885,500)<<std::endl;
-    std::cout<<Rational::floatToRational(152486.36885,5000)<<std::endl<<std::endl;
+    std::cout<<Rational::floatToRational(152486.36885,10)<<std::endl;
+    // std::cout<<Rational::floatToRational(152486.36885,500)<<std::endl;
+    // std::cout<<Rational::floatToRational(152486.36885,5000)<<std::endl<<std::endl;
 
-    std::cout<<Rational::floatToRational(152.85,5)<<std::endl;
-    std::cout<<Rational::floatToRational(152.85,500)<<std::endl<<std::endl;
+    // std::cout<<Rational::floatToRational(152.85,5)<<std::endl;
+    // std::cout<<Rational::floatToRational(152.85,500)<<std::endl<<std::endl;
 
-    std::cout<<Rational::floatToRational(150.5,5)<<std::endl;
-    std::cout<<Rational::floatToRational(150.5,500)<<std::endl;
+    // std::cout<<Rational::floatToRational(150.5,5)<<std::endl;
+    // std::cout<<Rational::floatToRational(150.5,500)<<std::endl;
 
-    std::cout<<Rational::floatToRational(3.49289482984329849284,10)<<std::endl;
+    // std::cout<<Rational::floatToRational(3.49289482984329849284,10)<<std::endl;
     
     
 
