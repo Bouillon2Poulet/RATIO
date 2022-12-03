@@ -188,7 +188,7 @@ TEST (StreamOperators, coutOperator){
 		ASSERT_EQ (stream.str(),std::to_string(-2)+"/"s+std::to_string(3));
 }
 
-TEST (RationalOperators, EqualcomparisonOperator){
+TEST (RationalOperators, EqualComparisonOperator){
 	Rational r1(0,1);
 	Rational r2(-2,3);
 	ASSERT_EQ(r1==r2,false);
@@ -197,6 +197,50 @@ TEST (RationalOperators, EqualcomparisonOperator){
 	ASSERT_EQ(r2==r3,true);
 }
 
+TEST (RationalOperators, NotEqualComparisonOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	ASSERT_EQ(r1!=r2,true);
+
+	Rational r3(-4,6);
+	ASSERT_EQ(r2!=r3,false);
+}
+
+TEST (RationalOperators, InferiorComparisonOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	ASSERT_EQ(r2<r1,true);
+
+	Rational r3(-5,6);
+	ASSERT_EQ(r2<r3,false);
+}
+
+TEST (RationalOperators, InferiorEqualComparisonOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	ASSERT_EQ(r2<=r1,true);
+
+	Rational r3(-4,6);
+	ASSERT_EQ(r2<=r3,true);
+}
+
+TEST (RationalOperators, SuperiorComparisonOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	ASSERT_EQ(r1>r2,true);
+
+	Rational r3(-5,6);
+	ASSERT_EQ(r2>r3,true);
+}
+
+TEST (RationalOperators, SuperiorEqualComparisonOperator){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+	ASSERT_EQ(r1>=r2,true);
+
+	Rational r3(-4,6);
+	ASSERT_EQ(r2>=r3,true);
+}
 
 //Methods
 TEST (RationalMethods, absMethod){

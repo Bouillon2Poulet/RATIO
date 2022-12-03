@@ -81,28 +81,29 @@ void Rational::Rational::operator/=(const Rational &r) {
 	*this=result;
 }
 
-bool Rational::Rational::operator==(const Rational &r){
+bool Rational::operator==(const Rational &r){
 return (_n==r._n && _d==r._d)?true:false;
 }
 
-bool Rational::Rational::operator!=(const Rational &r){
+bool Rational::operator!=(const Rational &r){
 return (_n!=r._n && _d!=r._d)?true:false;
 }
 
-bool Rational::Rational::operator<(const Rational &r){
-	return (_n*r._d<_d*r._n) ? true : false;
+
+bool Rational::operator<(const Rational &r){
+	return _n*int(r._d)<int(_d)*r._n;
 }
 
-bool Rational::Rational::operator<=(const Rational &r){
-	return (_n*r._d<=_d*r._n) ? true : false;
+bool Rational::operator<=(const Rational &r){
+	return _n*int(r._d)<=int(_d)*r._n;
 }
 
-bool Rational::Rational::operator>(const Rational &r){
-return (_n*r._d>_d*r._n) ? true : false;
+bool Rational::operator>(const Rational &r){
+return _n*int(r._d)>int(_d)*r._n;
 }
 
-bool Rational::Rational::operator>=(const Rational &r){
-return (_n*r._d>=_d*r._n) ? true : false;
+bool Rational::operator>=(const Rational &r){
+return _n*int(r._d)>=int(_d)*r._n;
 }
 
 //Methods

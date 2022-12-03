@@ -48,7 +48,12 @@
         "sstream": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "any": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "numbers": "cpp",
+        "variant": "cpp"
     },
     "cmake.sourceDirectory": "${workspaceFolder}/src"
 }
