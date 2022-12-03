@@ -62,10 +62,15 @@ void Rational::Rational::operator-=(const Rational &r) {
 Rational Rational::Rational::operator*(const Rational &r) const {
 	return Rational(_n*r._n,_d*r._d);
 }
+
 Rational Rational::Rational::operator*(const float &f) const {
 	Rational r = floatToRational(f,10);
 	return Rational(_n*r._n,_d*r._d);
 }
+
+// Rational Rational::Rational::operator*(const int &i) const {
+// 	return Rational(_n*i,int(_d)*i);
+// }
 
 void Rational::Rational::operator*=(const Rational &r) {
 	Rational result = *this*r;

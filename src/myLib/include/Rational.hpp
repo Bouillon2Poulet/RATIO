@@ -125,6 +125,11 @@ public :
 	/// \return the product of the current Rational and the argument float
 	Rational operator*(const float &f) const;
 
+	// /// \brief multiply a Rational with a int
+	// /// \param i : int to multiply to the calling Rational
+	// /// \return the product of the current Rational and the argument int
+	// Rational operator*(const int &i) const;
+
 	/// \brief multiply a Rational to the calling Rational
 	/// \param r : Rational to multiply to the calling Rational
 	void operator*=(const Rational &r);
