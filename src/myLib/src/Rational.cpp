@@ -136,6 +136,12 @@ float Rational::tan() const {
 	return std::tan(toFloat());	
 }
 
+Rational Rational::pow(const unsigned int n) const
+{
+	if(n==0) return Rational(1,1);
+	else return Rational(_n,_d) * pow(n-1);
+}
+
 Rational Rational::floatToRational(const float& f, const uint nbIter){
 	const float fPos = std::abs(f);
 	if(fPos == 0. || nbIter == 0 ) return Rational(0,1);

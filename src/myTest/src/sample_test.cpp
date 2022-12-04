@@ -291,3 +291,14 @@ TEST (RationalMethods, tanMethod){
 	ASSERT_NEAR(r2.tan(),1,0.01);
 	ASSERT_NEAR(r3.tan(),0,0.01);
 }
+
+TEST (RationalMethods, powMethod){
+	Rational r1(0,1);
+	Rational r2(0,1);
+	ASSERT_EQ(r1.pow(10)==r2,true);
+
+	Rational r3(-4,6);
+	Rational r4(4,9);
+
+	ASSERT_EQ(r3.pow(2)==r4,true);
+}

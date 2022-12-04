@@ -26,8 +26,11 @@ int main(int argc, char **argv) {
     int nb_iter = 10;
     Rational uR=uRational(nb_iter);
     float uF=uFloat(nb_iter);
-    std::cout<<"Using Rational class, u(100) = "<<uR<<" = "<<float(uR.n())/float(uR.d())<<std::endl;
+    std::cout<<"Using Rational class, u(100) = "<<uR<<" = "<<uR.toFloat()<<std::endl;
     std::cout<<"Withou Rational class, u(100) = "<<uF<<std::endl;
+   
+    std::cout<<"uR^3 = "<<uR.pow(3)<<std::endl;
+
 
     // std::cout<<Rational::floatToRational(1.5,10)<<std::endl;
     // std::cout<<Rational::floatToRational(2.,10)<<std::endl;

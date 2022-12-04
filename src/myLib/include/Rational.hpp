@@ -190,6 +190,9 @@ public :
 	/// \brief return the tan() of the calling Rational (passing by float)
 	float tan() const;
 
+	/// \brief return the pow value of the calling Rational
+	Rational pow(const unsigned int n) const; 
+
 	/// \brief recursive way to convert a float to a Rational
 	/// \param f : float to convert to Rationnal
 	/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
