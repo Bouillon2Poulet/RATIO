@@ -5,10 +5,9 @@
 
 Rational uRational(int nb_iter){
     Rational u(1,3);
-    Rational one(1,1);
     for (int i=1; i<nb_iter; i++){
         //std::cout<<u<<std::endl;
-        u=u*4.0 - one;
+        u=u*4.0 - Rational(1,1);
     }
     return u;
 };
@@ -29,9 +28,6 @@ int main(int argc, char **argv) {
     std::cout<<"Using Rational class, u(100) = "<<uR<<" = "<<uR.toFloat()<<std::endl;
     std::cout<<"Withou Rational class, u(100) = "<<uF<<std::endl;
    
-    std::cout<<"uR^3 = "<<uR.pow(3)<<std::endl;
-
-
     // std::cout<<Rational::floatToRational(1.5,10)<<std::endl;
     // std::cout<<Rational::floatToRational(2.,10)<<std::endl;
     // std::cout<<Rational::floatToRational(0.3333333,100)<<std::endl;

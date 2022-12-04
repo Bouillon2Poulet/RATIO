@@ -6,6 +6,7 @@
 // #include <algorithm>  // transform
 #include <numeric>    // gcd()
 #include <cmath>      // sqrt
+#include <assert.h>
 // #include <stdexcept>  // special exceptions
 // #include <string>     // for exceptions
 
@@ -141,6 +142,20 @@ Rational Rational::pow(const unsigned int n) const
 	if(n==0) return Rational(1,1);
 	else return Rational(_n,_d) * pow(n-1);
 }
+
+Rational Rational::sqrt() const
+{
+	if(_n< 0){
+		std::cout<<"Veuillez rentrer un nombre positif"<<std::endl;
+		}
+	else return Rational(std::sqrt(_n),std::sqrt(_d));
+}
+
+
+float Rational::exp() const {
+	return std::exp(toFloat());
+}
+
 
 Rational Rational::floatToRational(const float& f, const uint nbIter){
 	const float fPos = std::abs(f);

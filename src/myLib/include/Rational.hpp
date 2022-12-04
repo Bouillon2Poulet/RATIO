@@ -193,6 +193,12 @@ public :
 	/// \brief return the pow value of the calling Rational
 	Rational pow(const unsigned int n) const; 
 
+	/// \brief return the square value of the calling Rational
+	Rational sqrt() const; 
+
+	/// \brief return the exp value of the calling Rational
+	float exp() const; 
+
 	/// \brief recursive way to convert a float to a Rational
 	/// \param f : float to convert to Rationnal
 	/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be

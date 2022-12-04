@@ -302,3 +302,22 @@ TEST (RationalMethods, powMethod){
 
 	ASSERT_EQ(r3.pow(2)==r4,true);
 }
+
+TEST (RationalMethods, sqrtMethod){
+	Rational r1(25,100);
+	Rational r2(5,10);
+	ASSERT_EQ(r1.sqrt()==r2,true);
+
+	Rational r3(4,36);
+	Rational r4(2,6);
+
+	ASSERT_EQ(r3.sqrt()==r4,true);
+}
+
+TEST (RationalMethods, expMethod){
+	Rational r1(0,1);
+	Rational r2(5,10);
+	ASSERT_EQ(r1.exp()==1.0,true);
+
+	ASSERT_EQ(r2.exp()==float(std::exp(5.0/10.0)),true);
+}
