@@ -25,7 +25,13 @@ Rational::Rational(const int n, const unsigned int d) : _n(n), _d(d) {
 }
 
 Rational::Rational(const int value){
-	//Faire la conversion int -> rationnel 
+	_n=value;
+	_d=1;
+}
+
+Rational::Rational(const float & f){
+	_n=floatToRational(f,10)._n;
+	_d=floatToRational(f,10)._d;
 }
 
 Rational::Rational(const Rational & r) : _n(r._n), _d(r._d) {

@@ -58,6 +58,10 @@ public:
 	/// \param r : the source rational to be copied
 	Rational(const Rational & r);
 
+	/// \brief constructor from a float that is converted into a Rational
+	/// \param f : the float that is converted
+	Rational(const float & f);
+
     /// \brief destructor
     ~Rational() = default;
 
