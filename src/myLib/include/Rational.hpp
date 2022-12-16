@@ -37,6 +37,7 @@
 
 /// \class Rational
 /// \brief class defining a number by its rational form
+template <typename T = int>
 class Rational {
 
 public:
@@ -48,11 +49,11 @@ public:
 	/// \brief constructor from numerator and denominator, PGCD(n,d) = 1
 	/// \param n : the const value used as numerator, can be negative
 	/// \param d : the const value used as denominator
-    Rational(const int n, const unsigned int d);
+    Rational(const T n, const unsigned int d);
 
 	/// \brief constructor from an int that is converted into a Rational
 	/// \param value : the const value converted into a Rational
-    Rational(const int value);
+    Rational(const T value);
 
 	/// \brief copy-constructor
 	/// \param r : the source rational to be copied
@@ -68,7 +69,7 @@ public:
 
 private :
 
-	int _n; /*!< numerator, can be negative */
+	T _n; /*!< numerator, can be negative */
 	unsigned int _d; /*!< denominator, can not be equal to zero */
 
 public :
@@ -214,6 +215,36 @@ public :
 	static Rational floatToRational(const float& f, const uint nbIter);
 	
 };
+
+//Constructors
+template <typename T>
+Rational<T>::Rational() : _n(0), _d(1) {
+}
+
+template <typename T>
+Rational<T>::Rational(const T n, const unsigned int d) : _n(n), _d(d) {
+	int gcd = std::gcd(_n,_d);
+	if (gcd!=1){
+		_n/=gcd;
+		_d/=gcd;
+	}
+}
+
+template <typename T>
+Rational<T>::Rational(const T value){
+	_n=value;
+	_d=1;
+}
+
+template <typename T>
+Rational<T>::Rational(const float & f){
+	_n=floatToRational(f,10)._n;
+	_d=floatToRational(f,10)._d;
+}
+
+template <typename T>
+Rational<T>::Rational(const Rational & r) : _n(r._n), _d(r._d) {
+}
 
     /// \brief manage display of a Rational using <<
     /// \param stream : input stream

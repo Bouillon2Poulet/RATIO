@@ -1,6 +1,4 @@
 #include "Rational.hpp"
-// SALUT MATHOU SAVA ????
-
 // #include <fstream>
 // #include <cstdlib>    // size_t
 // #include <algorithm>  // transform
@@ -12,8 +10,8 @@
 
 
 //Constructors
-
-Rational::Rational() : _n(0), _d(1) {
+template <typename T=int>
+Rational<T>::Rational() : _n(0), _d(1) {
 }
 
 Rational::Rational(const int n, const unsigned int d) : _n(n), _d(d) {
