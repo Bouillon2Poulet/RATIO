@@ -109,6 +109,18 @@ TEST (RationalOperators, minusOperator){
 	ASSERT_EQ((r2-r3).d(),12);
 }
 
+TEST (RationalOperators, minusInt){
+	Rational r1(0,1);
+	Rational r2(-2,3);
+
+	Rational r3(-1,1);
+	Rational r4(-5,3);
+
+	ASSERT_EQ((r1-1)==r3,true);
+	ASSERT_EQ((r2-1)==r4,true);
+
+}
+
 TEST (RationalOperators, minusEqualOperator){
 	Rational r1(0,1);
 	Rational r2(-2,3);

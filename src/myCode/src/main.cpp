@@ -7,7 +7,7 @@ Rational uRational(int nb_iter){
     Rational u(1,3);
     for (int i=1; i<nb_iter; i++){
         //std::cout<<u<<std::endl;
-        u=u*4.0 - Rational(1,1);
+        u=u*4.0 - 1;
     }
     return u;
 };

@@ -111,6 +111,10 @@ public :
 	/// \return the substract of the current Rational and the argument Rational
 	Rational operator-(const Rational &r) const;
 
+	Rational operator-(const int &i) const;
+
+	Rational operator-(const float &f) const;
+
 	/// \brief substract a rational to the calling Rational
 	/// \param r : Rational to substract to the calling Rational
 	void operator-=(const Rational &r);
@@ -198,6 +202,7 @@ public :
 
 	/// \brief return the exp value of the calling Rational
 	float exp() const; 
+
 
 	/// \brief recursive way to convert a float to a Rational
 	/// \param f : float to convert to Rationnal
