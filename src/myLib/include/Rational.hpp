@@ -211,9 +211,24 @@ public :
 	/// \brief recursive way to convert a float to a Rational
 	/// \param f : float to convert to Rationnal
 	/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
-	static Rational floatToRational(const float& f, const uint nbIter);
+	
+	template<typename T>
+	static Rational floatToRational(const T& f, const uint nbIter);
 	
 };
+
+	template<typename T>
+	static Rational floatToRational(const T& f, const uint nbIter){
+	const T fPos = std::abs(f);
+	if(fPos == 0. || nbIter == 0 ) return Rational(0,1);
+	if(fPos<1){
+		return ((floatToRational(1*sign(f)/fPos,nbIter)).invert());
+	}
+	if(fPos>=1){
+		const uint uintPart = std::floor(fPos);
+		return Rational(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
+	}
+}
 
     /// \brief manage display of a Rational using <<
     /// \param stream : input stream

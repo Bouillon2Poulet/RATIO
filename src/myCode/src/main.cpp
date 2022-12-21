@@ -27,6 +27,11 @@ int main(int argc, char **argv) {
     float uF=uFloat(nb_iter);
     std::cout<<"Using Rational class, u(100) = "<<uR<<" = "<<uR.toFloat()<<std::endl;
     std::cout<<"Withou Rational class, u(100) = "<<uF<<std::endl;
+
+    // int a = 2;
+    // Rational r = Rational::floatToRational(a,10);
+
+    // std::cout<<"a = "<<r<<std::endl;
    
     // std::cout<<Rational::floatToRational(1.5,10)<<std::endl;
     // std::cout<<Rational::floatToRational(2.,10)<<std::endl;
