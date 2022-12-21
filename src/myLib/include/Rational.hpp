@@ -246,10 +246,171 @@ template <typename T>
 Rational<T>::Rational(const Rational & r) : _n(r._n), _d(r._d) {
 }
 
-    /// \brief manage display of a Rational using <<
-    /// \param stream : input stream
-    /// \param r : the Rational to output
-    /// \return the output stream containing the Rational data
-    std::ostream& operator<< (std::ostream& stream, const Rational& r);
+//Operators
+template <typename T>
+void Rational<T>::operator=(const Rational &r){
+	_n = r.n();
+	_d = r.d();
+}
+
+template <typename T>
+Rational<T> Rational<T>::operator+(const Rational &r) const{
+	return Rational(_n*r._d+r._n*_d,_d*r._d);
+}
+
+template <typename T>
+void Rational<T>::operator+=(const Rational &r) {
+	Rational result = *this+r;
+	*this=result;
+}
+
+template <typename T>
+Rational<T> Rational<T>::operator-() const {
+	return Rational(-1*_n,_d);
+}
+
+template <typename T>
+Rational<T> Rational<T>::operator-(const Rational &r) const{
+	return Rational(_n*r._d-r._n*_d,_d*r._d);
+}
+
+template <typename T>
+Rational<T> Rational<T>::operator-(const int &i) const{
+	return Rational(_n-i*int(_d),_d);
+}
+
+template <typename T>
+void Rational<T>::operator-=(const Rational &r) {
+	Rational result = *this-r;
+	*this=result;
+}
+
+template <typename T>
+Rational<T> Rational<T>::operator*(const Rational &r) const {
+	return Rational(_n*r._n,_d*r._d);
+}
+
+template <typename T>
+Rational<T> Rational<T>::operator*(const float &f) const {
+	Rational r = floatToRational(f,10);
+	return Rational(_n*r._n,_d*r._d);
+}
+
+template <typename T>
+void Rational<T>::operator*=(const Rational &r) {
+	Rational result = *this*r;
+	*this=result;
+}
+
+template <typename T>
+Rational<T> Rational<T>::operator/(const Rational &r) const{
+	return *this*r.invert();
+}
+
+template <typename T>
+void Rational<T>::operator/=(const Rational &r) {
+	Rational result = *this/r;
+	*this=result;
+}
+
+template <typename T>
+bool Rational<T>::operator==(const Rational &r){
+return (_n==r._n && _d==r._d)?true:false;
+}
+
+template <typename T>
+bool Rational<T>::operator!=(const Rational &r){
+return (_n!=r._n && _d!=r._d)?true:false;
+}
+
+template <typename T>
+bool Rational<T>::operator<(const Rational &r){
+	return _n*int(r._d)<int(_d)*r._n;
+}
+
+template <typename T>
+bool Rational<T>::operator<=(const Rational &r){
+	return _n*int(r._d)<=int(_d)*r._n;
+}
+
+template <typename T>
+bool Rational<T>::operator>(const Rational &r){
+return _n*int(r._d)>int(_d)*r._n;
+}
+
+template <typename T>
+bool Rational<T>::operator>=(const Rational &r){
+return _n*int(r._d)>=int(_d)*r._n;
+}
+
+//Methods
+
+template <typename T>
+Rational<T> Rational<T>::abs() const {
+	return Rational<T>(std::abs(_n),_d);
+}
+
+template <typename T>
+int Rational<T>::floor() const {
+	return std::floor(_n/(int)_d);
+}
+
+template <typename T>
+float Rational<T>::toFloat() const {
+	return (float)_n/(float)_d;
+}
+
+template <typename T>
+float Rational<T>::cos() const {
+	return std::cos(toFloat());	
+}
+
+template <typename T>
+float Rational<T>::sin() const {
+	return std::sin(toFloat());	
+}
+
+template <typename T>
+float Rational<T>::tan() const {
+	return std::tan(toFloat());	
+}
+
+template <typename T>
+Rational<T> Rational<T>::pow(const unsigned int n) const {
+	if(n==0) return Rational(1,1);
+	else return Rational(_n,_d) * pow(n-1);
+}
+
+template <typename T>
+Rational<T> Rational<T>::sqrt() const {
+	if(_n< 0){
+		std::cout<<"Veuillez rentrer un nombre positif"<<std::endl;
+		}
+	else return Rational(std::sqrt(_n),std::sqrt(_d));
+}
+
+template <typename T>
+float Rational<T>::exp() const {
+	return std::exp(toFloat());
+}
+
+template <typename T>
+Rational<T> Rational<T>::floatToRational(const float& f, const uint nbIter){
+	const float fPos = std::abs(f);
+	if(fPos == 0. || nbIter == 0 ) return Rational<T>(0,1);
+	if(fPos<1){
+		return ((floatToRational(1*sign(f)/fPos,nbIter)).invert());
+	}
+	if(fPos>=1){
+		const uint uintPart = std::floor(fPos);
+		return Rational<T>(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
+	}
+}
+
+template <typename T>
+std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
+	stream << r.n() << "/" << r.d();
+	return stream;
+}
 
 #endif
