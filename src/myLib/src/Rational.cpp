@@ -1,3 +1,4 @@
+#if 0
 #include "Rational.hpp"
 // #include <fstream>
 // #include <cstdlib>    // size_t
@@ -190,3 +191,4 @@ std::ostream& operator<< (std::ostream& stream, const Rational& r) {
 	return stream;
 }
 
+#endif
