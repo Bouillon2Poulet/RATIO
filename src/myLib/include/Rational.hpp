@@ -4,6 +4,8 @@
 #include <vector>
 #include <cstdlib>
 #include <fstream>
+#include <numeric>
+#include <type_traits>
 
 #include "internal.hpp"
 
@@ -70,7 +72,7 @@ public:
 private :
 
 	T _n; /*!< numerator, can be negative */
-	unsigned int _d; /*!< denominator, can not be equal to zero */
+	T _d; /*!< denominator, can not be equal to zero */
 
 public :
 	/// \brief return the numerator of a Rational
@@ -208,7 +210,6 @@ public :
 	/// \brief return the exp value of the calling Rational
 	float exp() const; 
 
-
 	/// \brief recursive way to convert a float to a Rational
 	/// \param f : float to convert to Rationnal
 	/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
@@ -219,31 +220,46 @@ public :
 //Constructors
 template <typename T>
 Rational<T>::Rational() : _n(0), _d(1) {
+	static_assert(std::is_integral_v<T>, "T template must be integers");
 }
 
 template <typename T>
 Rational<T>::Rational(const T n, const unsigned int d) : _n(n), _d(d) {
+	static_assert(std::is_integral_v<T>, "T template must be integers");
+
 	int gcd = std::gcd(_n,_d);
 	if (gcd!=1){
 		_n/=gcd;
 		_d/=gcd;
 	}
+
+	_n*=sign(_d);
+	_d*=sign(_d);
 }
 
 template <typename T>
 Rational<T>::Rational(const T value){
+	static_assert(std::is_integral_v<T>, "T template must be integers");
 	_n=value;
 	_d=1;
 }
 
 template <typename T>
 Rational<T>::Rational(const float & f){
+	static_assert(std::is_integral_v<T>, "T template must be integers");
 	_n=floatToRational(f,10)._n;
 	_d=floatToRational(f,10)._d;
+
+	_n*=sign(_d);
+	_d*=sign(_d);
 }
 
 template <typename T>
 Rational<T>::Rational(const Rational & r) : _n(r._n), _d(r._d) {
+	static_assert(std::is_integral_v<T>, "T template must be integers");
+
+	_n*=sign(_d);
+	_d*=sign(_d);
 }
 
 //Operators
@@ -386,7 +402,7 @@ Rational<T> Rational<T>::sqrt() const {
 	if(_n< 0){
 		std::cout<<"Veuillez rentrer un nombre positif"<<std::endl;
 		}
-	else return Rational(std::sqrt(_n),std::sqrt(_d));
+	return Rational(std::sqrt(_n),std::sqrt(_d));
 }
 
 template <typename T>
@@ -401,10 +417,8 @@ Rational<T> Rational<T>::floatToRational(const float& f, const uint nbIter){
 	if(fPos<1){
 		return ((floatToRational(1*sign(f)/fPos,nbIter)).invert());
 	}
-	if(fPos>=1){
-		const uint uintPart = std::floor(fPos);
-		return Rational<T>(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
-	}
+	const uint uintPart = std::floor(fPos);
+	return Rational<T>(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
 }
 
 template <typename T>

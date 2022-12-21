@@ -3,14 +3,14 @@
 #include "Rational.hpp"
 #include "internal.hpp"
 
-Rational uRational(int nb_iter){
-    Rational u(1,3);
+Rational<int> uRational(int nb_iter){
+    Rational<int> u(1,3);
     for (int i=1; i<nb_iter; i++){
         //std::cout<<u<<std::endl;
         u=u*4.0 - 1;
     }
     return u;
-};
+}
 
 float uFloat(int nb_iter){
     float u=1.0/3.0;
@@ -19,11 +19,11 @@ float uFloat(int nb_iter){
         u=u*4 - 1;
     }
     return u;
-};
+}
 
-int main(int argc, char **argv) {
+int main(/*int argc, char **argv*/) {
     int nb_iter = 10;
-    Rational uR=uRational(nb_iter);
+    Rational<int> uR=uRational(nb_iter);
     float uF=uFloat(nb_iter);
     std::cout<<"Using Rational class, u(100) = "<<uR<<" = "<<uR.toFloat()<<std::endl;
     std::cout<<"Withou Rational class, u(100) = "<<uF<<std::endl;
