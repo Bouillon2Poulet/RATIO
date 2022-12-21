@@ -219,7 +219,6 @@ public :
 	
 };
 
-<<<<<<< HEAD
 //Constructors
 template <typename T>
 Rational<T>::Rational() : _n(0), _d(1) {
@@ -429,25 +428,5 @@ std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 	stream << r.n() << "/" << r.d();
 	return stream;
 }
-=======
-	template<typename T>
-	static Rational floatToRational(const T& f, const uint nbIter){
-	const T fPos = std::abs(f);
-	if(fPos == 0. || nbIter == 0 ) return Rational(0,1);
-	if(fPos<1){
-		return ((floatToRational(1*sign(f)/fPos,nbIter)).invert());
-	}
-	if(fPos>=1){
-		const uint uintPart = std::floor(fPos);
-		return Rational(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
-	}
-}
-
-    /// \brief manage display of a Rational using <<
-    /// \param stream : input stream
-    /// \param r : the Rational to output
-    /// \return the output stream containing the Rational data
-    std::ostream& operator<< (std::ostream& stream, const Rational& r);
->>>>>>> 6ab7df26ab02192d0d1adf2685f8673699fb22a7
 
 #endif
