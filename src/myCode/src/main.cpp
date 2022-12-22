@@ -2,6 +2,7 @@
 
 #include "Rational.hpp"
 #include "internal.hpp"
+#include <vector>
 
 Rational<int> uRational(int nb_iter){
     Rational<int> u(1,3);
@@ -28,7 +29,13 @@ int main(/*int argc, char **argv*/) {
     std::cout<<"Using Rational class, u(100) = "<<uR<<" = "<<uR.toFloat()<<std::endl;
     std::cout<<"Without Rational class, u(100) = "<<uF<<std::endl;
 
+    float a = 5.5;
+    Rational<int> b = Rational<int>::toRational(a,10);
+    std::cout<<"b = "<<b<<std::endl;
 
+    // std::vector<int> my_vector{1,2,2};
+    // Rational<int> c = Rational<int>::toRational(my_vector,10);
+    // std::cout<<"c = "<<c<<std::endl;
 
     return 0;
 }

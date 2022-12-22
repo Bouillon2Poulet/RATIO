@@ -447,7 +447,7 @@ Rational<T> Rational<T>::toRational(const A& v, const uint nbIter){
 	else if(std::is_integral_v<A>){
 		return Rational<T>(v,1);
 	}
-	else {
+	else if (std::is_floating_point_v<A>){
 		const float fPos = std::abs(v);
 		if(fPos == 0. || nbIter == 0 ) return Rational<T>(0,1);
 		if(fPos<1){
@@ -455,6 +455,9 @@ Rational<T> Rational<T>::toRational(const A& v, const uint nbIter){
 		}
 		const uint uintPart = std::floor(fPos);
 		return Rational<T>(sign(v)*uintPart,1)+toRational(sign(v)*(fPos-uintPart),nbIter-1);
+	}
+	else {
+		throw std::invalid_argument("error : bad argument");
 	}
 }
 
