@@ -6,6 +6,7 @@
 #include <fstream>
 #include <numeric>
 #include <type_traits>
+#include <limits>
 
 #include "internal.hpp"
 
@@ -39,6 +40,7 @@
 
 /// \class Rational
 /// \brief class defining a number by its rational form
+using namespace internal;
 template <typename T = int>
 class Rational {
 
@@ -51,19 +53,12 @@ public:
 	/// \brief constructor from numerator and denominator, PGCD(n,d) = 1
 	/// \param n : the const value used as numerator, can be negative
 	/// \param d : the const value used as denominator
-    Rational(const T n, const unsigned int d);
+    Rational(const T& n, const T& d);
 
-	/// \brief constructor from an int that is converted into a Rational
+	/// \brief constructor from a value that is converted into a Rational thanks to toRational() function, is also used as copy constructor
 	/// \param value : the const value converted into a Rational
-    Rational(const T value);
+    Rational(const T& value);
 
-	/// \brief copy-constructor
-	/// \param r : the source rational to be copied
-	Rational(const Rational & r);
-
-	/// \brief constructor from a float that is converted into a Rational
-	/// \param f : the float that is converted
-	Rational(const float & f);
 
     /// \brief destructor
     ~Rational() = default;
@@ -99,7 +94,6 @@ public :
 	/// \brief affectation operator
 	void operator=(const Rational &r);
 
-
 	/// \brief add 2 Rationals
 	/// \param v : template to add to the calling rational
 	/// \return the sum of the current Rational and the template argument 
@@ -121,7 +115,6 @@ public :
 	template <typename A>
 	Rational operator-(const A &v) const;
 
-
 	/// \brief substract a rational to the calling Rational
 	/// \param r : Rational to substract to the calling Rational
 	template <typename A>
@@ -132,13 +125,6 @@ public :
 	/// \return the product of the current Rational and the template argument 
 	template <typename A>
 	Rational operator*(const A &v) const;
-
-
-
-	// /// \brief multiply a Rational with a int
-	// /// \param i : int to multiply to the calling Rational
-	// /// \return the product of the current Rational and the argument int
-	// Rational operator*(const int &i) const;
 
 	/// \brief multiply a Rational to the calling Rational
 	/// \param r : Rational to multiply to the calling Rational
@@ -234,7 +220,7 @@ Rational<T>::Rational() : _n(0), _d(1) {
 }
 
 template <typename T>
-Rational<T>::Rational(const T n, const unsigned int d) : _n(n), _d(d) {
+Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 	static_assert(std::is_integral_v<T>, "T template must be integers");
 
 	int gcd = std::gcd(_n,_d);
@@ -248,28 +234,11 @@ Rational<T>::Rational(const T n, const unsigned int d) : _n(n), _d(d) {
 }
 
 template <typename T>
-Rational<T>::Rational(const T value){
+Rational<T>::Rational(const T& value){
 	static_assert(std::is_integral_v<T>, "T template must be integers");
-	_n=value;
-	_d=1;
-}
-
-template <typename T>
-Rational<T>::Rational(const float & f){
-	static_assert(std::is_integral_v<T>, "T template must be integers");
-	_n=toRational<float>(f,10)._n;
-	_d=toRational<float>(f,10)._d;
-
-	_n*=sign(_d);
-	_d*=sign(_d);
-}
-
-template <typename T>
-Rational<T>::Rational(const Rational & r) : _n(r._n), _d(r._d) {
-	static_assert(std::is_integral_v<T>, "T template must be integers");
-
-	_n*=sign(_d);
-	_d*=sign(_d);
+	Rational r = toRational(value);
+	_n=r._n;
+	_d=r._d;
 }
 
 //Operators

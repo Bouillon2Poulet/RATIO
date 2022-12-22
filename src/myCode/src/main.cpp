@@ -33,9 +33,7 @@ int main(/*int argc, char **argv*/) {
     Rational<int> b = Rational<int>::toRational(a,10);
     std::cout<<"b = "<<b<<std::endl;
 
-    // std::vector<int> my_vector{1,2,2};
-    // Rational<int> c = Rational<int>::toRational(my_vector,10);
-    // std::cout<<"c = "<<c<<std::endl;
+
 
     return 0;
 }
