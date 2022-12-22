@@ -279,8 +279,8 @@ TEST (RationalMethods, toFloatMethod){
 
 TEST (RationalMethods, cosMethod){
 	Rational<int>r1(0,1);
-	Rational<int>r2 = Rational<int>::floatToRational(M_PI/2,10);
-	Rational<int>r3 = Rational<int>::floatToRational(M_PI,10);
+	Rational<int>r2 = Rational<int>::toRational<float>(M_PI/2,10);
+	Rational<int>r3 = Rational<int>::toRational<float>(M_PI,10);
 	ASSERT_NEAR(r1.cos(),1,0.01);
 	ASSERT_NEAR(r2.cos(),0,0.01);
 	ASSERT_NEAR(r3.cos(),-1,0.01);
@@ -288,8 +288,8 @@ TEST (RationalMethods, cosMethod){
 
 TEST (RationalMethods, sinMethod){
 	Rational<int>r1(0,1);
-	Rational<int>r2 = Rational<int>::floatToRational(M_PI/2,10);
-	Rational<int>r3 = Rational<int>::floatToRational(M_PI,10);
+	Rational<int>r2 = Rational<int>::toRational<float>(M_PI/2,10);
+	Rational<int>r3 = Rational<int>::toRational<float>(M_PI,10);
 	ASSERT_NEAR(r1.sin(),0,0.01);
 	ASSERT_NEAR(r2.sin(),1,0.01);
 	ASSERT_NEAR(r3.sin(),0,0.01);
@@ -297,8 +297,8 @@ TEST (RationalMethods, sinMethod){
 
 TEST (RationalMethods, tanMethod){
 	Rational<int>r1(0,1);
-	Rational<int>r2 = Rational<int>::floatToRational(M_PI/4,10);
-	Rational<int>r3 = Rational<int>::floatToRational(M_PI,10);
+	Rational<int>r2 = Rational<int>::toRational<float>(M_PI/4,10);
+	Rational<int>r3 = Rational<int>::toRational<float>(M_PI,10);
 	ASSERT_NEAR(r1.tan(),0,0.01);
 	ASSERT_NEAR(r2.tan(),1,0.01);
 	ASSERT_NEAR(r3.tan(),0,0.01);

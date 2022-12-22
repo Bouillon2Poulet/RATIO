@@ -103,7 +103,8 @@ public :
 	/// \brief add 2 Rationals
 	/// \param r : rational to add to the calling rational
 	/// \return the sum of the current Rational and the argument Rational
-	Rational operator+(const Rational &r) const;
+	template <typename A>
+	Rational operator+(const A &v) const;
 
 	/// \brief add a Rational to the calling Rational
 	/// \param r : rational to add to the calling rational
@@ -213,9 +214,8 @@ public :
 	/// \brief recursive way to convert a float to a Rational
 	/// \param f : float to convert to Rationnal
 	/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
-	
-	template<typename T>
-	static Rational floatToRational(const T& f, const uint nbIter);
+	template<typename A>
+	static Rational toRational(const A& v, const uint nbIter);
 	
 };
 
@@ -249,8 +249,8 @@ Rational<T>::Rational(const T value){
 template <typename T>
 Rational<T>::Rational(const float & f){
 	static_assert(std::is_integral_v<T>, "T template must be integers");
-	_n=floatToRational(f,10)._n;
-	_d=floatToRational(f,10)._d;
+	_n=toRational<float>(f,10)._n;
+	_d=toRational<float>(f,10)._d;
 
 	_n*=sign(_d);
 	_d*=sign(_d);
@@ -272,7 +272,9 @@ void Rational<T>::operator=(const Rational &r){
 }
 
 template <typename T>
-Rational<T> Rational<T>::operator+(const Rational &r) const{
+template <typename A>
+Rational<T> Rational<T>::operator+(const A &v) const{
+	Rational r = toRational<A>(v, 10);
 	return Rational(_n*r._d+r._n*_d,_d*r._d);
 }
 
@@ -310,7 +312,7 @@ Rational<T> Rational<T>::operator*(const Rational &r) const {
 
 template <typename T>
 Rational<T> Rational<T>::operator*(const float &f) const {
-	Rational r = floatToRational(f,10);
+	Rational r = toRational<float>(f,10);
 	return Rational(_n*r._n,_d*r._d);
 }
 
@@ -413,14 +415,23 @@ float Rational<T>::exp() const {
 }
 
 template <typename T>
-Rational<T> Rational<T>::floatToRational(const float& f, const uint nbIter){
-	const float fPos = std::abs(f);
-	if(fPos == 0. || nbIter == 0 ) return Rational<T>(0,1);
-	if(fPos<1){
-		return ((floatToRational(1*sign(f)/fPos,nbIter)).invert());
+template <typename A>
+Rational<T> Rational<T>::toRational(const A& v, const uint nbIter){
+	if constexpr (std::is_same_v<A,Rational>){
+		return v;
 	}
-	const uint uintPart = std::floor(fPos);
-	return Rational<T>(sign(f)*uintPart,1)+floatToRational(sign(f)*(fPos-uintPart),nbIter-1);
+	else if(std::is_integral_v<A>){
+		return Rational<T>(v,1);
+	}
+	else {
+		const float fPos = std::abs(v);
+		if(fPos == 0. || nbIter == 0 ) return Rational<T>(0,1);
+		if(fPos<1){
+			return ((toRational(1*sign(v)/fPos,nbIter)).invert());
+		}
+		const uint uintPart = std::floor(fPos);
+		return Rational<T>(sign(v)*uintPart,1)+toRational(sign(v)*(fPos-uintPart),nbIter-1);
+	}
 }
 
 template <typename T>
