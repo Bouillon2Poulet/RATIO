@@ -145,15 +145,11 @@ TEST (RationalOperators, multiplyOperator){
 	Rational<int> r3(5,4);
 	ASSERT_EQ((r2*r3).n(),-5);
 	ASSERT_EQ((r2*r3).d(),6);
-}
 
-TEST (RationalOperators, multiplyWithFloatOperator){
-	Rational<int> r1(0,1);
+//float 
 	ASSERT_EQ((r1*0.66).n(),0);
 	ASSERT_EQ((r1*0.66).d(),1);
-
-	Rational<int> r2(5,4);
-	ASSERT_NEAR((r2*0.66).toFloat(),0.825,0.1);
+	ASSERT_NEAR((r3*0.66).toFloat(),0.825,0.1);
 }
 
 TEST (RationalOperators, multiplyEqualOperator){
