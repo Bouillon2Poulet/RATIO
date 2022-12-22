@@ -28,12 +28,6 @@ int main(/*int argc, char **argv*/) {
     std::cout<<"Using Rational class, u(100) = "<<uR<<" = "<<uR.toFloat()<<std::endl;
     std::cout<<"Without Rational class, u(100) = "<<uF<<std::endl;
 
-    Rational<int> u(1,3);
-    std::cout<<"1/3 + 1 = "<<u+1<<std::endl;
-    std::cout<<"-1/3 - 1 = "<<-u-1<<std::endl;
-    std::cout<<"1/3 + 1.5 = "<<u+1.5<<std::endl;
-
-
 
 
     return 0;

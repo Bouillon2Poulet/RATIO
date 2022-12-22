@@ -92,6 +92,15 @@ TEST (RationalOperators, plusEqualOperator){
 	r2+=r3;
 	ASSERT_EQ(r2.n(),7);
 	ASSERT_EQ(r2.d(),12);
+
+	Rational<int> r4(-5,3);
+	int a = 2;
+	float b = 1.5;
+	r1+=a;
+	r4+=b;
+	ASSERT_EQ(r1==Rational<int>(2,1),true);
+	ASSERT_EQ(r4==Rational<int>(-1,6),true);
+
 }
 
 TEST (RationalOperators, unaryMinusOperator){
@@ -134,6 +143,14 @@ TEST (RationalOperators, minusEqualOperator){
 	r2-=r3;
 	ASSERT_EQ(r2.n(),-23);
 	ASSERT_EQ(r2.d(),12);
+
+	Rational<int> r4(-5,3);
+	int a = 2;
+	float b = 1.5;
+	r1-=a;
+	r4-=b;
+	ASSERT_EQ(r1==Rational<int>(-2,1),true);
+	ASSERT_EQ(r4==Rational<int>(-19,6),true);
 }
 
 TEST (RationalOperators, multiplyOperator){
@@ -164,6 +181,14 @@ TEST (RationalOperators, multiplyEqualOperator){
 	r2*=r3;
 	ASSERT_EQ(r2.n(),-5);
 	ASSERT_EQ(r2.d(),6);
+
+	Rational<int> r4(-5,3);
+	int a = 2;
+	float b = -1.5;
+	r1*=a;
+	r4*=b;
+	ASSERT_EQ(r1==Rational<int>(0,1),true);
+	ASSERT_EQ(r4==Rational<int>(5,2),true);
 }
 
 TEST (RationalOperators, divideOperator){
@@ -175,6 +200,13 @@ TEST (RationalOperators, divideOperator){
 	Rational<int> r3(5,4);
 	ASSERT_EQ((r2/r3).n(),-8);
 	ASSERT_EQ((r2/r3).d(),15);
+
+	int a = 2;
+	float b = 1.5;
+	ASSERT_EQ((r1/a)==Rational<int>(0,1),true);
+	ASSERT_EQ((r1/b)==Rational<int>(0,1),true);
+	ASSERT_EQ((r2/a)==Rational<int>(-2,6),true);
+	ASSERT_EQ((r2/b)==Rational<int>(-4,9),true);
 }
 
 TEST (RationalOperators, divideEqualOperator){
@@ -189,6 +221,14 @@ TEST (RationalOperators, divideEqualOperator){
 	r2/=r3;
 	ASSERT_EQ(r2.n(),-8);
 	ASSERT_EQ(r2.d(),15);
+
+	Rational<int> r4(-5,3);
+	int a = 2;
+	float b = -1.5;
+	r1/=a;
+	r4/=b;
+	ASSERT_EQ(r1==Rational<int>(0,1),true);
+	ASSERT_EQ(r4==Rational<int>(10,9),true);
 }
 
 TEST (StreamOperators, coutOperator){
@@ -205,6 +245,14 @@ TEST (RationalOperators, EqualComparisonOperator){
 
 	Rational<int>r3(-4,6);
 	ASSERT_EQ(r2==r3,true);
+
+	Rational<int>r4(-3,1);
+	Rational<int>r5(-3,2);
+	int a = -3;
+	float b = -1.5;
+	ASSERT_EQ(r4==a,true);
+	ASSERT_EQ(r5==b,true);
+
 }
 
 TEST (RationalOperators, NotEqualComparisonOperator){
@@ -214,6 +262,14 @@ TEST (RationalOperators, NotEqualComparisonOperator){
 
 	Rational<int>r3(-4,6);
 	ASSERT_EQ(r2!=r3,false);
+
+	Rational<int>r4(-6,2);
+	Rational<int>r5(-3,2);
+	int a = -3;
+	float b = -2.5;
+	ASSERT_EQ(r4!=a,false);
+	ASSERT_EQ(r5!=b,true);
+	
 }
 
 TEST (RationalOperators, InferiorComparisonOperator){
@@ -223,6 +279,13 @@ TEST (RationalOperators, InferiorComparisonOperator){
 
 	Rational<int>r3(-5,6);
 	ASSERT_EQ(r2<r3,false);
+
+	Rational<int>r4(-3,1);
+	Rational<int>r5(-3,2);
+	int a = -2;
+	float b = -2.5;
+	ASSERT_EQ(r4<a,true);
+	ASSERT_EQ(r5<b,false);
 }
 
 TEST (RationalOperators, InferiorEqualComparisonOperator){
@@ -232,6 +295,13 @@ TEST (RationalOperators, InferiorEqualComparisonOperator){
 
 	Rational<int>r3(-4,6);
 	ASSERT_EQ(r2<=r3,true);
+
+	Rational<int>r4(-3,1);
+	Rational<int>r5(-3,2);
+	int a = -2;
+	float b = -1.5;
+	ASSERT_EQ(r4<=a,true);
+	ASSERT_EQ(r5<=b,true);
 }
 
 TEST (RationalOperators, SuperiorComparisonOperator){
@@ -241,6 +311,13 @@ TEST (RationalOperators, SuperiorComparisonOperator){
 
 	Rational<int>r3(-5,6);
 	ASSERT_EQ(r2>r3,true);
+
+	Rational<int>r4(-3,1);
+	Rational<int>r5(-3,2);
+	int a = -2;
+	float b = -2.5;
+	ASSERT_EQ(r4>a,false);
+	ASSERT_EQ(r5>b,true);
 }
 
 TEST (RationalOperators, SuperiorEqualComparisonOperator){
@@ -250,6 +327,13 @@ TEST (RationalOperators, SuperiorEqualComparisonOperator){
 
 	Rational<int>r3(-4,6);
 	ASSERT_EQ(r2>=r3,true);
+
+	Rational<int>r4(-3,1);
+	Rational<int>r5(-3,2);
+	int a = -2;
+	float b = -1.5;
+	ASSERT_EQ(r4>=a,false);
+	ASSERT_EQ(r5>=b,true);
 }
 
 //Methods

@@ -108,7 +108,8 @@ public :
 
 	/// \brief add a Rational to the calling Rational
 	/// \param r : rational to add to the calling rational
-	void operator+=(const Rational &r);
+	template <typename A>
+	void operator+=(const A &v);
 
 	/// \brief unary minus
 	/// \return the of minus the calling Rational
@@ -123,7 +124,8 @@ public :
 
 	/// \brief substract a rational to the calling Rational
 	/// \param r : Rational to substract to the calling Rational
-	void operator-=(const Rational &r);
+	template <typename A>
+	void operator-=(const A &v);
 
 	/// \brief multiply 2 Rationals
 	/// \param v : Template to multiply to the calling Rational
@@ -140,40 +142,50 @@ public :
 
 	/// \brief multiply a Rational to the calling Rational
 	/// \param r : Rational to multiply to the calling Rational
-	void operator*=(const Rational &r);
+	template <typename A>
+	void operator*=(const A &v);
 
 	/// \brief divide 2 Rationals
-	/// \param r : Rational to divide to the calling Rational
-	/// \return the quotient of the current Rational and the argument Rational
-	Rational operator/(const Rational &r) const;
+	/// \param v : template to divide to the calling Rational
+	/// \return the quotient of the current Rational and the template argument 
+	template <typename A>
+	Rational operator/(const A &v) const;
 
 	/// \brief divide a rational to the calling Rational
 	/// \param r : Rational to divide to the calling Rational
-	void operator/=(const Rational &r);
+	template <typename A>
+	void operator/=(const A &v);
 
 	/// \brief compare if 2 Rationals are equals
-	/// \param r : Rational to divide to the calling Rational
-	bool operator==(const Rational &r);
+	/// \param v : Rational to divide to the calling Rational
+	/// \return the quotient of the current Rational and the template argument 
+	template <typename A>
+	bool operator==(const A &v);
 
 	/// \brief compare if 2 Rationals are different
 	/// \param r : Rational to divide to the calling Rational
-	bool operator!=(const Rational &r);
+	template <typename A>
+	bool operator!=(const A &v);
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
-	bool operator>(const Rational &r);
+	template <typename A>
+	bool operator>(const A &v);
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
-	bool operator>=(const Rational &r);
+	template <typename A>
+	bool operator>=(const A &v);
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
-	bool operator<(const Rational &r);
+	template <typename A>
+	bool operator<(const A &v);
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
-	bool operator<=(const Rational &r);
+	template <typename A>
+	bool operator<=(const A &v);
 
 
 
@@ -275,7 +287,9 @@ Rational<T> Rational<T>::operator+(const A &v) const{
 }
 
 template <typename T>
-void Rational<T>::operator+=(const Rational &r) {
+template <typename A>
+void Rational<T>::operator+=(const A &v) {
+	Rational r = toRational<A>(v, 10);
 	Rational result = *this+r;
 	*this=result;
 }
@@ -294,7 +308,9 @@ Rational<T> Rational<T>::operator-(const A &v) const{
 
 
 template <typename T>
-void Rational<T>::operator-=(const Rational &r) {
+template <typename A>
+void Rational<T>::operator-=(const A &v) {
+	Rational r = toRational<A>(v, 10);
 	Rational result = *this-r;
 	*this=result;
 }
@@ -307,49 +323,67 @@ Rational<T> Rational<T>::operator*(const A &v) const {
 }
 
 template <typename T>
-void Rational<T>::operator*=(const Rational &r) {
+template <typename A>
+void Rational<T>::operator*=(const A &v){
+	Rational r = toRational<A>(v, 10);
 	Rational result = *this*r;
 	*this=result;
 }
 
 template <typename T>
-Rational<T> Rational<T>::operator/(const Rational &r) const{
+template <typename A>
+Rational<T> Rational<T>::operator/(const A &v) const{
+	Rational r = toRational<A>(v,10);
 	return *this*r.invert();
 }
 
 template <typename T>
-void Rational<T>::operator/=(const Rational &r) {
+template <typename A>
+void Rational<T>::operator/=(const A &v){
+	Rational r = toRational<A>(v, 10);
 	Rational result = *this/r;
 	*this=result;
 }
 
 template <typename T>
-bool Rational<T>::operator==(const Rational &r){
-return (_n==r._n && _d==r._d)?true:false;
+template <typename A>
+bool Rational<T>::operator==(const A &v){
+	Rational r = toRational<A>(v,10);
+	return (_n==r._n && _d==r._d)?true:false;
 }
 
 template <typename T>
-bool Rational<T>::operator!=(const Rational &r){
-return (_n!=r._n && _d!=r._d)?true:false;
+template <typename A>
+bool Rational<T>::operator!=(const A &v){
+	Rational r = toRational<A>(v,10);
+return (_n!=r._n || _d!=r._d) ? true : false;
 }
 
 template <typename T>
-bool Rational<T>::operator<(const Rational &r){
+template <typename A>
+bool Rational<T>::operator<(const A &v){
+	Rational r = toRational<A>(v,10);
 	return _n*int(r._d)<int(_d)*r._n;
 }
 
 template <typename T>
-bool Rational<T>::operator<=(const Rational &r){
+template <typename A>
+bool Rational<T>::operator<=(const A &v){
+	Rational r = toRational<A>(v,10);
 	return _n*int(r._d)<=int(_d)*r._n;
 }
 
 template <typename T>
-bool Rational<T>::operator>(const Rational &r){
+template <typename A>
+bool Rational<T>::operator>(const A &v){
+	Rational r = toRational<A>(v,10);
 return _n*int(r._d)>int(_d)*r._n;
 }
 
 template <typename T>
-bool Rational<T>::operator>=(const Rational &r){
+template <typename A>
+bool Rational<T>::operator>=(const A &v){
+	Rational r = toRational<A>(v,10);
 return _n*int(r._d)>=int(_d)*r._n;
 }
 
