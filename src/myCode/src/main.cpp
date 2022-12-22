@@ -26,18 +26,15 @@ int main(/*int argc, char **argv*/) {
     Rational<int> uR=uRational(nb_iter);
     float uF=uFloat(nb_iter);
     std::cout<<"Using Rational class, u(100) = "<<uR<<" = "<<uR.toFloat()<<std::endl;
-    std::cout<<"Withou Rational class, u(100) = "<<uF<<std::endl;
+    std::cout<<"Without Rational class, u(100) = "<<uF<<std::endl;
 
-    // int a = 2;
-    // Rational r = Rational::floatToRational(a,10);
+    Rational<int> u(1,3);
+    std::cout<<"1/3 + 1 = "<<u+1<<std::endl;
+    std::cout<<"-1/3 - 1 = "<<-u-1<<std::endl;
+    std::cout<<"1/3 + 1.5 = "<<u+1.5<<std::endl;
 
-    // std::cout<<"a = "<<r<<std::endl;
-   
-    // std::cout<<Rational::floatToRational(1.5,10)<<std::endl;
-    // std::cout<<Rational::floatToRational(2.,10)<<std::endl;
-    // std::cout<<Rational::floatToRational(0.3333333,100)<<std::endl;
-    // std::cout<<Rational::floatToRational(-0.666666666,10)<<std::endl;
-    // std::cout<<"!!!"<<Rational::floatToRational(-10.459,10)<<std::endl;
+
+
 
     return 0;
 }

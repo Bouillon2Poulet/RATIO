@@ -101,7 +101,7 @@ public :
 
 
 	/// \brief add 2 Rationals
-	/// \param r : rational to add to the calling rational
+	/// \param v : template to add to the calling rational
 	/// \return the sum of the current Rational and the argument Rational
 	template <typename A>
 	Rational operator+(const A &v) const;
@@ -115,13 +115,11 @@ public :
 	Rational operator-() const;
 	
 	/// \brief substract 2 Rationals
-	/// \param r : Rational to substract to the calling Rational
+	/// \param v : template to substract to the calling Rational
 	/// \return the substract of the current Rational and the argument Rational
-	Rational operator-(const Rational &r) const;
+	template <typename A>
+	Rational operator-(const A &v) const;
 
-	Rational operator-(const int &i) const;
-
-	Rational operator-(const float &f) const;
 
 	/// \brief substract a rational to the calling Rational
 	/// \param r : Rational to substract to the calling Rational
@@ -290,14 +288,12 @@ Rational<T> Rational<T>::operator-() const {
 }
 
 template <typename T>
-Rational<T> Rational<T>::operator-(const Rational &r) const{
+template <typename A>
+Rational<T> Rational<T>::operator-(const A &v) const{
+	Rational r = toRational<A>(v, 10);
 	return Rational(_n*r._d-r._n*_d,_d*r._d);
 }
 
-template <typename T>
-Rational<T> Rational<T>::operator-(const int &i) const{
-	return Rational(_n-i*int(_d),_d);
-}
 
 template <typename T>
 void Rational<T>::operator-=(const Rational &r) {

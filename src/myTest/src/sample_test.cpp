@@ -72,6 +72,13 @@ TEST (RationalOperators, plusOperator){
 	Rational<int> r3(5,4);
 	ASSERT_EQ((r2+r3).n(),7);
 	ASSERT_EQ((r2+r3).d(),12);
+
+	int a = 2;
+	float b = 1.5;
+	ASSERT_EQ((r1+a)==Rational<int>(2,1),true);
+	ASSERT_EQ((r1+b)==Rational<int>(3,2),true);
+	ASSERT_EQ((r2+a)==Rational<int>(4,3),true);
+	ASSERT_EQ((r2+b)==Rational<int>(5,6),true);
 }
 
 TEST (RationalOperators, plusEqualOperator){
@@ -107,18 +114,13 @@ TEST (RationalOperators, minusOperator){
 	Rational<int> r3(5,4);
 	ASSERT_EQ((r2-r3).n(),-23);
 	ASSERT_EQ((r2-r3).d(),12);
-}
 
-TEST (RationalOperators, minusInt){
-	Rational<int> r1(0,1);
-	Rational<int> r2(-2,3);
-
-	Rational<int> r3(-1,1);
-	Rational<int> r4(-5,3);
-
-	ASSERT_EQ((r1-1)==r3,true);
-	ASSERT_EQ((r2-1)==r4,true);
-
+	int a = 2;
+	float b = 1.5;
+	ASSERT_EQ((r1-a)==Rational<int>(-2,1),true);
+	ASSERT_EQ((r1-b)==Rational<int>(-3,2),true);
+	ASSERT_EQ((r2-a)==Rational<int>(-8,3),true);
+	ASSERT_EQ((r2-b)==Rational<int>(-13,6),true);
 }
 
 TEST (RationalOperators, minusEqualOperator){
