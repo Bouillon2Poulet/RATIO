@@ -37,7 +37,7 @@
 /// 	- [path to build]/doc/doc-doxygen/html/index.html or 
 /// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
 
-
+int NBITERDEFAULT = NBITERDEFAULT;
 
 /// \class Rational
 /// \brief class defining a number by its rational form
@@ -286,14 +286,14 @@ constexpr void Rational<T>::operator=(const Rational &r){
 template <typename T>
 template <typename A>
 constexpr Rational<T> Rational<T>::operator+(const A &v) const{
-	Rational r = toRational<A>(v, 10);
+	Rational r = toRational<A>(v, NBITERDEFAULT);
 	return Rational(_n*r._d+r._n*_d,_d*r._d);
 }
 
 template <typename T>
 template <typename A>
 constexpr void Rational<T>::operator+=(const A &v) {
-	Rational r = toRational<A>(v, 10);
+	Rational r = toRational<A>(v, NBITERDEFAULT);
 	Rational result = *this+r;
 	*this=result;
 }
@@ -306,7 +306,7 @@ constexpr Rational<T> Rational<T>::operator-() const {
 template <typename T>
 template <typename A>
 constexpr Rational<T> Rational<T>::operator-(const A &v) const{
-	Rational r = toRational<A>(v, 10);
+	Rational r = toRational<A>(v, NBITERDEFAULT);
 	return Rational(_n*r._d-r._n*_d,_d*r._d);
 }
 
@@ -314,7 +314,7 @@ constexpr Rational<T> Rational<T>::operator-(const A &v) const{
 template <typename T>
 template <typename A>
 constexpr void Rational<T>::operator-=(const A &v) {
-	Rational r = toRational<A>(v, 10);
+	Rational r = toRational<A>(v, NBITERDEFAULT);
 	Rational result = *this-r;
 	*this=result;
 }
@@ -322,14 +322,14 @@ constexpr void Rational<T>::operator-=(const A &v) {
 template <typename T>
 template <typename A>
 constexpr Rational<T> Rational<T>::operator*(const A &v) const {
-	Rational r = toRational<A>(v,10);
+	Rational r = toRational<A>(v,NBITERDEFAULT);
 	return Rational(_n*r._n,_d*r._d);
 }
 
 template <typename T>
 template <typename A>
 constexpr void Rational<T>::operator*=(const A &v){
-	Rational r = toRational<A>(v, 10);
+	Rational r = toRational<A>(v, NBITERDEFAULT);
 	Rational result = *this*r;
 	*this=result;
 }
@@ -337,14 +337,14 @@ constexpr void Rational<T>::operator*=(const A &v){
 template <typename T>
 template <typename A>
 constexpr Rational<T> Rational<T>::operator/(const A &v) const{
-	Rational r = toRational<A>(v,10);
+	Rational r = toRational<A>(v,NBITERDEFAULT);
 	return *this*r.invert();
 }
 
 template <typename T>
 template <typename A>
 constexpr void Rational<T>::operator/=(const A &v){
-	Rational r = toRational<A>(v, 10);
+	Rational r = toRational<A>(v, NBITERDEFAULT);
 	Rational result = *this/r;
 	*this=result;
 }
@@ -352,42 +352,42 @@ constexpr void Rational<T>::operator/=(const A &v){
 template <typename T>
 template <typename A>
 constexpr bool Rational<T>::operator==(const A &v){
-	Rational r = toRational<A>(v,10);
+	Rational r = toRational<A>(v,NBITERDEFAULT);
 	return (_n==r._n && _d==r._d)?true:false;
 }
 
 template <typename T>
 template <typename A>
 constexpr bool Rational<T>::operator!=(const A &v){
-	Rational r = toRational<A>(v,10);
+	Rational r = toRational<A>(v,NBITERDEFAULT);
 return (_n!=r._n || _d!=r._d) ? true : false;
 }
 
 template <typename T>
 template <typename A>
 constexpr bool Rational<T>::operator<(const A &v) const{
-	Rational r = toRational<A>(v,10);
+	Rational r = toRational<A>(v,NBITERDEFAULT);
 	return _n*int(r._d)<int(_d)*r._n;
 }
 
 template <typename T>
 template <typename A>
 constexpr bool Rational<T>::operator<=(const A &v){
-	Rational r = toRational<A>(v,10);
+	Rational r = toRational<A>(v,NBITERDEFAULT);
 	return _n*int(r._d)<=int(_d)*r._n;
 }
 
 template <typename T>
 template <typename A>
 constexpr bool Rational<T>::operator>(const A &v) const {
-	Rational r = toRational<A>(v,10);
+	Rational r = toRational<A>(v,NBITERDEFAULT);
 return _n*int(r._d)>int(_d)*r._n;
 }
 
 template <typename T>
 template <typename A>
 constexpr bool Rational<T>::operator>=(const A &v){
-	Rational r = toRational<A>(v,10);
+	Rational r = toRational<A>(v,NBITERDEFAULT);
 return _n*int(r._d)>=int(_d)*r._n;
 }
 
