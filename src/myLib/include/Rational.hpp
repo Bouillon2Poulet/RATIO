@@ -253,6 +253,7 @@ Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 		_d/=gcd;
 	}
 
+	//case _d<0
 	_n*=sign(_d);
 	_d*=sign(_d);
 
