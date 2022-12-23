@@ -255,6 +255,11 @@ Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 
 	_n*=sign(_d);
 	_d*=sign(_d);
+
+	//infinite
+	if (_d==0){
+		_n=1;
+	}
 }
 
 template <typename T>
@@ -263,6 +268,11 @@ Rational<T>::Rational(const T& value){
 	Rational r = toRational(value);
 	_n=r._n;
 	_d=r._d;
+
+	//infinite
+	if (_d==0){
+		_n=1;
+	}
 }
 
 //Operators
