@@ -7,6 +7,7 @@
 #include <numeric>
 #include <type_traits>
 #include <limits>
+#include <stdarg.h>
 
 #include "internal.hpp"
 
@@ -20,7 +21,7 @@
 /// \image html myImage.jpg
 /// \tableofcontents
 /// \section instroduction_sec What for?
-/// VectorD is a super tool.
+/// Rational is a super tool.
 /// \section install_bigsec How to install
 /// \subsection dependencies_sec Dependecies
 /// \li nothing
@@ -49,6 +50,10 @@ public:
 
 	/// \brief default constructor, creates a Rational equal to zero
     Rational();
+
+	/// \brief copy constructor
+	/// \param r : the source Rational
+	Rational(const Rational& r)=default;
 
 	/// \brief constructor from numerator and denominator, PGCD(n,d) = 1
 	/// \param n : the const value used as numerator, can be negative
@@ -156,7 +161,7 @@ public :
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
 	template <typename A>
-	bool operator>(const A &v);
+	bool operator>(const A &v) const;
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
@@ -166,7 +171,7 @@ public :
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
 	template <typename A>
-	bool operator<(const A &v);
+	bool operator<(const A &v) const;
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
@@ -210,7 +215,26 @@ public :
 	/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
 	template<typename A>
 	static Rational toRational(const A& v, const uint nbIter);
-	
+
+	/// \brief function that returns the maximum of 2 Rationals
+	/// \param r1 : the first Rational to get the maximum of
+	/// \param r2 : the second Rational to get the maximum of
+	static Rational<T> max(const Rational<T>& r1,const Rational<T>& r2);
+
+	/// \brief variadic function that return the maximum of several Rationals
+	/// \param args : the Rationals to get the maximum of
+	template<typename... Args>
+	static Rational<T> max(const Rational<T>& r, Args... args);
+
+	/// \brief function that returns the minimum of 2 Rationals
+	/// \param r1 : the first Rational to get the minimum of
+	/// \param r2 : the second Rational to get the minimum of
+	static Rational<T> min(const Rational<T>& r1,const Rational<T>& r2);
+
+	/// \brief variadic function that return the minimum of several Rationals
+	/// \param args : the Rationals to get the maximum of
+	template<typename... Args>
+	static Rational<T> min(const Rational<T>& r, Args... args);
 };
 
 //Constructors
@@ -330,7 +354,7 @@ return (_n!=r._n || _d!=r._d) ? true : false;
 
 template <typename T>
 template <typename A>
-bool Rational<T>::operator<(const A &v){
+bool Rational<T>::operator<(const A &v) const{
 	Rational r = toRational<A>(v,10);
 	return _n*int(r._d)<int(_d)*r._n;
 }
@@ -344,7 +368,7 @@ bool Rational<T>::operator<=(const A &v){
 
 template <typename T>
 template <typename A>
-bool Rational<T>::operator>(const A &v){
+bool Rational<T>::operator>(const A &v) const {
 	Rational r = toRational<A>(v,10);
 return _n*int(r._d)>int(_d)*r._n;
 }
@@ -428,6 +452,28 @@ Rational<T> Rational<T>::toRational(const A& v, const uint nbIter){
 	else {
 		throw std::invalid_argument("error : bad argument");
 	}
+}
+
+template <typename T>
+Rational<T> Rational<T>::max(const Rational<T>& r1,const Rational<T>& r2) {
+	return r1>r2 ? r1 : r2;
+}
+
+template<typename T>
+template <typename... Args>
+Rational<T> Rational<T>::max(const Rational<T>& r, Args... args) {
+	return  Rational<T>::max(r,max(args...));
+}
+
+template <typename T>
+Rational<T> Rational<T>::min(const Rational<T>& r1,const Rational<T>& r2) {
+	return r1<r2 ? r1 : r2;
+}
+
+template<typename T>
+template <typename... Args>
+Rational<T> Rational<T>::min(const Rational<T>& r, Args... args) {
+	return  Rational<T>::min(r,min(args...));
 }
 
 template <typename T>
