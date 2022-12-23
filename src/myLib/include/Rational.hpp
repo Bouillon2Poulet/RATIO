@@ -42,7 +42,7 @@
 /// \li Shout out to Elise Massa who recommended overleaf.com in order to make our project report
 /// \li Finally, huge thanks to Vincent Nozick aka "le maxi crack" who supported us during the whole semester
 
-int NBITERDEFAULT = NBITERDEFAULT;
+int NBITERDEFAULT = 10;
 
 /// \class Rational
 /// \brief template class defining a number by its rational form, template type MUST BE a integral
@@ -280,7 +280,7 @@ template <typename T>
 template <typename A>
 constexpr Rational<T>::Rational(const A& value){
 	static_assert(std::is_integral_v<T>, "T template must be integers");
-	Rational r = toRational(value);
+	Rational r = toRational(value,NBITERDEFAULT);
 	_n=r._n;
 	_d=r._d;
 

@@ -5,22 +5,22 @@
 #include <string>
 #include <vector>
 
-Rational<int> uRational(int nb_iter){
+void uRational(int nb_iter){
     Rational<int> u(1,3);
     for (int i=1; i<nb_iter; i++){
-        //std::cout<<u<<std::endl;
+        std::cout<<"    u"<<i<<" = "<<u<<std::endl;
         u=u*4.0 - 1;
     }
-    return u;
+    std::cout<<std::endl;
 }
 
-float uFloat(int nb_iter){
+void uFloat(int nb_iter){
     float u=1.0/3.0;
     for (int i=1; i<nb_iter; i++){
-        //std::cout<<"u = "<<u<<std::endl;
+        std::cout<<"    u"<<i<<" = "<<u<<std::endl;
         u=u*4 - 1;
     }
-    return u;
+    std::cout<<std::endl;
 }
 
 void chapter1();
@@ -28,25 +28,7 @@ void chapter2();
 void chapter3();
 void chapter4();
 
-int main(/*int argc, char **argv*/) {
-    int nb_iter = 10;
-    Rational<int> uR=uRational(nb_iter);
-    float uF=uFloat(nb_iter);
-    std::cout<<"Using Rational class, u(100) = "<<uR<<" = "<<uR.toFloat()<<std::endl;
-    std::cout<<"Without Rational class, u(100) = "<<uF<<std::endl;
-
-    float a = 5.5;
-    Rational<int> b = Rational<int>::toRational(a,10);
-    std::cout<<"b = "<<b<<std::endl;
-
-    Rational<int> r1 = Rational<int>(5,1);
-    Rational<int> r2 = Rational<int>(4,1);
-    Rational<int> r3 = Rational<int>(10,3);
-    Rational<int> r4 = Rational<int>(-4,2);
-
-    //std::cout<<Rational<int>::min(r1,r2,r3,r4)<<std::endl;
-    std::cout<<Rational<int>::max(r1,r2,r3,r4)<<std::endl;
-
+int main() {
     system("clear");
     std::cout<<"Bienvenue dans la demo de la librairie Rational !"<<std::endl;
     std::cout<<"\n\n\n\n\n\n";
@@ -68,27 +50,36 @@ int main(/*int argc, char **argv*/) {
     std::string s = "1234";
 
     while (s.find(c)==std::string::npos){
-        std::cout<<"!!!";
         std::cin>>c;
     }
     switch (c){
-        case '1': std::cout<<"!!";
-                chapter1();
-                c='2';
-                break;
+        case '1': chapter1();
         case '2': chapter2();
-                c='3';
-                break;
         case '3': chapter3();
-                break;
         case '4': chapter4();
-                break;
     }
 
     return 0;
 }
 
 void chapter1(){
+    system("clear");
+    std::cout<<"Tout d'abord, pourquoi ?"<<std::endl<<std::endl;
+    std::cout<<"La librairie Rational propose une alternative a la representation des reels par des nombres a virgule flottante"<<std::endl;
+    std::cout<<"Elle permet de reduire les erreurs d'arrondis dus a leur stockage en memoire"<<std::endl;
+    std::cout<<"Prenons l'exemple de la suite suivante :"<<std::endl;
+    std::cout<<"    u0 = 1/3"<<std::endl;
+    std::cout<<"    un+1 = 4un - 1"<<std::endl<<std::endl;
+    std::cout<<"On constate qu'au bout de 4 iterations, la suite diverge en utilisant des nombres a virgule flottante :"<<std::endl<<std::endl;
+    uFloat(10);
+    std::cout<<"C'est a cause de ces fameux arrondis !"<<std::endl;
+    std::cout<<"Regardons ce qu'il se passe en utilisant notre classe Rational :"<<std::endl;
+    uRational(10);
+    std::cout<<"Emouvant non ? :^)"<<std::endl;
+    std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
+    char a;
+    std::cin>>a;
+    
     system("clear");
     std::cout<<"La classe Rational se compose de deux arguments :"<<std::endl;
     std::cout<<"    _n : le numerateur"<<std::endl;
@@ -99,8 +90,8 @@ void chapter1(){
     std::cout<<"D'autres types sont egalement acceptes mais leur utilisation est deconseillee :"<<std::endl<<std::endl;
     std::cout<<"   bool\n   char\n   char8_t\n   char16_t\n   char32_t\n   wchar_t\n"<<std::endl<<std::endl;
     std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
-    char a;
     std::cin>>a;
+
     system("clear");
     std::cout<<"Nous avons fait le choix de passer la classe en template pour faciliter la representation des grands nombre"<<std::endl;
     std::cout<<"Neanmoins elle reste sujette a l'overflow, l'utilisateur doit alors choisir le bon type pour le template afin de ne pas depasser les valeurs max et min des parametres de la classe"<<std::endl;
@@ -116,11 +107,25 @@ void chapter1(){
 
 void chapter2(){
     system("clear");
-    std::cout<<"Il existe 3 constructeurs pour instancier un Rational :"<<std::endl;
+    std::cout<<"Il existe 4 constructeurs pour instancier un Rational :"<<std::endl;
     std::cout<<"   - default constructor -> Rational<int>(1/0):"<<std::endl;
-    std::cout<<"   - copy constructor -> Rational<T>(Rational<T>& r):"<<std::endl;
     std::cout<<"   - input constructor -> Rational<T>(T& n, T& d):"<<std::endl;
-    std::cout<<"   - value constructor -> Rational<T>(A& value):"<<std::endl;
+    std::cout<<"   - copy constructor -> Rational<T>(Rational<T>& r):"<<std::endl;
+    std::cout<<"   - value constructor -> Rational<T>(A& value):"<<std::endl<<std::endl;
+    std::cout<<"Exemple :"<<std::endl;
+    std::cout<<"    Rational r1<int> = Rational<int>()"<<std::endl;
+    Rational r1 = Rational<int>();
+    std::cout<<"-> r1 = "<<r1<<std::endl;
+    std::cout<<"    Rational<int> r2 = Rational<int>(-5,2)"<<std::endl;
+    Rational r2 = Rational<int>(-5,2);
+    std::cout<<"-> r2 = "<<r2<<std::endl;
+    std::cout<<"    Rational<int> r3 = Rational<int>(r2)"<<std::endl;
+    Rational r3 = Rational<int>(-5,2);
+    std::cout<<"-> r3 = "<<r3<<std::endl;
+    std::cout<<"    Rational<int> r4 = Rational<int>(3.5)"<<std::endl;
+    Rational r4 = Rational<int>(3.5f);
+    std::cout<<"-> r4 = "<<r4<<std::endl;
+    
     std::cout<<"\n\n"<<std::endl;
     std::cout<<"nb: le value constructor prend un type A en argument, en suite c'est la fonction toRational qui s'occupe de convertir A en un Rational"<<std::endl;
     std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
@@ -133,32 +138,75 @@ void chapter2(){
     std::cout<<"   ==, !="<<std::endl;
     std::cout<<"   >, >=, <, <="<<std::endl<<std::endl;
     std::cout<<"Exemple :"<<std::endl;
-    std::cout<<"Rational r1 = Rational(5,2);"<<std::endl;
-    Rational r1 = Rational(5,2);
-    std::cout<<"Rational r2 = Rational(-3,2);"<<std::endl<<std::endl;
-    Rational r2 = Rational(-3,2);
-    std::cout<<"    r1+r2 = "<<r1+r2<<std::endl;
-    std::cout<<"    r1-r2 = "<<r1-r2<<std::endl;
-    std::cout<<"    r1*r2 = "<<r1*r2<<std::endl;
-    std::cout<<"    r1/r2 = "<<r1/r2<<std::endl<<std::endl;
-    bool b1 = r1>r2;
-    std::cout<<"    r1>r2 = "<<std::boolalpha<<b1<<std::endl;
-    bool b2 = r1<r2;
-    std::cout<<"    r1<r2 = "<<std::boolalpha<<b2<<std::endl;
-    bool b3 = r1==r2;
-    std::cout<<"    r1==r2 = "<<std::boolalpha<<b3<<std::endl;
-    bool b4 = r1!=r2;
-    std::cout<<"    r1!=r2 = "<<std::boolalpha<<b4<<std::endl;
+    std::cout<<"Rational r5 = Rational(5,2);"<<std::endl;
+    Rational<int> r5 = Rational<int>(5,2);
+    std::cout<<"Rational r6 = Rational(-3,2);"<<std::endl<<std::endl;
+    Rational<int> r6 = Rational<int>(-3,2);
+    std::cout<<"    r5+r6 = "<<r1+r2<<std::endl;
+    std::cout<<"    r5-r6 = "<<r1-r2<<std::endl;
+    std::cout<<"    r5*r6 = "<<r1*r2<<std::endl;
+    std::cout<<"    r5/r6 = "<<r1/r2<<std::endl<<std::endl;
+    bool b1 = r5>r6;
+    std::cout<<"    r5>r6 = "<<std::boolalpha<<b1<<std::endl;
+    bool b2 = r5<r6;
+    std::cout<<"    r5<r6 = "<<std::boolalpha<<b2<<std::endl;
+    bool b3 = r5==r6;
+    std::cout<<"    r5==r6 = "<<std::boolalpha<<b3<<std::endl;
+    bool b4 = r5!=r6;
+    std::cout<<"    r5!=r6 = "<<std::boolalpha<<b4<<std::endl;
 
 
     std::cout<<"\nL'operateur << de std::ostream a egalement ete surcharge :"<<std::endl;
-    Rational r = Rational(5,2);
+    Rational<int> r = Rational<int>(5,2);
     std::cout<<"Rational r = Rational(5,2)\nstd::cout<<\"r = \"<<r<<std::endl"<<std::endl;
     std::cout<<"-> r = "<<r<<std::endl;
+    std::cout<<"\n\n\n"<<"Presser une touche -> Chapitre suivant"<<std::endl;
+    std::cin>>a;
     return;
 }
 
 void chapter3(){
+    system("clear");
+    std::cout<<"La methode principale de la librairie est static toRational(), elle permet de trier le type A de la value v a convertir :"<<std::endl;
+    std::cout<<"Elle prend en premier parametre la valeur a convertir et en deuxieme le nombre d'iteration (dans le cas ou A=float)"<<std::endl;
+    std::cout<<"    si A=Rational -> renvoie le meme Rational"<<std::endl;
+    std::cout<<"    si A=integral -> renvoie Rational(v,1)"<<std::endl;
+    std::cout<<"    si A=float-> utilise un algorithme de conversion"<<std::endl<<std::endl;
+    std::cout<<"Exemples :"<<std::endl;
+    std::cout<<"Rational<int> a = Rational::toRational(5,10)"<<std::endl;
+    Rational<int> a = Rational<int>::toRational(5,10);
+    std::cout<<"a ="<<a<<std::endl;
+    std::cout<<"Rational<int> b = Rational::toRational(a,10)"<<std::endl;
+    Rational<int> b = Rational<int>::toRational(a,10);
+    std::cout<<"b ="<<b<<std::endl;
+    std::cout<<"Rational<int> c = Rational::toRational(5.9,10)"<<std::endl;
+    Rational<int> c = Rational<int>::toRational(5.9f,10);
+    std::cout<<"c ="<<c<<std::endl<<std::endl;
+    std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
+    char z;
+    std::cin>>z;
+    system("clear");
+
+    std::cout<<"La classe Rational comprend plusieurs methodes basiques"<<std::endl;
+    std::cout<<"Certaines se servent de la STL en passant le Rational en float grace a la methode toFloat() :"<<std::endl;
+    std::cout<<"    cos()"<<std::endl;
+    std::cout<<"    sin()"<<std::endl;
+    std::cout<<"    tan()"<<std::endl;
+    std::cout<<"    sqrt()"<<std::endl;
+    std::cout<<"    exp()"<<std::endl<<std::endl;
+    std::cout<<"La methode pow() est une fonction recursive :"<<std::endl;
+    Rational<int> r1 = Rational<int>(5,3);
+    std::cout<<"Rational<int> r1 = Rational<int>(5,3)\nr1.pow(5) = "<<r1.pow(5)<<std::endl<<std::endl;
+    std::cout<<"Les methodes min et max sont des fonctions recusives variadics :"<<std::endl;
+    Rational<int> r2 = Rational<int>(5,3);
+    Rational<int> r3 = Rational<int>(8,9);
+    Rational<int> r4 = Rational<int>(-4,3);
+    Rational<int> r5 = Rational<int>(-1,5);
+    std::cout<<"    Rational<int> r2 = Rational<int>(5/3);\n    Rational<int> r3 = Rational<int>(8/9);\n    Rational<int> r4 = Rational<int>(-4/3);\n   Rational<int> r5 = Rational<int>(-1/5);\n"<<std::endl;
+    std::cout<<"Rational<int>::min(r2,r3,r4,r5) = "<<Rational<int>::min(r2,r3,r4,r5)<<std::endl;
+    std::cout<<"Rational<int>::max(r2,r3,r4,r5) = "<<Rational<int>::max(r2,r3,r4,r5)<<std::endl;
+    std::cout<<"\n\n\n"<<"Presser une touche -> Chapitre suivant"<<std::endl;
+    std::cin>>z;
     return;
 }
 
