@@ -67,7 +67,8 @@ public:
 
 	/// \brief constructor from a value that is converted into a Rational thanks to toRational() function
 	/// \param value : the const value converted into a Rational
-    constexpr Rational(const T& value);
+	template<typename A>
+    constexpr Rational(const A& value);
 
 
     /// \brief destructor
@@ -276,7 +277,8 @@ constexpr Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 }
 
 template <typename T>
-constexpr Rational<T>::Rational(const T& value){
+template <typename A>
+constexpr Rational<T>::Rational(const A& value){
 	static_assert(std::is_integral_v<T>, "T template must be integers");
 	Rational r = toRational(value);
 	_n=r._n;
