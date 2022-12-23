@@ -21,10 +21,11 @@
 /// \image html myImage.jpg
 /// \tableofcontents
 /// \section instroduction_sec What for?
-/// Rational is a super tool.
+/// Rational is a super tool to decrease error caused by floats intrinsic rounds  
 /// \section install_bigsec How to install
 /// \subsection dependencies_sec Dependecies
-/// \li nothing
+/// \li C++ 17
+/// \li STL library
 /// \li Doxygen (if you want the documentation)
 /// \subsection install_sec Install with cmake (Linux / Mac)
 /// \li go to main dir
@@ -36,11 +37,15 @@
 /// \li The documentation is located in :
 /// 	- [path to build]/doc/doc-doxygen/html/index.html or 
 /// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
+/// \section Credits
+/// \li Big thanks to Jules Fouchy, Matteo Leclercq and Guy Luong for the big help they provided us
+/// \li Shout out to Elise Massa who recommended overleaf.com in order to make our project report
+/// \li Finally, huge thanks to Vincent Nozick aka "le maxi crack" who supported us during the whole semester
 
 int NBITERDEFAULT = NBITERDEFAULT;
 
 /// \class Rational
-/// \brief class defining a number by its rational form
+/// \brief template class defining a number by its rational form, template type MUST BE a integral
 using namespace internal;
 template <typename T = int>
 class Rational {
@@ -48,7 +53,7 @@ class Rational {
 public:
 	//////////////////////Constructors
 
-	/// \brief default constructor, creates a Rational equal to zero
+	/// \brief default constructor, creates a Rational equal to zero (1/0)
     constexpr Rational();
 
 	/// \brief copy constructor
@@ -56,11 +61,11 @@ public:
 	constexpr Rational(const Rational& r)=default;
 
 	/// \brief constructor from numerator and denominator, PGCD(n,d) = 1
-	/// \param n : the const value used as numerator, can be negative
+	/// \param n : the const value used as numerator
 	/// \param d : the const value used as denominator
     constexpr Rational(const T& n, const T& d);
 
-	/// \brief constructor from a value that is converted into a Rational thanks to toRational() function, is also used as copy constructor
+	/// \brief constructor from a value that is converted into a Rational thanks to toRational() function
 	/// \param value : the const value converted into a Rational
     constexpr Rational(const T& value);
 
@@ -71,8 +76,8 @@ public:
 
 private :
 
-	T _n; /*!< numerator, can be negative */
-	T _d; /*!< denominator, can not be equal to zero */
+	T _n; /*!< numerator*/
+	T _d; /*!< denominator, if equal to zero -> the Rational is infinite */
 
 public :
 	/// \brief return the numerator of a Rational
@@ -100,92 +105,96 @@ public :
 	constexpr void operator=(const Rational &r);
 
 	/// \brief add 2 Rationals
-	/// \param v : template to add to the calling rational
-	/// \return the sum of the current Rational and the template argument 
+	/// \param v : the value to add to the calling rational
+	/// \return the sum of the current Rational and the argument value
 	template <typename A>
 	constexpr Rational operator+(const A &v) const;
 
-	/// \brief add a Rational to the calling Rational
-	/// \param r : rational to add to the calling rational
+	/// \brief add a value to the calling Rational
+	/// \param v : the value to add to the calling rational
 	template <typename A>
 	constexpr void operator+=(const A &v);
 
 	/// \brief unary minus
-	/// \return the of minus the calling Rational
+	/// \return the minus of the calling Rational
 	constexpr Rational operator-() const;
 	
 	/// \brief substract 2 Rationals
-	/// \param v : template to substract to the calling Rational
-	/// \return the substract of the current Rational and the template argument 
+	/// \param v : value to substract to the calling Rational
+	/// \return the substract of the current Rational and the argument value
 	template <typename A>
 	constexpr Rational operator-(const A &v) const;
 
-	/// \brief substract a rational to the calling Rational
-	/// \param r : Rational to substract to the calling Rational
+	/// \brief substract a value to the calling Rational
+	/// \param v : the value to substract to the calling Rational
 	template <typename A>
 	constexpr void operator-=(const A &v);
 
-	/// \brief multiply 2 Rationals
-	/// \param v : Template to multiply to the calling Rational
-	/// \return the product of the current Rational and the template argument 
+	/// \brief multiply a Rational to a value
+	/// \param v : the value to multiply to the calling Rational
+	/// \return the product of the current Rational and the argument value
 	template <typename A>
 	constexpr Rational operator*(const A &v) const;
 
-	/// \brief multiply a Rational to the calling Rational
-	/// \param r : Rational to multiply to the calling Rational
+	/// \brief multiply a value to the calling Rational
+	/// \param v : the value to multiply to the calling Rational
 	template <typename A>
 	constexpr void operator*=(const A &v);
 
 	/// \brief divide 2 Rationals
-	/// \param v : template to divide to the calling Rational
-	/// \return the quotient of the current Rational and the template argument 
+	/// \param v : the value to divide to the calling Rational
+	/// \return the quotient of the current Rational and the argument value
 	template <typename A>
 	constexpr Rational operator/(const A &v) const;
 
-	/// \brief divide a rational to the calling Rational
-	/// \param r : Rational to divide to the calling Rational
+	/// \brief divide a value to the calling Rational
+	/// \param v : the value to divide to the calling Rational
 	template <typename A>
 	constexpr void operator/=(const A &v);
 
-	/// \brief compare if 2 Rationals are equals
-	/// \param v : Rational to divide to the calling Rational
-	/// \return the quotient of the current Rational and the template argument 
+	/// \brief compare if the left Rational is equal to the argument value
+	/// \param v : the value to compare to the calling Rational
+	/// \return 1 if equal else 0
 	template <typename A>
 	constexpr bool operator==(const A &v);
 
-	/// \brief compare if 2 Rationals are different
-	/// \param r : Rational to divide to the calling Rational
+	/// \brief compare if the left Rational is different to the argument value
+	/// \param v : the value to compare to the calling Rational
+	/// \return 1 if different else 0
 	template <typename A>
 	constexpr bool operator!=(const A &v);
 
-	/// \brief compare the size of two rationals
-	/// \param r : Rational to divide to the calling Rational
+	/// \brief compare if the left Rational is greater than the argument value
+	/// \param v : the value to compare to the calling Rational
+	/// \return 1 if greater else 0
 	template <typename A>
 	constexpr bool operator>(const A &v) const;
 
-	/// \brief compare the size of two rationals
-	/// \param r : Rational to divide to the calling Rational
+	/// \brief compare if the left Rational is greater or equal to the argument value
+	/// \param v : the value to compare to the calling Rational
+	/// \return 1 if greater or equal else 0
 	template <typename A>
 	constexpr bool operator>=(const A &v);
 
-	/// \brief compare the size of two rationals
-	/// \param r : Rational to divide to the calling Rational
+	/// \brief compare if the left Rational is lower than the argument value
+	/// \param v : the value to compare to the calling Rational
+	/// \return 1 if lower else 0
 	template <typename A>
 	constexpr bool operator<(const A &v) const;
 
-	/// \brief compare the size of two rationals
-	/// \param r : Rational to divide to the calling Rational
+	/// \brief compare if the left Rational is lower or equal to the argument value
+	/// \param v : the value to compare to the calling Rational
+	/// \return 1 if lower or equal else 0
 	template <typename A>
 	constexpr bool operator<=(const A &v);
 
 
-
 	//////////////////////Others methods
 
-	/// \brief return the absolute value from the calling Rational
+	/// \brief return the absolute value of the calling Rational
 	constexpr Rational abs() const;
 
-	/// \brief return the integar part from the calling Rational
+	/// \brief return the integar part of the calling Rational
 	constexpr int floor() const;
 
 	/// \brief convert the calling Rational to a float
@@ -204,14 +213,14 @@ public :
 	/// \brief return the pow value of the calling Rational
 	constexpr Rational pow(const unsigned int n) const; 
 
-	/// \brief return the square value of the calling Rational
+	/// \brief return the square root of the calling Rational (passing by float)
 	constexpr Rational sqrt() const; 
 
-	/// \brief return the exp value of the calling Rational
+	/// \brief return the exp value of the calling Rational (passing by float)
 	constexpr float exp() const; 
 
-	/// \brief recursive way to convert a float to a Rational
-	/// \param f : float to convert to Rationnal
+	/// \brief recursive way to convert a value to a Rational
+	/// \param v : the value to convert to Rational
 	/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
 	template<typename A>
 	constexpr static Rational toRational(const A& v, const uint nbIter);
