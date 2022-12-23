@@ -49,20 +49,20 @@ public:
 	//////////////////////Constructors
 
 	/// \brief default constructor, creates a Rational equal to zero
-    Rational();
+    constexpr Rational();
 
 	/// \brief copy constructor
 	/// \param r : the source Rational
-	Rational(const Rational& r)=default;
+	constexpr Rational(const Rational& r)=default;
 
 	/// \brief constructor from numerator and denominator, PGCD(n,d) = 1
 	/// \param n : the const value used as numerator, can be negative
 	/// \param d : the const value used as denominator
-    Rational(const T& n, const T& d);
+    constexpr Rational(const T& n, const T& d);
 
 	/// \brief constructor from a value that is converted into a Rational thanks to toRational() function, is also used as copy constructor
 	/// \param value : the const value converted into a Rational
-    Rational(const T& value);
+    constexpr Rational(const T& value);
 
 
     /// \brief destructor
@@ -76,17 +76,17 @@ private :
 
 public :
 	/// \brief return the numerator of a Rational
-	inline int n() const {
+	constexpr inline int n() const {
 		return _n;
 	}
 
 	/// \brief return the denominator of a Rational
-	inline unsigned int d() const {
+	constexpr inline unsigned int d() const {
 		return _d;
 	}
 
 	/// \brief return the invert of a Rational
-	inline Rational invert() const {
+	constexpr inline Rational invert() const {
 		if(_n==0||_d==0){
 			throw std::invalid_argument("_d = 0");
 		}
@@ -97,154 +97,154 @@ public :
 	//////////////////////Operators
 
 	/// \brief affectation operator
-	void operator=(const Rational &r);
+	constexpr void operator=(const Rational &r);
 
 	/// \brief add 2 Rationals
 	/// \param v : template to add to the calling rational
 	/// \return the sum of the current Rational and the template argument 
 	template <typename A>
-	Rational operator+(const A &v) const;
+	constexpr Rational operator+(const A &v) const;
 
 	/// \brief add a Rational to the calling Rational
 	/// \param r : rational to add to the calling rational
 	template <typename A>
-	void operator+=(const A &v);
+	constexpr void operator+=(const A &v);
 
 	/// \brief unary minus
 	/// \return the of minus the calling Rational
-	Rational operator-() const;
+	constexpr Rational operator-() const;
 	
 	/// \brief substract 2 Rationals
 	/// \param v : template to substract to the calling Rational
 	/// \return the substract of the current Rational and the template argument 
 	template <typename A>
-	Rational operator-(const A &v) const;
+	constexpr Rational operator-(const A &v) const;
 
 	/// \brief substract a rational to the calling Rational
 	/// \param r : Rational to substract to the calling Rational
 	template <typename A>
-	void operator-=(const A &v);
+	constexpr void operator-=(const A &v);
 
 	/// \brief multiply 2 Rationals
 	/// \param v : Template to multiply to the calling Rational
 	/// \return the product of the current Rational and the template argument 
 	template <typename A>
-	Rational operator*(const A &v) const;
+	constexpr Rational operator*(const A &v) const;
 
 	/// \brief multiply a Rational to the calling Rational
 	/// \param r : Rational to multiply to the calling Rational
 	template <typename A>
-	void operator*=(const A &v);
+	constexpr void operator*=(const A &v);
 
 	/// \brief divide 2 Rationals
 	/// \param v : template to divide to the calling Rational
 	/// \return the quotient of the current Rational and the template argument 
 	template <typename A>
-	Rational operator/(const A &v) const;
+	constexpr Rational operator/(const A &v) const;
 
 	/// \brief divide a rational to the calling Rational
 	/// \param r : Rational to divide to the calling Rational
 	template <typename A>
-	void operator/=(const A &v);
+	constexpr void operator/=(const A &v);
 
 	/// \brief compare if 2 Rationals are equals
 	/// \param v : Rational to divide to the calling Rational
 	/// \return the quotient of the current Rational and the template argument 
 	template <typename A>
-	bool operator==(const A &v);
+	constexpr bool operator==(const A &v);
 
 	/// \brief compare if 2 Rationals are different
 	/// \param r : Rational to divide to the calling Rational
 	template <typename A>
-	bool operator!=(const A &v);
+	constexpr bool operator!=(const A &v);
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
 	template <typename A>
-	bool operator>(const A &v) const;
+	constexpr bool operator>(const A &v) const;
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
 	template <typename A>
-	bool operator>=(const A &v);
+	constexpr bool operator>=(const A &v);
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
 	template <typename A>
-	bool operator<(const A &v) const;
+	constexpr bool operator<(const A &v) const;
 
 	/// \brief compare the size of two rationals
 	/// \param r : Rational to divide to the calling Rational
 	template <typename A>
-	bool operator<=(const A &v);
+	constexpr bool operator<=(const A &v);
 
 
 
 	//////////////////////Others methods
 
 	/// \brief return the absolute value from the calling Rational
-	Rational abs() const;
+	constexpr Rational abs() const;
 
 	/// \brief return the integar part from the calling Rational
-	int floor() const;
+	constexpr int floor() const;
 
 	/// \brief convert the calling Rational to a float
 	/// \return the nearest float from the calling Rational
-	float toFloat() const;
+	constexpr float toFloat() const;
 
 	/// \brief return the cos() of the calling Rational (passing by float)
-	float cos() const;
+	constexpr float cos() const;
 
 	/// \brief return the sin() of the calling Rational (passing by float)
-	float sin() const;
+	constexpr float sin() const;
 
 	/// \brief return the tan() of the calling Rational (passing by float)
-	float tan() const;
+	constexpr float tan() const;
 
 	/// \brief return the pow value of the calling Rational
-	Rational pow(const unsigned int n) const; 
+	constexpr Rational pow(const unsigned int n) const; 
 
 	/// \brief return the square value of the calling Rational
-	Rational sqrt() const; 
+	constexpr Rational sqrt() const; 
 
 	/// \brief return the exp value of the calling Rational
-	float exp() const; 
+	constexpr float exp() const; 
 
 	/// \brief recursive way to convert a float to a Rational
 	/// \param f : float to convert to Rationnal
 	/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
 	template<typename A>
-	static Rational toRational(const A& v, const uint nbIter);
+	constexpr static Rational toRational(const A& v, const uint nbIter);
 
 	/// \brief function that returns the maximum of 2 Rationals
 	/// \param r1 : the first Rational to get the maximum of
 	/// \param r2 : the second Rational to get the maximum of
-	static Rational<T> max(const Rational<T>& r1,const Rational<T>& r2);
+	constexpr static Rational<T> max(const Rational<T>& r1,const Rational<T>& r2);
 
 	/// \brief variadic function that return the maximum of several Rationals
 	/// \param args : the Rationals to get the maximum of
 	template<typename... Args>
-	static Rational<T> max(const Rational<T>& r, Args... args);
+	constexpr static Rational<T> max(const Rational<T>& r, Args... args);
 
 	/// \brief function that returns the minimum of 2 Rationals
 	/// \param r1 : the first Rational to get the minimum of
 	/// \param r2 : the second Rational to get the minimum of
-	static Rational<T> min(const Rational<T>& r1,const Rational<T>& r2);
+	constexpr static Rational<T> min(const Rational<T>& r1,const Rational<T>& r2);
 
 	/// \brief variadic function that return the minimum of several Rationals
 	/// \param args : the Rationals to get the maximum of
 	template<typename... Args>
-	static Rational<T> min(const Rational<T>& r, Args... args);
+	constexpr static Rational<T> min(const Rational<T>& r, Args... args);
 };
 
 //Constructors
 template <typename T>
-Rational<T>::Rational() : _n(0), _d(1) {
+constexpr Rational<T>::Rational() : _n(0), _d(1) {
 	static_assert(std::is_integral_v<T>, "T template must be integers");
 }
 
 template <typename T>
-Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
+constexpr Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 	static_assert(std::is_integral_v<T>, "T template must be integers");
 
 	int gcd = std::gcd(_n,_d);
@@ -264,7 +264,7 @@ Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 }
 
 template <typename T>
-Rational<T>::Rational(const T& value){
+constexpr Rational<T>::Rational(const T& value){
 	static_assert(std::is_integral_v<T>, "T template must be integers");
 	Rational r = toRational(value);
 	_n=r._n;
@@ -278,34 +278,34 @@ Rational<T>::Rational(const T& value){
 
 //Operators
 template <typename T>
-void Rational<T>::operator=(const Rational &r){
+constexpr void Rational<T>::operator=(const Rational &r){
 	_n = r.n();
 	_d = r.d();
 }
 
 template <typename T>
 template <typename A>
-Rational<T> Rational<T>::operator+(const A &v) const{
+constexpr Rational<T> Rational<T>::operator+(const A &v) const{
 	Rational r = toRational<A>(v, 10);
 	return Rational(_n*r._d+r._n*_d,_d*r._d);
 }
 
 template <typename T>
 template <typename A>
-void Rational<T>::operator+=(const A &v) {
+constexpr void Rational<T>::operator+=(const A &v) {
 	Rational r = toRational<A>(v, 10);
 	Rational result = *this+r;
 	*this=result;
 }
 
 template <typename T>
-Rational<T> Rational<T>::operator-() const {
+constexpr Rational<T> Rational<T>::operator-() const {
 	return Rational(-1*_n,_d);
 }
 
 template <typename T>
 template <typename A>
-Rational<T> Rational<T>::operator-(const A &v) const{
+constexpr Rational<T> Rational<T>::operator-(const A &v) const{
 	Rational r = toRational<A>(v, 10);
 	return Rational(_n*r._d-r._n*_d,_d*r._d);
 }
@@ -313,7 +313,7 @@ Rational<T> Rational<T>::operator-(const A &v) const{
 
 template <typename T>
 template <typename A>
-void Rational<T>::operator-=(const A &v) {
+constexpr void Rational<T>::operator-=(const A &v) {
 	Rational r = toRational<A>(v, 10);
 	Rational result = *this-r;
 	*this=result;
@@ -321,14 +321,14 @@ void Rational<T>::operator-=(const A &v) {
 
 template <typename T>
 template <typename A>
-Rational<T> Rational<T>::operator*(const A &v) const {
+constexpr Rational<T> Rational<T>::operator*(const A &v) const {
 	Rational r = toRational<A>(v,10);
 	return Rational(_n*r._n,_d*r._d);
 }
 
 template <typename T>
 template <typename A>
-void Rational<T>::operator*=(const A &v){
+constexpr void Rational<T>::operator*=(const A &v){
 	Rational r = toRational<A>(v, 10);
 	Rational result = *this*r;
 	*this=result;
@@ -336,14 +336,14 @@ void Rational<T>::operator*=(const A &v){
 
 template <typename T>
 template <typename A>
-Rational<T> Rational<T>::operator/(const A &v) const{
+constexpr Rational<T> Rational<T>::operator/(const A &v) const{
 	Rational r = toRational<A>(v,10);
 	return *this*r.invert();
 }
 
 template <typename T>
 template <typename A>
-void Rational<T>::operator/=(const A &v){
+constexpr void Rational<T>::operator/=(const A &v){
 	Rational r = toRational<A>(v, 10);
 	Rational result = *this/r;
 	*this=result;
@@ -351,42 +351,42 @@ void Rational<T>::operator/=(const A &v){
 
 template <typename T>
 template <typename A>
-bool Rational<T>::operator==(const A &v){
+constexpr bool Rational<T>::operator==(const A &v){
 	Rational r = toRational<A>(v,10);
 	return (_n==r._n && _d==r._d)?true:false;
 }
 
 template <typename T>
 template <typename A>
-bool Rational<T>::operator!=(const A &v){
+constexpr bool Rational<T>::operator!=(const A &v){
 	Rational r = toRational<A>(v,10);
 return (_n!=r._n || _d!=r._d) ? true : false;
 }
 
 template <typename T>
 template <typename A>
-bool Rational<T>::operator<(const A &v) const{
+constexpr bool Rational<T>::operator<(const A &v) const{
 	Rational r = toRational<A>(v,10);
 	return _n*int(r._d)<int(_d)*r._n;
 }
 
 template <typename T>
 template <typename A>
-bool Rational<T>::operator<=(const A &v){
+constexpr bool Rational<T>::operator<=(const A &v){
 	Rational r = toRational<A>(v,10);
 	return _n*int(r._d)<=int(_d)*r._n;
 }
 
 template <typename T>
 template <typename A>
-bool Rational<T>::operator>(const A &v) const {
+constexpr bool Rational<T>::operator>(const A &v) const {
 	Rational r = toRational<A>(v,10);
 return _n*int(r._d)>int(_d)*r._n;
 }
 
 template <typename T>
 template <typename A>
-bool Rational<T>::operator>=(const A &v){
+constexpr bool Rational<T>::operator>=(const A &v){
 	Rational r = toRational<A>(v,10);
 return _n*int(r._d)>=int(_d)*r._n;
 }
@@ -394,43 +394,43 @@ return _n*int(r._d)>=int(_d)*r._n;
 //Methods
 
 template <typename T>
-Rational<T> Rational<T>::abs() const {
+constexpr Rational<T> Rational<T>::abs() const {
 	return Rational<T>(std::abs(_n),_d);
 }
 
 template <typename T>
-int Rational<T>::floor() const {
+constexpr int Rational<T>::floor() const {
 	return std::floor(_n/(int)_d);
 }
 
 template <typename T>
-float Rational<T>::toFloat() const {
+constexpr float Rational<T>::toFloat() const {
 	return (float)_n/(float)_d;
 }
 
 template <typename T>
-float Rational<T>::cos() const {
+constexpr float Rational<T>::cos() const {
 	return std::cos(toFloat());	
 }
 
 template <typename T>
-float Rational<T>::sin() const {
+constexpr float Rational<T>::sin() const {
 	return std::sin(toFloat());	
 }
 
 template <typename T>
-float Rational<T>::tan() const {
+constexpr float Rational<T>::tan() const {
 	return std::tan(toFloat());	
 }
 
 template <typename T>
-Rational<T> Rational<T>::pow(const unsigned int n) const {
+constexpr Rational<T> Rational<T>::pow(const unsigned int n) const {
 	if(n==0) return Rational(1,1);
 	else return Rational(_n,_d) * pow(n-1);
 }
 
 template <typename T>
-Rational<T> Rational<T>::sqrt() const {
+constexpr Rational<T> Rational<T>::sqrt() const {
 	if(_n< 0){
 		std::cout<<"Veuillez rentrer un nombre positif"<<std::endl;
 		}
@@ -438,13 +438,13 @@ Rational<T> Rational<T>::sqrt() const {
 }
 
 template <typename T>
-float Rational<T>::exp() const {
+constexpr float Rational<T>::exp() const {
 	return std::exp(toFloat());
 }
 
 template <typename T>
 template <typename A>
-Rational<T> Rational<T>::toRational(const A& v, const uint nbIter){
+constexpr Rational<T> Rational<T>::toRational(const A& v, const uint nbIter){
 	if constexpr (std::is_same_v<A,Rational>){
 		return v;
 	}
@@ -466,29 +466,29 @@ Rational<T> Rational<T>::toRational(const A& v, const uint nbIter){
 }
 
 template <typename T>
-Rational<T> Rational<T>::max(const Rational<T>& r1,const Rational<T>& r2) {
+constexpr Rational<T> Rational<T>::max(const Rational<T>& r1,const Rational<T>& r2) {
 	return r1>r2 ? r1 : r2;
 }
 
 template<typename T>
 template <typename... Args>
-Rational<T> Rational<T>::max(const Rational<T>& r, Args... args) {
+constexpr Rational<T> Rational<T>::max(const Rational<T>& r, Args... args) {
 	return  Rational<T>::max(r,max(args...));
 }
 
 template <typename T>
-Rational<T> Rational<T>::min(const Rational<T>& r1,const Rational<T>& r2) {
+constexpr Rational<T> Rational<T>::min(const Rational<T>& r1,const Rational<T>& r2) {
 	return r1<r2 ? r1 : r2;
 }
 
 template<typename T>
 template <typename... Args>
-Rational<T> Rational<T>::min(const Rational<T>& r, Args... args) {
+constexpr Rational<T> Rational<T>::min(const Rational<T>& r, Args... args) {
 	return  Rational<T>::min(r,min(args...));
 }
 
 template <typename T>
-std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
+constexpr std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
 	stream << r.n() << "/" << r.d();
 	return stream;
 }

@@ -6,7 +6,7 @@ namespace internal {
     /// \param val : the value to get the sign from
     /// \return the sign of value, zero if value is equal to zero
     template<typename T>
-    int sign(T val)
+    constexpr int sign(T val)
     {
         return (T{0} < val) - (val < T{0});
     }
