@@ -266,8 +266,13 @@ constexpr Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 	_n*=sign(_d);
 	_d*=sign(_d);
 
+	//case 0/0
+	if (_n ==0 && _d==0){
+		throw std::invalid_argument("error : bad argument");
+	}
+
 	//infinite
-	if (_d==0) _n=1;
+	if (_d==0) _n=1*sign(_n);
 }
 
 template <typename T>
@@ -278,9 +283,7 @@ constexpr Rational<T>::Rational(const T& value){
 	_d=r._d;
 
 	//infinite
-	if (_d==0){
-		_n=1;
-	}
+	if (_d==0) _n=1*sign(_n);
 }
 
 //Operators

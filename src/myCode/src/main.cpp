@@ -60,7 +60,7 @@ int main(/*int argc, char **argv*/) {
     std::cout<<"Au fil de cette demo, nous allons vous presenter les fonctionnalites de la librairie!"<<std::endl<<std::endl;
     std::cout<<"Sommaire :"<<std::endl;
     std::cout<<"1 - Classe Rational"<<std::endl;
-    std::cout<<"2 - Constructeurs"<<std::endl;
+    std::cout<<"2 - Constructeurs et operateurs"<<std::endl;
     std::cout<<"3 - Methodes"<<std::endl;
     std::cout<<"4 - Pour aller + loin"<<std::endl;
     std::cout<<"\n\nVeuillez selectionner un chapitre"<<std::endl;
@@ -74,8 +74,10 @@ int main(/*int argc, char **argv*/) {
     switch (c){
         case '1': std::cout<<"!!";
                 chapter1();
+                c='2';
                 break;
         case '2': chapter2();
+                c='3';
                 break;
         case '3': chapter3();
                 break;
@@ -96,11 +98,32 @@ void chapter1(){
     std::cout<<"   short\n   int\n   long\n   long long\n"<<std::endl<<std::endl;
     std::cout<<"D'autres types sont egalement acceptes mais leur utilisation est deconseillee :"<<std::endl<<std::endl;
     std::cout<<"   bool\n   char\n   char8_t\n   char16_t\n   char32_t\n   wchar_t\n"<<std::endl<<std::endl;
-
+    std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
+    char a;
+    std::cin>>a;
+    system("clear");
+    std::cout<<"Nous avons fait le choix de passer la classe en template pour faciliter la representation des grands nombre"<<std::endl;
+    std::cout<<"Neanmoins elle reste sujette a l'overflow, l'utilisateur doit alors choisir le bon type pour le template afin de ne pas depasser les valeurs max et min des parametres de la classe"<<std::endl;
+    std::cout<<"\n\n"<<std::endl;
+    std::cout<<"La classe comprend la notion d'infini :"<<std::endl;
+    std::cout<<"    (+/-)1/0"<<std::endl;
+    std::cout<<"\nAinsi, toute operation qui inclue l'infini resultera en l'infini (positif ou negatif)"<<std::endl;
+    std::cout<<"\nLe Rational 0/0 resulte en une erreur, le chiffre zero etant represente par 0/1"<<std::endl;
+    std::cout<<"\n\n\n"<<"Presser une touche -> Chapitre suivant"<<std::endl;
+    std::cin>>a;
     return;
 }
 
 void chapter2(){
+    system("clear");
+    std::cout<<"Il existe 3 constructeurs pour instancier un Rational :"<<std::endl;
+    std::cout<<"   - default constructor -> Rational<int>(1/0):"<<std::endl;
+    std::cout<<"   - copy constructor -> Rational<T>(Rational<T>& r):"<<std::endl;
+    std::cout<<"   - input constructor -> Rational<T>(T& n, T& d):"<<std::endl;
+    std::cout<<"   - value constructor -> Rational<T>(T& value):"<<std::endl;
+    std::cout<<"\n\n"<<std::endl;
+    std::cout<<"nb: the value constructor prend un type integral (cf Chapitre 1) en argument, en suite c'est la fonction toRational qui s'occupe de convertir la valeur en un Rational"<<std::endl;
+    std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
     return;
 }
 
