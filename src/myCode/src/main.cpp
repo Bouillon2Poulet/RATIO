@@ -120,10 +120,41 @@ void chapter2(){
     std::cout<<"   - default constructor -> Rational<int>(1/0):"<<std::endl;
     std::cout<<"   - copy constructor -> Rational<T>(Rational<T>& r):"<<std::endl;
     std::cout<<"   - input constructor -> Rational<T>(T& n, T& d):"<<std::endl;
-    std::cout<<"   - value constructor -> Rational<T>(T& value):"<<std::endl;
+    std::cout<<"   - value constructor -> Rational<T>(A& value):"<<std::endl;
     std::cout<<"\n\n"<<std::endl;
-    std::cout<<"nb: the value constructor prend un type integral (cf Chapitre 1) en argument, en suite c'est la fonction toRational qui s'occupe de convertir la valeur en un Rational"<<std::endl;
+    std::cout<<"nb: le value constructor prend un type A en argument, en suite c'est la fonction toRational qui s'occupe de convertir A en un Rational"<<std::endl;
     std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
+    char a;
+    std::cin>>a;
+    system("clear");
+    std::cout<<"La classe Rational comprend des surcharges pour les operateurs d'operations et de comparaisons :"<<std::endl;
+    std::cout<<"   +, +=, -, -="<<std::endl;
+    std::cout<<"   *, *=, /, /="<<std::endl;
+    std::cout<<"   ==, !="<<std::endl;
+    std::cout<<"   >, >=, <, <="<<std::endl<<std::endl;
+    std::cout<<"Exemple :"<<std::endl;
+    std::cout<<"Rational r1 = Rational(5,2);"<<std::endl;
+    Rational r1 = Rational(5,2);
+    std::cout<<"Rational r2 = Rational(-3,2);"<<std::endl<<std::endl;
+    Rational r2 = Rational(-3,2);
+    std::cout<<"    r1+r2 = "<<r1+r2<<std::endl;
+    std::cout<<"    r1-r2 = "<<r1-r2<<std::endl;
+    std::cout<<"    r1*r2 = "<<r1*r2<<std::endl;
+    std::cout<<"    r1/r2 = "<<r1/r2<<std::endl<<std::endl;
+    bool b1 = r1>r2;
+    std::cout<<"    r1>r2 = "<<std::boolalpha<<b1<<std::endl;
+    bool b2 = r1<r2;
+    std::cout<<"    r1<r2 = "<<std::boolalpha<<b2<<std::endl;
+    bool b3 = r1==r2;
+    std::cout<<"    r1==r2 = "<<std::boolalpha<<b3<<std::endl;
+    bool b4 = r1!=r2;
+    std::cout<<"    r1!=r2 = "<<std::boolalpha<<b4<<std::endl;
+
+
+    std::cout<<"\nL'operateur << de std::ostream a egalement ete surcharge :"<<std::endl;
+    Rational r = Rational(5,2);
+    std::cout<<"Rational r = Rational(5,2)\nstd::cout<<\"r = \"<<r<<std::endl"<<std::endl;
+    std::cout<<"-> r = "<<r<<std::endl;
     return;
 }
 
