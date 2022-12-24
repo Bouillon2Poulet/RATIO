@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+using namespace rational;
+
 void uRational(int nb_iter){
     Rational<int> u(1,3);
     for (int i=1; i<nb_iter; i++){

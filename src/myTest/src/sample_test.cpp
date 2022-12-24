@@ -9,10 +9,10 @@ using namespace std::string_literals;
 
 #include "Rational.hpp"
 #include "internal.hpp"
+using namespace rational;
 
 /////////////////////////////////////////////////////
 // constructors
-
 TEST (RationalConstructor, defaultConstructor) { 
 	Rational<int> r;
 	ASSERT_EQ (r.n(),0);
@@ -27,9 +27,6 @@ TEST (RationalConstructor, directConstructor) {
 	Rational<int> r2(-4,6);
 	ASSERT_EQ(r2.n(),-2);
 	ASSERT_EQ(r2.d(),3);
-
-	// ASSERT_THROW(Rational(-0.5f, 0.5f), std::exception);
-	// ASSERT_THROW(Rational(2, -2), std::exception);
 }
 
 TEST (RationalConstructor, copyConstructor) { 
