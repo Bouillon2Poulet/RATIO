@@ -21,7 +21,7 @@
 /// \image html myImage.jpg
 /// \tableofcontents
 /// \section instroduction_sec What for?
-/// Rational is a super tool to decrease error caused by floats intrinsic rounds  
+/// Rational is a super tool to decrease error caused by float with STLs intrinsic rounds  
 /// \section install_bigsec How to install
 /// \subsection dependencies_sec Dependecies
 /// \li C++ 17
@@ -56,23 +56,26 @@ namespace rational{
 		//////////////////////Constructors
 
 		/// \brief default constructor, creates a Rational equal to zero (1/0)
-		constexpr Rational();
+		/// \tparam T : the Rational type, MUST BE an integral
+		constexpr Rational<T>();
 
 		/// \brief copy constructor
+		/// \tparam T : the Rational type, MUST BE an integral
 		/// \param r : the source Rational
-		constexpr Rational(const Rational& r)=default;
+		constexpr Rational<T>(const Rational& r)=default;
 
 		/// \brief constructor from numerator and denominator, PGCD(n,d) = 1
-		/// \tparam T : the template type, MUST BE an integral
+		/// \tparam T : the Rational type, MUST BE an integral
 		/// \param n : the const value used as numerator
 		/// \param d : the const value used as denominator
-		constexpr Rational(const T& n, const T& d);
+		constexpr Rational<T>(const T& n, const T& d);
 
 		/// \brief constructor from a value that is converted into a Rational thanks to toRational() function
+		/// \tparam T : the Rational type, MUST BE an integral
 		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param value : the const value converted into a Rational
 		template<typename A>
-		constexpr Rational(const A& value);
+		constexpr Rational<T>(const A& value);
 
 
 		/// \brief destructor
@@ -96,6 +99,7 @@ namespace rational{
 		}
 
 		/// \brief return the invert of a Rational
+		/// \tparam T : the Rational type, MUST BE an integral
 		constexpr inline Rational<T> invert() const {
 			if(_n==0||_d==0){
 				throw std::invalid_argument("_d = 0");
@@ -110,143 +114,186 @@ namespace rational{
 		constexpr void operator=(const Rational &r);
 
 		/// \brief add 2 Rationals
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to add to the calling rational
 		/// \return the sum of the current Rational and the argument value
 		template <typename A>
-		constexpr Rational<T> operator+(const A &v) const;
+		constexpr Rational<T> operator+(const A& v) const;
 
 		/// \brief add a value to the calling Rational
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to add to the calling rational
 		template <typename A>
-		constexpr void operator+=(const A &v);
+		constexpr void operator+=(const A& v);
 
 		/// \brief unary minus
+		/// \tparam T : the Rational type, MUST BE an integral
 		/// \return the minus of the calling Rational
 		constexpr Rational<T> operator-() const;
 		
 		/// \brief substract 2 Rationals
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : value to substract to the calling Rational
 		/// \return the substract of the current Rational and the argument value
 		template <typename A>
-		constexpr Rational<T> operator-(const A &v) const;
+		constexpr Rational<T> operator-(const A& v) const;
 
 		/// \brief substract a value to the calling Rational
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to substract to the calling Rational
 		template <typename A>
-		constexpr void operator-=(const A &v);
+		constexpr void operator-=(const A& v);
 
 		/// \brief multiply a Rational to a value
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to multiply to the calling Rational
 		/// \return the product of the current Rational and the argument value
 		template <typename A>
-		constexpr Rational<T> operator*(const A &v) const;
+		constexpr Rational<T> operator*(const A& v) const;
 
 		/// \brief multiply a value to the calling Rational
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to multiply to the calling Rational
 		template <typename A>
-		constexpr void operator*=(const A &v);
+		constexpr void operator*=(const A& v);
 
 		/// \brief divide 2 Rationals
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to divide to the calling Rational
 		/// \return the quotient of the current Rational and the argument value
 		template <typename A>
-		constexpr Rational<T> operator/(const A &v) const;
+		constexpr Rational<T> operator/(const A& v) const;
 
 		/// \brief divide a value to the calling Rational
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to divide to the calling Rational
 		template <typename A>
-		constexpr void operator/=(const A &v);
+		constexpr void operator/=(const A& v);
 
-		/// \brief compare if the left Rational is equal to the argument value
+		/// \brief compare if the calling Rational is equal to the argument value
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to compare to the calling Rational
 		/// \return 1 if equal else 0
 		template <typename A>
-		constexpr bool operator==(const A &v);
+		constexpr bool operator==(const A& v);
 
-		/// \brief compare if the left Rational is different to the argument value
+		/// \brief compare if the calling Rational is different to the argument value
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to compare to the calling Rational
 		/// \return 1 if different else 0
 		template <typename A>
-		constexpr bool operator!=(const A &v);
+		constexpr bool operator!=(const A& v);
 
-		/// \brief compare if the left Rational is greater than the argument value
+		/// \brief compare if the calling Rational is greater than the argument value
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to compare to the calling Rational
 		/// \return 1 if greater else 0
 		template <typename A>
-		constexpr bool operator>(const A &v) const;
+		constexpr bool operator>(const A& v) const;
 
-		/// \brief compare if the left Rational is greater or equal to the argument value
+		/// \brief compare if the calling Rational is greater or equal to the argument value
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to compare to the calling Rational
 		/// \return 1 if greater or equal else 0
 		template <typename A>
-		constexpr bool operator>=(const A &v);
+		constexpr bool operator>=(const A& v);
 
-		/// \brief compare if the left Rational is lower than the argument value
+		/// \brief compare if the calling Rational is lower than the argument value
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to compare to the calling Rational
 		/// \return 1 if lower else 0
 		template <typename A>
-		constexpr bool operator<(const A &v) const;
+		constexpr bool operator<(const A& v) const;
 
-		/// \brief compare if the left Rational is lower or equal to the argument value
+		/// \brief compare if the calling Rational is lower or equal to the argument value
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to compare to the calling Rational
 		/// \return 1 if lower or equal else 0
 		template <typename A>
-		constexpr bool operator<=(const A &v);
+		constexpr bool operator<=(const A& v);
 
 
 		//////////////////////Others methods
 
 		/// \brief return the absolute value of the calling Rational
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \return the absolute value of the calling Rational
 		constexpr Rational<T> abs() const;
 
 		/// \brief return the integar part of the calling Rational
+		/// \return the aintegar value of the calling Rational
 		constexpr int floor() const;
 
 		/// \brief convert the calling Rational to a float
 		/// \return the nearest float from the calling Rational
 		constexpr float toFloat() const;
 
-		/// \brief return the cos() of the calling Rational (passing by float)
+		/// \brief return the cos() of the calling Rational (passing by float with STL)
+		/// \return the cos of the calling Rational
 		constexpr float cos() const;
 
-		/// \brief return the sin() of the calling Rational (passing by float)
+		/// \brief return the sin() of the calling Rational (passing by float with STL)
+		/// \return the sin of the calling Rational
 		constexpr float sin() const;
 
-		/// \brief return the tan() of the calling Rational (passing by float)
+		/// \brief return the tan() of the calling Rational (passing by float with STL)
+		/// \return the absolute value of the calling Rational
 		constexpr float tan() const;
 
-		/// \brief return the pow value of the calling Rational
+		/// \brief return the pow value of the calling Rational, is recursive
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \return the pow(n) of the calling Rational
 		constexpr Rational<T> pow(const unsigned int n) const; 
 
-		/// \brief return the square root of the calling Rational (passing by float)
+		/// \brief return the square root of the calling Rational (passing by float with STL)
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \return the square root (n) of the calling Rational
 		constexpr Rational<T> sqrt() const; 
 
-		/// \brief return the exp value of the calling Rational (passing by float)
+		/// \brief return the exp value of the calling Rational (passing by float with STL)
+		/// \return the exp of the calling Rational
 		constexpr float exp() const; 
 
 		/// \brief recursive way to convert a value to a Rational
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to convert to Rational
 		/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
 		template<typename A>
 		constexpr static Rational<T> toRational(const A& v, const uint nbIter);
 
 		/// \brief function that returns the maximum of 2 Rationals
+		/// \tparam T : the Rational type, MUST BE an integral
 		/// \param r1 : the first Rational to get the maximum of
 		/// \param r2 : the second Rational to get the maximum of
+		/// \return the maximum of r1 and r2
 		constexpr static Rational<T> max(const Rational<T>& r1,const Rational<T>& r2);
 
 		/// \brief variadic function that return the maximum of several Rationals
+		/// \tparam T : the Rational type, MUST BE an integral
 		/// \param args : the Rationals to get the maximum of
+		/// \return the maximum of the several Rationals
 		template<typename... Args>
 		constexpr static Rational<T> max(const Rational<T>& r, Args... args);
 
 		/// \brief function that returns the minimum of 2 Rationals
+		/// \tparam T : the Rational type, MUST BE an integral
 		/// \param r1 : the first Rational to get the minimum of
 		/// \param r2 : the second Rational to get the minimum of
+		/// \return the minimum of r1 and r2
 		constexpr static Rational<T> min(const Rational<T>& r1,const Rational<T>& r2);
 
 		/// \brief variadic function that return the minimum of several Rationals
-		/// \param args : the Rationals to get the maximum of
+		/// \tparam T : the Rational type, MUST BE an integral
+		/// \param args : the Rationals to get the minimum of
+		/// \return the minimum of the several Rationals
 		template<typename... Args>
 		constexpr static Rational<T> min(const Rational<T>& r, Args... args);
 	};
@@ -302,14 +349,14 @@ namespace rational{
 
 	template <typename T>
 	template <typename A>
-	constexpr Rational<T> Rational<T>::operator+(const A &v) const{
+	constexpr Rational<T> Rational<T>::operator+(const A& v) const{
 		Rational r = toRational<A>(v, NBITERDEFAULT);
 		return Rational(_n*r._d+r._n*_d,_d*r._d);
 	}
 
 	template <typename T>
 	template <typename A>
-	constexpr void Rational<T>::operator+=(const A &v) {
+	constexpr void Rational<T>::operator+=(const A& v) {
 		Rational r = toRational<A>(v, NBITERDEFAULT);
 		Rational result = *this+r;
 		*this=result;
@@ -322,7 +369,7 @@ namespace rational{
 
 	template <typename T>
 	template <typename A>
-	constexpr Rational<T> Rational<T>::operator-(const A &v) const{
+	constexpr Rational<T> Rational<T>::operator-(const A& v) const{
 		Rational r = toRational<A>(v, NBITERDEFAULT);
 		return Rational(_n*r._d-r._n*_d,_d*r._d);
 	}
@@ -330,7 +377,7 @@ namespace rational{
 
 	template <typename T>
 	template <typename A>
-	constexpr void Rational<T>::operator-=(const A &v) {
+	constexpr void Rational<T>::operator-=(const A& v) {
 		Rational r = toRational<A>(v, NBITERDEFAULT);
 		Rational result = *this-r;
 		*this=result;
@@ -338,14 +385,14 @@ namespace rational{
 
 	template <typename T>
 	template <typename A>
-	constexpr Rational<T> Rational<T>::operator*(const A &v) const {
+	constexpr Rational<T> Rational<T>::operator*(const A& v) const {
 		Rational r = toRational<A>(v,NBITERDEFAULT);
 		return Rational(_n*r._n,_d*r._d);
 	}
 
 	template <typename T>
 	template <typename A>
-	constexpr void Rational<T>::operator*=(const A &v){
+	constexpr void Rational<T>::operator*=(const A& v){
 		Rational r = toRational<A>(v, NBITERDEFAULT);
 		Rational result = *this*r;
 		*this=result;
@@ -353,14 +400,14 @@ namespace rational{
 
 	template <typename T>
 	template <typename A>
-	constexpr Rational<T> Rational<T>::operator/(const A &v) const{
+	constexpr Rational<T> Rational<T>::operator/(const A& v) const{
 		Rational r = toRational<A>(v,NBITERDEFAULT);
 		return *this*r.invert();
 	}
 
 	template <typename T>
 	template <typename A>
-	constexpr void Rational<T>::operator/=(const A &v){
+	constexpr void Rational<T>::operator/=(const A& v){
 		Rational r = toRational<A>(v, NBITERDEFAULT);
 		Rational result = *this/r;
 		*this=result;
@@ -368,42 +415,42 @@ namespace rational{
 
 	template <typename T>
 	template <typename A>
-	constexpr bool Rational<T>::operator==(const A &v){
+	constexpr bool Rational<T>::operator==(const A& v){
 		Rational r = toRational<A>(v,NBITERDEFAULT);
 		return (_n==r._n && _d==r._d);
 	}
 
 	template <typename T>
 	template <typename A>
-	constexpr bool Rational<T>::operator!=(const A &v){
+	constexpr bool Rational<T>::operator!=(const A& v){
 		Rational r = toRational<A>(v,NBITERDEFAULT);
 		return (_n!=r._n || _d!=r._d);
 	}
 
 	template <typename T>
 	template <typename A>
-	constexpr bool Rational<T>::operator<(const A &v) const{
+	constexpr bool Rational<T>::operator<(const A& v) const{
 		Rational r = toRational<A>(v,NBITERDEFAULT);
 		return _n*int(r._d)<int(_d)*r._n;
 	}
 
 	template <typename T>
 	template <typename A>
-	constexpr bool Rational<T>::operator<=(const A &v){
+	constexpr bool Rational<T>::operator<=(const A& v){
 		Rational r = toRational<A>(v,NBITERDEFAULT);
 		return _n*int(r._d)<=int(_d)*r._n;
 	}
 
 	template <typename T>
 	template <typename A>
-	constexpr bool Rational<T>::operator>(const A &v) const {
+	constexpr bool Rational<T>::operator>(const A& v) const {
 		Rational r = toRational<A>(v,NBITERDEFAULT);
 		return _n*int(r._d)>int(_d)*r._n;
 	}
 
 	template <typename T>
 	template <typename A>
-	constexpr bool Rational<T>::operator>=(const A &v){
+	constexpr bool Rational<T>::operator>=(const A& v){
 		Rational r = toRational<A>(v,NBITERDEFAULT);
 		return _n*int(r._d)>=int(_d)*r._n;
 	}
