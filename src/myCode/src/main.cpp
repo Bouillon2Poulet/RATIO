@@ -1,9 +1,7 @@
 #include <iostream>
-
 #include "Rational.hpp"
 #include "internal.hpp"
 #include <string>
-#include <vector>
 
 using namespace rational;
 
