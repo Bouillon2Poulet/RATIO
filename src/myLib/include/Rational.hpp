@@ -84,12 +84,12 @@ namespace rational{
 
 	public :
 		/// \brief return the numerator of a Rational
-		constexpr inline int n() const {
+		constexpr inline T n() const {
 			return _n;
 		}
 
 		/// \brief return the denominator of a Rational
-		constexpr inline unsigned int d() const {
+		constexpr inline T d() const {
 			return _d;
 		}
 
@@ -259,6 +259,11 @@ namespace rational{
 	constexpr Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 		static_assert(std::is_integral_v<T>, "T template must be integers");
 
+		//case 0/0
+		if (_n ==0 && _d==0){
+			throw std::invalid_argument("error : bad argument");
+		}
+
 		int gcd = std::gcd(_n,_d);
 		if (gcd!=1){
 			_n/=gcd;
@@ -269,10 +274,6 @@ namespace rational{
 		_n*=sign(_d);
 		_d*=sign(_d);
 
-		//case 0/0
-		if (_n ==0 && _d==0){
-			throw std::invalid_argument("error : bad argument");
-		}
 
 		//infinite
 		if (_d==0) _n=1*sign(_n);
@@ -282,7 +283,7 @@ namespace rational{
 	template <typename A>
 	constexpr Rational<T>::Rational(const A& value){
 		static_assert(std::is_integral_v<T>, "T template must be integers");
-		Rational r = toRational(value,NBITERDEFAULT);
+		Rational<T> r = toRational(value,NBITERDEFAULT);
 		_n=r._n;
 		_d=r._d;
 
@@ -367,14 +368,14 @@ namespace rational{
 	template <typename A>
 	constexpr bool Rational<T>::operator==(const A &v){
 		Rational r = toRational<A>(v,NBITERDEFAULT);
-		return (_n==r._n && _d==r._d)?true:false;
+		return (_n==r._n && _d==r._d);
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr bool Rational<T>::operator!=(const A &v){
 		Rational r = toRational<A>(v,NBITERDEFAULT);
-	return (_n!=r._n || _d!=r._d) ? true : false;
+		return (_n!=r._n || _d!=r._d);
 	}
 
 	template <typename T>
@@ -395,14 +396,14 @@ namespace rational{
 	template <typename A>
 	constexpr bool Rational<T>::operator>(const A &v) const {
 		Rational r = toRational<A>(v,NBITERDEFAULT);
-	return _n*int(r._d)>int(_d)*r._n;
+		return _n*int(r._d)>int(_d)*r._n;
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr bool Rational<T>::operator>=(const A &v){
 		Rational r = toRational<A>(v,NBITERDEFAULT);
-	return _n*int(r._d)>=int(_d)*r._n;
+		return _n*int(r._d)>=int(_d)*r._n;
 	}
 
 	//Methods

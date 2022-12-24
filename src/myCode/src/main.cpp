@@ -7,46 +7,35 @@
 
 using namespace rational;
 
-void uRational(int nb_iter){
-    Rational<int> u(1,3);
-    for (int i=1; i<nb_iter; i++){
-        std::cout<<"    u"<<i<<" = "<<u<<std::endl;
-        u=u*4.0 - 1;
-    }
-    std::cout<<std::endl;
-}
-
-void uFloat(int nb_iter){
-    float u=1.0/3.0;
-    for (int i=1; i<nb_iter; i++){
-        std::cout<<"    u"<<i<<" = "<<u<<std::endl;
-        u=u*4 - 1;
-    }
-    std::cout<<std::endl;
-}
-
+void demo();
 void chapter1();
 void chapter2();
 void chapter3();
 void chapter4();
+void demoEnd();
+void uRational(int nb_iter);
+void uFloat(int nb_iter);
 
 int main() {
-    system("clear");
+    demo();
+    return 0;
+}
+
+void demo(){
+        system("clear");
     std::cout<<"Bienvenue dans la demo de la librairie Rational !"<<std::endl;
     std::cout<<"\n\n\n\n\n\n";
     std::cout<<"Appuyez sur une touche pour continuer"<<std::endl;
     char c ;
     std::cin>>c;
     system("clear");
-
-    bool inMenu = 1;
     
     std::cout<<"Au fil de cette demo, nous allons vous presenter les fonctionnalites de la librairie!"<<std::endl<<std::endl;
     std::cout<<"Sommaire :"<<std::endl;
     std::cout<<"1 - Classe Rational"<<std::endl;
     std::cout<<"2 - Constructeurs et operateurs"<<std::endl;
     std::cout<<"3 - Methodes"<<std::endl;
-    std::cout<<"4 - Pour aller + loin"<<std::endl;
+    std::cout<<"4 - Mauvaises pratiques"<<std::endl;
     std::cout<<"\n\nVeuillez selectionner un chapitre"<<std::endl;
     std::cin>>c;
     std::string s = "1234";
@@ -60,8 +49,7 @@ int main() {
         case '3': chapter3();
         case '4': chapter4();
     }
-
-    return 0;
+    demoEnd();
 }
 
 void chapter1(){
@@ -88,7 +76,7 @@ void chapter1(){
     std::cout<<"    _d : le denominateur, il ne peut pas etre negatif"<<std::endl<<std::endl;
     std::cout<<"La classe est un template, elle peut donc prendre differents types d'integrals en entree"<<std::endl;
     std::cout<<"Liste des types acceptes :"<<std::endl;
-    std::cout<<"   short\n   int\n   long\n   long long\n"<<std::endl<<std::endl;
+    std::cout<<"   short\n   int\n   long int\n   long long int\n"<<std::endl<<std::endl;
     std::cout<<"D'autres types sont egalement acceptes mais leur utilisation est deconseillee :"<<std::endl<<std::endl;
     std::cout<<"   bool\n   char\n   char8_t\n   char16_t\n   char32_t\n   wchar_t\n"<<std::endl<<std::endl;
     std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
@@ -169,11 +157,12 @@ void chapter2(){
 
 void chapter3(){
     system("clear");
-    std::cout<<"La methode principale de la librairie est static toRational(), elle permet de trier le type A de la value v a convertir :"<<std::endl;
+    std::cout<<"La methode principale de la librairie est : static Rational<T> toRational(A& v,int nbIter), elle permet de trier le type A de la value v a convertir :"<<std::endl;
     std::cout<<"Elle prend en premier parametre la valeur a convertir et en deuxieme le nombre d'iteration (dans le cas ou A=float)"<<std::endl;
     std::cout<<"    si A=Rational -> renvoie le meme Rational"<<std::endl;
     std::cout<<"    si A=integral -> renvoie Rational(v,1)"<<std::endl;
-    std::cout<<"    si A=float-> utilise un algorithme de conversion"<<std::endl<<std::endl;
+    std::cout<<"    si A=float -> utilise un algorithme de conversion"<<std::endl<<std::endl;
+    std::cout<<"    sinon -> renvoie une exception"<<std::endl<<std::endl;
     std::cout<<"Exemples :"<<std::endl;
     std::cout<<"Rational<int> a = Rational::toRational(5,10)"<<std::endl;
     Rational<int> a = Rational<int>::toRational(5,10);
@@ -204,7 +193,7 @@ void chapter3(){
     Rational<int> r3 = Rational<int>(8,9);
     Rational<int> r4 = Rational<int>(-4,3);
     Rational<int> r5 = Rational<int>(-1,5);
-    std::cout<<"    Rational<int> r2 = Rational<int>(5/3);\n    Rational<int> r3 = Rational<int>(8/9);\n    Rational<int> r4 = Rational<int>(-4/3);\n   Rational<int> r5 = Rational<int>(-1/5);\n"<<std::endl;
+    std::cout<<"   Rational<int> r2 = Rational<int>(5/3);\n   Rational<int> r3 = Rational<int>(8/9);\n   Rational<int> r4 = Rational<int>(-4/3);\n   Rational<int> r5 = Rational<int>(-1/5);\n"<<std::endl;
     std::cout<<"Rational<int>::min(r2,r3,r4,r5) = "<<Rational<int>::min(r2,r3,r4,r5)<<std::endl;
     std::cout<<"Rational<int>::max(r2,r3,r4,r5) = "<<Rational<int>::max(r2,r3,r4,r5)<<std::endl;
     std::cout<<"\n\n\n"<<"Presser une touche -> Chapitre suivant"<<std::endl;
@@ -213,5 +202,64 @@ void chapter3(){
 }
 
 void chapter4(){
+    system("clear");
+    std::cout<<"La librairie comprend un systeme d'exception qui permet a l'utilisateur de bien utiliser cette derniere"<<std::endl;
+    std::cout<<"Voici une liste des cas qui peut mener a un crash :"<<std::endl;
+    std::cout<<"    - Passer un type A != integral, floating_points, Rational au constructeur ou a la methode static toRational()"<<std::endl;
+    std::cout<<"    - Essayer de construire un Rational(0,0), le zero correspondant a Rational(1,0)"<<std::endl;
+    std::cout<<"    - Appeler la methode invert sur Rational(1,0) et Rational(0,1)"<<std::endl<<std::endl;
+    std::string errorString;
+    try {
+        Rational r = Rational(0,0);
+    } catch(std::exception& e){
+        errorString = e.what();
+    }
+    std::cout<<"Exemple :\n   try{\n   Rational(0,0)\n} catch (std::exception& e){\nstd::cout<<e.what()<<std::endl;\n}\n->"<<errorString<<std::endl;
+    std::cout<<"\nDe plus, des static_asserts permettent de verifier qu'a toute instantiation de la classe Rational<T>, T correspondent bien a un integral"<<std::endl;
+    std::cout<<"En effet, cela n'aurait pas de sens de creer un Rational avec des floats au numerateur et denominateur !"<<std::endl;
+    std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
+    char a;
+    std::cin>>a;
+
+    system("clear");
+    std::cout<<"Enfin, un ensemble de test unitaires se trouvent dans src/myTest/src/sample_test.cpp"<<std::endl;
+    std::cout<<"Chemin vers l'executable : build/myTest/myUnitTests"<<std::endl;
+    std::cout<<"Ces derniers assurent que toutes les fonctionnalites de la librairie fonctionnent !"<<std::endl;
+    std::cout<<"\n\n\n"<<"Presser une touche -> Fin de la demo"<<std::endl;
+    std::cin>>a;
     return;
+}
+
+void demoEnd(){
+    system("clear");
+    std::cout<<"FIN DE LA DEMO"<<std::endl<<std::endl;
+    std::cout<<"Merci d'avoir telecharge notre librairie Rational !"<<std::endl;
+    std::cout<<"Nous esperons que celle-ci vous sera utile !\n\n\n"<<std::endl;
+    std::cout<<"Credits :"<<std::endl;
+    std::cout<<"    Romain Serres"<<std::endl;
+    std::cout<<"    Mathilde Stocchi"<<"\n\n";
+    std::cout<<"Remerciements :"<<std::endl;
+    std::cout<<"    Jules Fouchy"<<std::endl;
+    std::cout<<"    Guy Luang"<<std::endl;
+    std::cout<<"    Matteo Leclercq"<<std::endl;
+    std::cout<<"    Elise Massa"<<std::endl;
+
+}
+
+void uRational(int nb_iter){
+    Rational<int> u(1,3);
+    for (int i=1; i<nb_iter; i++){
+        std::cout<<"    u"<<i<<" = "<<u<<std::endl;
+        u=u*4.0 - 1;
+    }
+    std::cout<<std::endl;
+}
+
+void uFloat(int nb_iter){
+    float u=1.0/3.0;
+    for (int i=1; i<nb_iter; i++){
+        std::cout<<"    u"<<i<<" = "<<u<<std::endl;
+        u=u*4 - 1;
+    }
+    std::cout<<std::endl;
 }
