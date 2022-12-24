@@ -45,7 +45,7 @@
 int NBITERDEFAULT = 10;
 
 /// \class Rational
-/// \brief template class defining a number by its rational form, template type MUST BE a integral
+/// \brief template class defining a number by its rational form, template type MUST BE an integral
 using namespace internal;
 
 namespace rational{
@@ -63,11 +63,13 @@ namespace rational{
 		constexpr Rational(const Rational& r)=default;
 
 		/// \brief constructor from numerator and denominator, PGCD(n,d) = 1
+		/// \tparam T : the template type, MUST BE an integral
 		/// \param n : the const value used as numerator
 		/// \param d : the const value used as denominator
 		constexpr Rational(const T& n, const T& d);
 
 		/// \brief constructor from a value that is converted into a Rational thanks to toRational() function
+		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param value : the const value converted into a Rational
 		template<typename A>
 		constexpr Rational(const A& value);
@@ -83,23 +85,23 @@ namespace rational{
 		T _d; /*!< denominator, if equal to zero -> the Rational is infinite */
 
 	public :
-		/// \brief return the numerator of a Rational
+		/// \brief return the T numerator of a Rational of type T
 		constexpr inline T n() const {
 			return _n;
 		}
 
-		/// \brief return the denominator of a Rational
+		/// \brief return the T denominator of a Rational of type T
 		constexpr inline T d() const {
 			return _d;
 		}
 
 		/// \brief return the invert of a Rational
-		constexpr inline Rational invert() const {
+		constexpr inline Rational<T> invert() const {
 			if(_n==0||_d==0){
 				throw std::invalid_argument("_d = 0");
 			}
 
-			return Rational(sign(_n)*_d, std::abs(_n));
+			return Rational<T>(sign(_n)*_d, std::abs(_n));
 		}
 
 		//////////////////////Operators
@@ -111,7 +113,7 @@ namespace rational{
 		/// \param v : the value to add to the calling rational
 		/// \return the sum of the current Rational and the argument value
 		template <typename A>
-		constexpr Rational operator+(const A &v) const;
+		constexpr Rational<T> operator+(const A &v) const;
 
 		/// \brief add a value to the calling Rational
 		/// \param v : the value to add to the calling rational
@@ -120,13 +122,13 @@ namespace rational{
 
 		/// \brief unary minus
 		/// \return the minus of the calling Rational
-		constexpr Rational operator-() const;
+		constexpr Rational<T> operator-() const;
 		
 		/// \brief substract 2 Rationals
 		/// \param v : value to substract to the calling Rational
 		/// \return the substract of the current Rational and the argument value
 		template <typename A>
-		constexpr Rational operator-(const A &v) const;
+		constexpr Rational<T> operator-(const A &v) const;
 
 		/// \brief substract a value to the calling Rational
 		/// \param v : the value to substract to the calling Rational
@@ -137,7 +139,7 @@ namespace rational{
 		/// \param v : the value to multiply to the calling Rational
 		/// \return the product of the current Rational and the argument value
 		template <typename A>
-		constexpr Rational operator*(const A &v) const;
+		constexpr Rational<T> operator*(const A &v) const;
 
 		/// \brief multiply a value to the calling Rational
 		/// \param v : the value to multiply to the calling Rational
@@ -148,7 +150,7 @@ namespace rational{
 		/// \param v : the value to divide to the calling Rational
 		/// \return the quotient of the current Rational and the argument value
 		template <typename A>
-		constexpr Rational operator/(const A &v) const;
+		constexpr Rational<T> operator/(const A &v) const;
 
 		/// \brief divide a value to the calling Rational
 		/// \param v : the value to divide to the calling Rational
@@ -195,7 +197,7 @@ namespace rational{
 		//////////////////////Others methods
 
 		/// \brief return the absolute value of the calling Rational
-		constexpr Rational abs() const;
+		constexpr Rational<T> abs() const;
 
 		/// \brief return the integar part of the calling Rational
 		constexpr int floor() const;
@@ -214,10 +216,10 @@ namespace rational{
 		constexpr float tan() const;
 
 		/// \brief return the pow value of the calling Rational
-		constexpr Rational pow(const unsigned int n) const; 
+		constexpr Rational<T> pow(const unsigned int n) const; 
 
 		/// \brief return the square root of the calling Rational (passing by float)
-		constexpr Rational sqrt() const; 
+		constexpr Rational<T> sqrt() const; 
 
 		/// \brief return the exp value of the calling Rational (passing by float)
 		constexpr float exp() const; 
@@ -226,7 +228,7 @@ namespace rational{
 		/// \param v : the value to convert to Rational
 		/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
 		template<typename A>
-		constexpr static Rational toRational(const A& v, const uint nbIter);
+		constexpr static Rational<T> toRational(const A& v, const uint nbIter);
 
 		/// \brief function that returns the maximum of 2 Rationals
 		/// \param r1 : the first Rational to get the maximum of
