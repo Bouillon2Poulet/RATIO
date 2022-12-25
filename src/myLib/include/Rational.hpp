@@ -318,10 +318,6 @@ namespace rational{
 		//case _d<0
 		_n*=sign(_d);
 		_d*=sign(_d);
-
-
-		//infinite
-		if (_d==0) _n=1*sign(_n);
 	}
 
 	template <typename T>
@@ -331,9 +327,6 @@ namespace rational{
 		Rational<T> r = toRational(value,NBITERDEFAULT);
 		_n=r._n;
 		_d=r._d;
-
-		//infinite
-		if (_d==0) _n=1*sign(_n);
 	}
 
 	//Operators
@@ -508,14 +501,14 @@ namespace rational{
 		if constexpr (std::is_same_v<A,Rational>){
 			return v;
 		}
-		else if(std::is_integral_v<A>){
+		else if constexpr (std::is_integral_v<A>){
 			return Rational<T>(v,1);
 		}
-		else if (std::is_floating_point_v<A>){
-			const float fPos = std::abs(v);
+		else if constexpr (std::is_floating_point_v<A>){
+			const A fPos = std::abs(v);
 			if(fPos == 0. || nbIter == 0 ) return Rational<T>(0,1);
 			if(fPos<1){
-				return ((toRational(1*sign(v)/fPos,nbIter)).invert());
+				return (toRational(A(1*sign(v)/fPos),nbIter)).invert();
 			}
 			const uint uintPart = std::floor(fPos);
 			return Rational<T>(sign(v)*uintPart,1)+toRational(sign(v)*(fPos-uintPart),nbIter-1);

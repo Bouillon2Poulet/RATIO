@@ -9,9 +9,13 @@ using namespace rational;
 /////////////////////////////////////////////////////
 // constructors
 TEST (RationalConstructor, defaultConstructor) { 
-	Rational<int> r;
-	ASSERT_EQ (r.n(),0);
-    ASSERT_EQ (r.d(),1);
+	Rational<int> r1;
+	ASSERT_EQ (r1.n(),0);
+    ASSERT_EQ (r1.d(),1);
+
+	Rational<long long int> r2;
+	ASSERT_EQ (r2.n(),0);
+    ASSERT_EQ (r2.d(),1);
 }
 
 TEST (RationalConstructor, directConstructor) { 
@@ -22,6 +26,26 @@ TEST (RationalConstructor, directConstructor) {
 	Rational<int> r2(-4,6);
 	ASSERT_EQ(r2.n(),-2);
 	ASSERT_EQ(r2.d(),3);
+
+	Rational<long long int> r3(-7,8);
+	ASSERT_EQ(r3.n(),-7);
+	ASSERT_EQ(r3.d(),8);
+
+	Rational<long long int> r4(-10,8);
+	ASSERT_EQ(r4.n(),-5);
+	ASSERT_EQ(r4.d(),4);
+
+	//0/0
+	ASSERT_THROW(Rational<short int> r5(0,0),std::exception);
+
+	//Infinite
+	Rational<long int> r6(20,0);
+	ASSERT_EQ(r6.n(),1);
+	ASSERT_EQ(r6.d(),0);
+
+	Rational<long int> r7(-20,0);
+	ASSERT_EQ(r7.n(),-1);
+	ASSERT_EQ(r7.d(),0);
 }
 
 TEST (RationalConstructor, copyConstructor) { 
@@ -29,6 +53,28 @@ TEST (RationalConstructor, copyConstructor) {
 	Rational<int> r2(r1);
 	ASSERT_EQ(r2.n(),r1.n());
 	ASSERT_EQ(r2.d(),r1.d());
+
+	Rational<long long int> r3(-4,3);
+	Rational<long long int> r4(r3);
+	ASSERT_EQ(r2.n(),r1.n());
+	ASSERT_EQ(r2.d(),r1.d());
+}
+
+TEST (RationalConstructor, valueConstructor) { 
+	Rational<int> r1(5);
+	Rational<long int> r2(-50);
+	ASSERT_EQ(r1.n(),5);
+	ASSERT_EQ(r1.d(),1);
+	ASSERT_EQ(r2.n(),-50);
+	ASSERT_EQ(r2.d(),1);
+
+	Rational<int> r3(2.5);
+	Rational<long long int> r4(-150.2);
+	ASSERT_EQ(r3.n(),5);
+	ASSERT_EQ(r3.d(),2);
+	std::cout<<r4;
+	ASSERT_EQ(r4.n(),-751);
+	ASSERT_EQ(r4.d(),5);
 }
 
 // Methods
