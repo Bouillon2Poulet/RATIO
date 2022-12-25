@@ -339,109 +339,109 @@ namespace rational{
 	template <typename T>
 	template <typename A>
 	constexpr Rational<T> Rational<T>::operator+(const A& v) const{
-		Rational r = toRational<A>(v, NBITERDEFAULT);
-		return Rational(_n*r._d+r._n*_d,_d*r._d);
+		Rational<T> r = toRational<A>(v, NBITERDEFAULT);
+		return Rational<T>(_n*r._d+r._n*_d,_d*r._d);
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr void Rational<T>::operator+=(const A& v) {
-		Rational r = toRational<A>(v, NBITERDEFAULT);
-		Rational result = *this+r;
+		Rational<T> r = toRational<A>(v, NBITERDEFAULT);
+		Rational<T> result = *this+r;
 		*this=result;
 	}
 
 	template <typename T>
 	constexpr Rational<T> Rational<T>::operator-() const {
-		return Rational(-1*_n,_d);
+		return Rational<T>(-1*_n,_d);
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr Rational<T> Rational<T>::operator-(const A& v) const{
-		Rational r = toRational<A>(v, NBITERDEFAULT);
-		return Rational(_n*r._d-r._n*_d,_d*r._d);
+		Rational<T> r = toRational<A>(v, NBITERDEFAULT);
+		return Rational<T>(_n*r._d-r._n*_d,_d*r._d);
 	}
 
 
 	template <typename T>
 	template <typename A>
 	constexpr void Rational<T>::operator-=(const A& v) {
-		Rational r = toRational<A>(v, NBITERDEFAULT);
-		Rational result = *this-r;
+		Rational<T> r = toRational<A>(v, NBITERDEFAULT);
+		Rational<T> result = *this-r;
 		*this=result;
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr Rational<T> Rational<T>::operator*(const A& v) const {
-		Rational r = toRational<A>(v,NBITERDEFAULT);
-		return Rational(_n*r._n,_d*r._d);
+		Rational<T> r = toRational<A>(v,NBITERDEFAULT);
+		return Rational<T>(_n*r._n,_d*r._d);
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr void Rational<T>::operator*=(const A& v){
-		Rational r = toRational<A>(v, NBITERDEFAULT);
-		Rational result = *this*r;
+		Rational<T> r = toRational<A>(v, NBITERDEFAULT);
+		Rational<T> result = *this*r;
 		*this=result;
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr Rational<T> Rational<T>::operator/(const A& v) const{
-		Rational r = toRational<A>(v,NBITERDEFAULT);
+		Rational<T> r = toRational<A>(v,NBITERDEFAULT);
 		return *this*r.invert();
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr void Rational<T>::operator/=(const A& v){
-		Rational r = toRational<A>(v, NBITERDEFAULT);
-		Rational result = *this/r;
+		Rational<T> r = toRational<A>(v, NBITERDEFAULT);
+		Rational<T> result = *this/r;
 		*this=result;
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr bool Rational<T>::operator==(const A& v){
-		Rational r = toRational<A>(v,NBITERDEFAULT);
+		Rational<T> r = toRational<A>(v,NBITERDEFAULT);
 		return (_n==r._n && _d==r._d);
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr bool Rational<T>::operator!=(const A& v){
-		Rational r = toRational<A>(v,NBITERDEFAULT);
+		Rational<T> r = toRational<A>(v,NBITERDEFAULT);
 		return (_n!=r._n || _d!=r._d);
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr bool Rational<T>::operator<(const A& v) const{
-		Rational r = toRational<A>(v,NBITERDEFAULT);
-		return _n*int(r._d)<int(_d)*r._n;
+		Rational<T> r = toRational<A>(v,NBITERDEFAULT);
+		return _n*r._d<_d*r._n;
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr bool Rational<T>::operator<=(const A& v){
-		Rational r = toRational<A>(v,NBITERDEFAULT);
-		return _n*int(r._d)<=int(_d)*r._n;
+		Rational<T> r = toRational<A>(v,NBITERDEFAULT);
+		return _n*r._d<=_d*r._n;
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr bool Rational<T>::operator>(const A& v) const {
-		Rational r = toRational<A>(v,NBITERDEFAULT);
-		return _n*int(r._d)>int(_d)*r._n;
+		Rational<T> r = toRational<A>(v,NBITERDEFAULT);
+		return _n*r._d>_d*r._n;
 	}
 
 	template <typename T>
 	template <typename A>
 	constexpr bool Rational<T>::operator>=(const A& v){
-		Rational r = toRational<A>(v,NBITERDEFAULT);
-		return _n*int(r._d)>=int(_d)*r._n;
+		Rational<T> r = toRational<A>(v,NBITERDEFAULT);
+		return _n*r._d>=_d*r._n;
 	}
 
 	//Methods
