@@ -242,7 +242,7 @@ void demoEnd(){
     std::cout<<"    Mathilde Stocchi"<<"\n\n";
     std::cout<<"Remerciements :"<<std::endl;
     std::cout<<"    Jules Fouchy"<<std::endl;
-    std::cout<<"    Guy Luang"<<std::endl;
+    std::cout<<"    Guy Luong"<<std::endl;
     std::cout<<"    Matteo Leclercq"<<std::endl;
     std::cout<<"    Elise Massa"<<std::endl;
 

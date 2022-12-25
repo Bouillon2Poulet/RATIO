@@ -72,9 +72,10 @@ TEST (RationalConstructor, valueConstructor) {
 	Rational<int> r4(-150.2);
 	ASSERT_EQ(r3.n(),5);
 	ASSERT_EQ(r3.d(),2);
-	std::cout<<r4;
 	ASSERT_EQ(r4.n(),-751);
 	ASSERT_EQ(r4.d(),5);
+
+	ASSERT_THROW(Rational<int> r5(12151581.2548421545),std::exception);
 }
 
 // Methods
@@ -117,6 +118,11 @@ TEST (RationalOperators, plusOperator){
 	ASSERT_EQ((r1+b)==Rational<int>(3,2),true);
 	ASSERT_EQ((r2+a)==Rational<int>(4,3),true);
 	ASSERT_EQ((r2+b)==Rational<int>(5,6),true);
+
+	//infinity
+	Rational<int> r4(1,0);
+	ASSERT_EQ((r2+r4).n(),1);
+	ASSERT_EQ((r2+r4).d(),0);
 }
 
 TEST (RationalOperators, plusEqualOperator){
@@ -139,6 +145,11 @@ TEST (RationalOperators, plusEqualOperator){
 	ASSERT_EQ(r1==Rational<int>(2,1),true);
 	ASSERT_EQ(r4==Rational<int>(-1,6),true);
 
+	//infinity
+	Rational<int> r5(1,0);
+	r2+=r5;
+	ASSERT_EQ(r2.n(),1);
+	ASSERT_EQ(r2.d(),0);
 }
 
 TEST (RationalOperators, unaryMinusOperator){
@@ -149,6 +160,11 @@ TEST (RationalOperators, unaryMinusOperator){
 	Rational<int> r2(2,3);
 	ASSERT_EQ((-r2).n(),-2);
 	ASSERT_EQ((-r2).d(),3);
+
+	//infinity
+	Rational<int> r4(1,0);
+	ASSERT_EQ(-r4.n(),-1);
+	ASSERT_EQ(-r4.d(),-0);
 }
 
 TEST (RationalOperators, minusOperator){
@@ -168,6 +184,11 @@ TEST (RationalOperators, minusOperator){
 	ASSERT_EQ((r1-b)==Rational<int>(-3,2),true);
 	ASSERT_EQ((r2-a)==Rational<int>(-8,3),true);
 	ASSERT_EQ((r2-b)==Rational<int>(-13,6),true);
+
+	//infinity
+	Rational<int> r4(1,0);
+	ASSERT_EQ((r2-r4).n(),-1);
+	ASSERT_EQ((r2-r4).d(),0);
 }
 
 TEST (RationalOperators, minusEqualOperator){
@@ -189,6 +210,12 @@ TEST (RationalOperators, minusEqualOperator){
 	r4-=b;
 	ASSERT_EQ(r1==Rational<int>(-2,1),true);
 	ASSERT_EQ(r4==Rational<int>(-19,6),true);
+
+	//infinity
+	Rational<int> r5(1,0);
+	r2-=r5;
+	ASSERT_EQ(r2.n(),-1);
+	ASSERT_EQ(r2.d(),0);
 }
 
 TEST (RationalOperators, multiplyOperator){
@@ -201,10 +228,15 @@ TEST (RationalOperators, multiplyOperator){
 	ASSERT_EQ((r2*r3).n(),-5);
 	ASSERT_EQ((r2*r3).d(),6);
 
-//float 
+	//float 
 	ASSERT_EQ((r1*0.66).n(),0);
 	ASSERT_EQ((r1*0.66).d(),1);
 	ASSERT_NEAR((r3*0.66).toFloat(),0.825,0.1);
+
+	//infinity
+	Rational<int> r5(1,0);
+	ASSERT_EQ((r2*r5).n(),-1);
+	ASSERT_EQ((r2*r5).d(),0);
 }
 
 TEST (RationalOperators, multiplyEqualOperator){
@@ -227,6 +259,12 @@ TEST (RationalOperators, multiplyEqualOperator){
 	r4*=b;
 	ASSERT_EQ(r1==Rational<int>(0,1),true);
 	ASSERT_EQ(r4==Rational<int>(5,2),true);
+	
+	//infinity
+	Rational<int> r5(1,0);
+	r2*=r5;
+	ASSERT_EQ(r2.n(),-1);
+	ASSERT_EQ(r2.d(),0);
 }
 
 TEST (RationalOperators, divideOperator){
@@ -245,6 +283,11 @@ TEST (RationalOperators, divideOperator){
 	ASSERT_EQ((r1/b)==Rational<int>(0,1),true);
 	ASSERT_EQ((r2/a)==Rational<int>(-2,6),true);
 	ASSERT_EQ((r2/b)==Rational<int>(-4,9),true);
+
+	//infinity
+	Rational<int> r5(1,0);
+	ASSERT_EQ((r2/r5).n(),0);
+	ASSERT_EQ((r2/r5).d(),1);
 }
 
 TEST (RationalOperators, divideEqualOperator){
@@ -267,6 +310,12 @@ TEST (RationalOperators, divideEqualOperator){
 	r4/=b;
 	ASSERT_EQ(r1==Rational<int>(0,1),true);
 	ASSERT_EQ(r4==Rational<int>(10,9),true);
+
+	//infinity
+	Rational<int> r5(1,0);
+	r2/=r5;
+	ASSERT_EQ(r2.n(),0);
+	ASSERT_EQ(r2.d(),1);
 }
 
 TEST (StreamOperators, coutOperator){
@@ -290,7 +339,6 @@ TEST (RationalOperators, EqualComparisonOperator){
 	float b = -1.5;
 	ASSERT_EQ(r4==a,true);
 	ASSERT_EQ(r5==b,true);
-
 }
 
 TEST (RationalOperators, NotEqualComparisonOperator){
@@ -324,6 +372,12 @@ TEST (RationalOperators, InferiorComparisonOperator){
 	float b = -2.5;
 	ASSERT_EQ(r4<a,true);
 	ASSERT_EQ(r5<b,false);
+
+	//infinity
+	Rational<int> r6 (1,0);
+	Rational<int> r7 (-1,0);
+	ASSERT_EQ(r4<r6,true);
+	ASSERT_EQ(r4<r7,false);
 }
 
 TEST (RationalOperators, InferiorEqualComparisonOperator){
@@ -340,6 +394,12 @@ TEST (RationalOperators, InferiorEqualComparisonOperator){
 	float b = -1.5;
 	ASSERT_EQ(r4<=a,true);
 	ASSERT_EQ(r5<=b,true);
+
+	//infinity
+	Rational<int> r6 (1,0);
+	Rational<int> r7 (-1,0);
+	ASSERT_EQ(r4<=r6,true);
+	ASSERT_EQ(r4<=r7,false);
 }
 
 TEST (RationalOperators, SuperiorComparisonOperator){
@@ -356,6 +416,12 @@ TEST (RationalOperators, SuperiorComparisonOperator){
 	float b = -2.5;
 	ASSERT_EQ(r4>a,false);
 	ASSERT_EQ(r5>b,true);
+
+	//infinity
+	Rational<int> r6 (1,0);
+	Rational<int> r7 (-1,0);
+	ASSERT_EQ(r4>r6,false);
+	ASSERT_EQ(r4>r7,true);
 }
 
 TEST (RationalOperators, SuperiorEqualComparisonOperator){
@@ -372,6 +438,12 @@ TEST (RationalOperators, SuperiorEqualComparisonOperator){
 	float b = -1.5;
 	ASSERT_EQ(r4>=a,false);
 	ASSERT_EQ(r5>=b,true);
+
+	//infinity
+	Rational<int> r6 (1,0);
+	Rational<int> r7 (-1,0);
+	ASSERT_EQ(r4>=r6,false);
+	ASSERT_EQ(r4>=r7,true);
 }
 
 //Methods
@@ -395,6 +467,10 @@ TEST (RationalMethods, toFloatMethod){
 	Rational<int>r2(0,1);
 	ASSERT_NEAR(r1.toFloat(),-0.666,0.01);
 	ASSERT_NEAR(r2.toFloat(),0,0.01);
+
+	//infinity
+	Rational<int>r3(1,0);
+	ASSERT_EQ(r3.toFloat(),INFINITY);
 }
 
 TEST (RationalMethods, cosMethod){
@@ -404,6 +480,10 @@ TEST (RationalMethods, cosMethod){
 	ASSERT_NEAR(r1.cos(),1,0.01);
 	ASSERT_NEAR(r2.cos(),0,0.01);
 	ASSERT_NEAR(r3.cos(),-1,0.01);
+
+	//infinity
+	Rational<int>r4(1,0);
+	ASSERT_EQ(std::isnan(r4.cos()),true);
 }
 
 TEST (RationalMethods, sinMethod){
@@ -413,6 +493,10 @@ TEST (RationalMethods, sinMethod){
 	ASSERT_NEAR(r1.sin(),0,0.01);
 	ASSERT_NEAR(r2.sin(),1,0.01);
 	ASSERT_NEAR(r3.sin(),0,0.01);
+
+	//infinity
+	Rational<int>r4(1,0);
+	ASSERT_EQ(std::isnan(r4.sin()),true);
 }
 
 TEST (RationalMethods, tanMethod){
@@ -422,6 +506,10 @@ TEST (RationalMethods, tanMethod){
 	ASSERT_NEAR(r1.tan(),0,0.01);
 	ASSERT_NEAR(r2.tan(),1,0.01);
 	ASSERT_NEAR(r3.tan(),0,0.01);
+
+	//infinity
+	Rational<int>r4(1,0);
+	ASSERT_EQ(std::isnan(r4.tan()),true);
 }
 
 TEST (RationalMethods, powMethod){
@@ -433,6 +521,11 @@ TEST (RationalMethods, powMethod){
 	Rational<int>r4(4,9);
 
 	ASSERT_EQ(r3.pow(2)==r4,true);
+
+	//infinity
+	Rational<int>r5(1,0);
+	ASSERT_EQ(r5.pow(5).n(),1);
+	ASSERT_EQ(r5.pow(5).d(),0);
 }
 
 TEST (RationalMethods, sqrtMethod){
@@ -442,8 +535,11 @@ TEST (RationalMethods, sqrtMethod){
 
 	Rational<int>r3(4,36);
 	Rational<int>r4(2,6);
-
 	ASSERT_EQ(r3.sqrt()==r4,true);
+
+	//infinity
+	Rational<int>r5(1,0);
+	ASSERT_EQ(std::isnan(r5.cos()),true);
 }
 
 TEST (RationalMethods, expMethod){
@@ -452,4 +548,8 @@ TEST (RationalMethods, expMethod){
 	ASSERT_EQ(r1.exp()==1.0,true);
 
 	ASSERT_EQ(r2.exp()==float(std::exp(5.0/10.0)),true);
+
+	//infinity
+	Rational<int>r5(1,0);
+	ASSERT_EQ(r5.exp(),INFINITY);
 }

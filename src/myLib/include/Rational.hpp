@@ -313,7 +313,6 @@ namespace rational{
 			_n/=gcd;
 			_d/=gcd;
 		}
-
 		//case _d<0
 		_n*=sign(_d);
 		_d*=sign(_d);
@@ -391,7 +390,7 @@ namespace rational{
 	template <typename A>
 	constexpr Rational<T> Rational<T>::operator/(const A& v) const{
 		Rational<T> r = toRational<A>(v,NBITERDEFAULT);
-		return *this*r.invert();
+		return Rational<T>(_n*r._d,_d*r._n);
 	}
 
 	template <typename T>
