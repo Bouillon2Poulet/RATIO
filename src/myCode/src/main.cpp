@@ -20,9 +20,10 @@ int main() {
     // std::cout<<"!!!"<<Rational<long int>(-5)<<std::endl;
     //std::cout<<"!!!"<<Rational<long long int>(-0.5)<<std::endl;
     double a = -150.2;
-    // float b = -150.2;
-    std::cout<<"!!!"<<Rational<int>(a)<<std::endl;
-    // std::cout<<"!!!"<<Rational<int>(b)<<std::endl;
+    float b = -150.2;
+    //std::cout<<"!!!"<<Rational<int>(a)<<std::endl;
+    // std::cout<<"!!!"<<Rational<long int>(a)<<std::endl;
+    std::cout<<"!!!"<<Rational<long int>(b)<<std::endl;
     // demo();
     return 0;
 }
@@ -171,13 +172,13 @@ void chapter3(){
     std::cout<<"    sinon -> renvoie une exception"<<std::endl<<std::endl;
     std::cout<<"Exemples :"<<std::endl;
     std::cout<<"Rational<int> a = Rational::toRational(5,10)"<<std::endl;
-    Rational<int> a = Rational<int>::toRational(5,10);
+    Rational<int> a = Rational<int>::toRational<int>(5,10);
     std::cout<<"a ="<<a<<std::endl;
     std::cout<<"Rational<int> b = Rational::toRational(a,10)"<<std::endl;
-    Rational<int> b = Rational<int>::toRational(a,10);
+    Rational<int> b = Rational<int>::toRational<Rational<int>>(a,10);
     std::cout<<"b ="<<b<<std::endl;
     std::cout<<"Rational<int> c = Rational::toRational(5.9,10)"<<std::endl;
-    Rational<int> c = Rational<int>::toRational(5.9f,10);
+    Rational<int> c = Rational<int>::toRational<float>(5.9f,10);
     std::cout<<"c ="<<c<<std::endl<<std::endl;
     std::cout<<"\n\n\n"<<"Presser une touche -> Page suivante"<<std::endl;
     char z;

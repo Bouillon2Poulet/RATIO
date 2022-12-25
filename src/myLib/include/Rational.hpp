@@ -39,6 +39,7 @@
 /// \li Finally, huge thanks to Vincent Nozick aka "le maxi crack" who supported us during the whole semester
 
 int NBITERDEFAULT = 10;
+float MAXERRORDEFAULT = 0.0001;
 
 /// \class Rational
 /// \brief template class defining a number by its rational form, template type MUST BE an integral
@@ -72,7 +73,6 @@ namespace rational{
 		/// \param value : the const value converted into a Rational
 		template<typename A>
 		constexpr Rational<T>(const A& value);
-
 
 		/// \brief destructor
 		~Rational() = default;
@@ -303,10 +303,8 @@ namespace rational{
 	template <typename T>
 	constexpr Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 		static_assert(std::is_integral_v<T>, "T template must be integers");
-		//std::cout<<"CONSTRUCTEUR VALUE"<<std::endl;
 		//case 0/0
 		if (_n ==0 && _d==0){
-			//std::cout<<"???"<<std::endl;
 			throw std::invalid_argument("error : bad argument");
 		}
 
@@ -316,11 +314,9 @@ namespace rational{
 			_d/=gcd;
 		}
 
-		//std::cout<<"AVANT"<<std::endl;
 		//case _d<0
 		_n*=sign(_d);
 		_d*=sign(_d);
-		//std::cout<<"APRES"<<std::endl;
 	}
 
 	template <typename T>
@@ -328,6 +324,7 @@ namespace rational{
 	constexpr Rational<T>::Rational(const A& value){
 		static_assert(std::is_integral_v<T>, "T template must be integers");
 		Rational<T> r = toRational(value,NBITERDEFAULT);
+		if (std::abs(r.toFloat()-(float)value)>MAXERRORDEFAULT) throw std::invalid_argument("Conversion failed, try double for value's type");
 		_n=r._n;
 		_d=r._d;
 	}
@@ -487,8 +484,8 @@ namespace rational{
 
 	template <typename T>
 	constexpr Rational<T> Rational<T>::sqrt() const {
-		if(_n< 0){
-			//std::cout<<"Veuillez rentrer un nombre positif"<<std::endl;
+		if(_n < 0){
+			throw std::invalid_argument("Veuillez rentrer un Rational positif");
 			}
 		return Rational(std::sqrt(_n),std::sqrt(_d));
 	}
@@ -501,33 +498,26 @@ namespace rational{
 	template <typename T>
 	template <typename A>
 	constexpr Rational<T> Rational<T>::toRational(const A& v, const uint nbIter){
-		//std::cout<<"???"<<v<<std::endl;
 		if constexpr (std::is_same_v<A,Rational>){
-			//std::cout<<'"SAME TYPE"'<<v<<std::endl;
 			return v;
 		}
 		if constexpr (std::is_integral_v<A>){
-			//std::cout<<'"INT"'<<v<<std::endl;
 			return Rational<T>(v,1);
 		}
 		else if constexpr (std::is_floating_point_v<A>){
-			//std::cout<<"FLOAT"<<std::endl;
 			const A fPos = std::abs(v);
-			//std::cout<<"ABS OK : "<< fPos << std::endl;
 			if(fPos == 0. || nbIter == 0 ){
-				//std::cout<<"PREMIER IF"<<std::endl;
 				return Rational<T>();
 			}
 			if(fPos<1){
-				//std::cout<<"IF < 1"<<std::endl;
-				return (toRational(A(1*sign(v)/fPos),nbIter)).invert();
+				return (toRational<A>(A(1*sign(v)/fPos),nbIter)).invert();
 			}
-			//std::cout<<"IF > 1"<<std::endl;
-			const uint uintPart = std::floor(fPos);
-			return Rational<T>((T)sign(v)*uintPart,(T)1)+toRational(sign(v)*(fPos-uintPart),nbIter-1);
+			const A uintPart = std::floor(fPos);
+			A diff = fPos - uintPart;
+			if (diff<1e-10) diff=0; //Avoid same floats considered as unequal;
+			return Rational<T>((T)sign(v)*uintPart,(T)1)+toRational<A>((A)sign(v)*(diff),nbIter-1);
 		}
 		else {
-			//std::cout<<"ELSE"<<std::endl;
 			throw std::invalid_argument("error : bad argument");
 		}
 	}
