@@ -15,12 +15,20 @@ void uRational(int nb_iter);
 void uFloat(int nb_iter);
 
 int main() {
-    demo();
+    system("clear");
+    // std::cout<<"!!!"<<Rational<int>(-0.5)<<std::endl;
+    // std::cout<<"!!!"<<Rational<long int>(-5)<<std::endl;
+    std::cout<<"!!!"<<Rational<long long int>(-0.5)<<std::endl;
+    // double a = -150.2;
+    // float b = -150.2;
+    // std::cout<<"!!!"<<Rational<int>(a)<<std::endl;
+    // std::cout<<"!!!"<<Rational<int>(b)<<std::endl;
+    // demo();
     return 0;
 }
 
 void demo(){
-        system("clear");
+    system("clear");
     std::cout<<"Bienvenue dans la demo de la librairie Rational !"<<std::endl;
     std::cout<<"\n\n\n\n\n\n";
     std::cout<<"Appuyez sur une touche pour continuer"<<std::endl;

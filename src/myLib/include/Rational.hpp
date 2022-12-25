@@ -107,7 +107,7 @@ namespace rational{
 		//////////////////////Operators
 
 		/// \brief affectation operator
-		constexpr void operator=(const Rational &r);
+		constexpr void operator=(const Rational<T> &r);
 
 		/// \brief add 2 Rationals
 		/// \tparam T : the Rational type, MUST BE an integral
@@ -303,9 +303,10 @@ namespace rational{
 	template <typename T>
 	constexpr Rational<T>::Rational(const T& n, const T& d) : _n(n), _d(d) {
 		static_assert(std::is_integral_v<T>, "T template must be integers");
-
+		//std::cout<<"CONSTRUCTEUR VALUE"<<std::endl;
 		//case 0/0
 		if (_n ==0 && _d==0){
+			//std::cout<<"???"<<std::endl;
 			throw std::invalid_argument("error : bad argument");
 		}
 
@@ -315,9 +316,11 @@ namespace rational{
 			_d/=gcd;
 		}
 
+		//std::cout<<"AVANT"<<std::endl;
 		//case _d<0
 		_n*=sign(_d);
 		_d*=sign(_d);
+		//std::cout<<"APRES"<<std::endl;
 	}
 
 	template <typename T>
@@ -331,7 +334,7 @@ namespace rational{
 
 	//Operators
 	template <typename T>
-	constexpr void Rational<T>::operator=(const Rational &r){
+	constexpr void Rational<T>::operator=(const Rational<T> &r){
 		_n = r.n();
 		_d = r.d();
 	}
@@ -485,7 +488,7 @@ namespace rational{
 	template <typename T>
 	constexpr Rational<T> Rational<T>::sqrt() const {
 		if(_n< 0){
-			std::cout<<"Veuillez rentrer un nombre positif"<<std::endl;
+			//std::cout<<"Veuillez rentrer un nombre positif"<<std::endl;
 			}
 		return Rational(std::sqrt(_n),std::sqrt(_d));
 	}
@@ -498,22 +501,33 @@ namespace rational{
 	template <typename T>
 	template <typename A>
 	constexpr Rational<T> Rational<T>::toRational(const A& v, const uint nbIter){
+		//std::cout<<"???"<<v<<std::endl;
 		if constexpr (std::is_same_v<A,Rational>){
+			//std::cout<<'"SAME TYPE"'<<v<<std::endl;
 			return v;
 		}
-		else if constexpr (std::is_integral_v<A>){
+		if constexpr (std::is_integral_v<A>){
+			//std::cout<<'"INT"'<<v<<std::endl;
 			return Rational<T>(v,1);
 		}
 		else if constexpr (std::is_floating_point_v<A>){
+			//std::cout<<"FLOAT"<<std::endl;
 			const A fPos = std::abs(v);
-			if(fPos == 0. || nbIter == 0 ) return Rational<T>(0,1);
+			//std::cout<<"ABS OK : "<< fPos << std::endl;
+			if(fPos == 0. || nbIter == 0 ){
+				//std::cout<<"PREMIER IF"<<std::endl;
+				return Rational<T>();
+			}
 			if(fPos<1){
+				//std::cout<<"IF < 1"<<std::endl;
 				return (toRational(A(1*sign(v)/fPos),nbIter)).invert();
 			}
+			//std::cout<<"IF > 1"<<std::endl;
 			const uint uintPart = std::floor(fPos);
-			return Rational<T>(sign(v)*uintPart,1)+toRational(sign(v)*(fPos-uintPart),nbIter-1);
+			return Rational<T>((T)sign(v)*uintPart,(T)1)+toRational((T)sign(v)*(T)(fPos-uintPart),nbIter-1);
 		}
 		else {
+			//std::cout<<"ELSE"<<std::endl;
 			throw std::invalid_argument("error : bad argument");
 		}
 	}

@@ -69,7 +69,7 @@ TEST (RationalConstructor, valueConstructor) {
 	ASSERT_EQ(r2.d(),1);
 
 	Rational<int> r3(2.5);
-	Rational<long long int> r4(-150.2);
+	Rational<int> r4(-150.2);
 	ASSERT_EQ(r3.n(),5);
 	ASSERT_EQ(r3.d(),2);
 	std::cout<<r4;
