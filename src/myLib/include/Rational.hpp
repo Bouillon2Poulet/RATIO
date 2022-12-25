@@ -524,7 +524,7 @@ namespace rational{
 			}
 			//std::cout<<"IF > 1"<<std::endl;
 			const uint uintPart = std::floor(fPos);
-			return Rational<T>((T)sign(v)*uintPart,(T)1)+toRational((T)sign(v)*(T)(fPos-uintPart),nbIter-1);
+			return Rational<T>((T)sign(v)*uintPart,(T)1)+toRational(sign(v)*(fPos-uintPart),nbIter-1);
 		}
 		else {
 			//std::cout<<"ELSE"<<std::endl;

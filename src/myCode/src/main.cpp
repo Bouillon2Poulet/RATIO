@@ -18,10 +18,10 @@ int main() {
     system("clear");
     // std::cout<<"!!!"<<Rational<int>(-0.5)<<std::endl;
     // std::cout<<"!!!"<<Rational<long int>(-5)<<std::endl;
-    std::cout<<"!!!"<<Rational<long long int>(-0.5)<<std::endl;
-    // double a = -150.2;
+    //std::cout<<"!!!"<<Rational<long long int>(-0.5)<<std::endl;
+    double a = -150.2;
     // float b = -150.2;
-    // std::cout<<"!!!"<<Rational<int>(a)<<std::endl;
+    std::cout<<"!!!"<<Rational<int>(a)<<std::endl;
     // std::cout<<"!!!"<<Rational<int>(b)<<std::endl;
     // demo();
     return 0;
