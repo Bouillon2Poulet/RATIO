@@ -16,15 +16,7 @@ void uFloat(int nb_iter);
 
 int main() {
     system("clear");
-    // std::cout<<"!!!"<<Rational<int>(-0.5)<<std::endl;
-    // std::cout<<"!!!"<<Rational<long int>(-5)<<std::endl;
-    //std::cout<<"!!!"<<Rational<long long int>(-0.5)<<std::endl;
-    double a = -150.2;
-    float b = -150.2;
-    //std::cout<<"!!!"<<Rational<int>(a)<<std::endl;
-    // std::cout<<"!!!"<<Rational<long int>(a)<<std::endl;
-    std::cout<<"!!!"<<Rational<long int>(b)<<std::endl;
-    // demo();
+    demo();
     return 0;
 }
 
@@ -52,8 +44,11 @@ void demo(){
     }
     switch (c){
         case '1': chapter1();
+        [[fallthrough]];
         case '2': chapter2();
+        [[fallthrough]];
         case '3': chapter3();
+        [[fallthrough]];
         case '4': chapter4();
     }
     demoEnd();
