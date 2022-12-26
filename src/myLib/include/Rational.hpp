@@ -548,7 +548,14 @@ namespace rational{
 
 	template <typename T>
 	constexpr std::ostream& operator<< (std::ostream& stream, const Rational<T>& r){
-		stream << r.n() << "/" << r.d();
+		if (r.d()==0){
+			char sign;
+			sign = (internal::sign(r.n())>0) ? '+' : '-';
+			stream << sign << "inf";
+		}
+		else{
+			stream << r.n() << "/" << r.d();
+		}
 		return stream;
 	}
 

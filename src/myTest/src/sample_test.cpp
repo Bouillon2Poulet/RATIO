@@ -323,6 +323,16 @@ TEST (StreamOperators, coutOperator){
 		std::stringstream stream;
 		stream<<r;
 		ASSERT_EQ (stream.str(),std::to_string(-2)+"/"s+std::to_string(3));
+
+		//infinity
+		Rational<int>r2(1,0);
+		Rational<int>r3(-1,0);
+		std::stringstream().swap(stream);
+		stream<<r2;
+		ASSERT_EQ (stream.str(),"+inf");
+		std::stringstream().swap(stream);
+		stream<<r3;
+		ASSERT_EQ (stream.str(),"-inf");
 }
 
 TEST (RationalOperators, EqualComparisonOperator){
