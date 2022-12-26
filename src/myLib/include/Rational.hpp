@@ -113,11 +113,11 @@ namespace rational{
 		/// \tparam T : the Rational type, MUST BE an integral
 		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to add to the calling rational
-		/// \return the sum of the current Rational and the argument value
+		/// \return the sum of the calling Rational and the argument value
 		template <typename A>
 		constexpr Rational<T> operator+(const A& v) const;
 
-		/// \brief add a value to the calling Rational
+		/// \brief add a value to the calling Rational, and assigns the result to that Rational.
 		/// \tparam T : the Rational type, MUST BE an integral
 		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to add to the calling rational
@@ -137,7 +137,7 @@ namespace rational{
 		template <typename A>
 		constexpr Rational<T> operator-(const A& v) const;
 
-		/// \brief substract a value to the calling Rational
+		/// \brief substract a value to the calling Rational and assigns the result to that Rational.
 		/// \tparam T : the Rational type, MUST BE an integral
 		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to substract to the calling Rational
@@ -152,7 +152,7 @@ namespace rational{
 		template <typename A>
 		constexpr Rational<T> operator*(const A& v) const;
 
-		/// \brief multiply a value to the calling Rational
+		/// \brief multiply a value to the calling Rational and assigns the result to that Rational.
 		/// \tparam T : the Rational type, MUST BE an integral
 		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to multiply to the calling Rational
@@ -167,7 +167,7 @@ namespace rational{
 		template <typename A>
 		constexpr Rational<T> operator/(const A& v) const;
 
-		/// \brief divide a value to the calling Rational
+		/// \brief divide a value to the calling Rational and assigns the result to that Rational.
 		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to divide to the calling Rational
 		template <typename A>
@@ -224,7 +224,7 @@ namespace rational{
 		constexpr Rational<T> abs() const;
 
 		/// \brief return the integar part of the calling Rational
-		/// \return the aintegar value of the calling Rational
+		/// \return the integar value of the calling Rational
 		constexpr int floor() const;
 
 		/// \brief convert the calling Rational to a float
@@ -261,7 +261,7 @@ namespace rational{
 		/// \tparam T : the Rational type, MUST BE an integral
 		/// \tparam A : the value type, MUST BE an integral, a floating point or a Rational
 		/// \param v : the value to convert to Rational
-		/// \param nbIter : number of recursive call, greater it is, more precise the conversion will be
+		/// \param nbIter : number of recursive call, the larger it is, the more precise the conversion will be
 		template<typename A>
 		constexpr static Rational<T> toRational(const A& v, const uint nbIter);
 
