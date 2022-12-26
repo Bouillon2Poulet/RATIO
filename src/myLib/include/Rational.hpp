@@ -16,8 +16,8 @@
 /// \mainpage
 /// \image html myImage.jpg
 /// \tableofcontents
-/// \section instroduction_sec What for?
-/// Rational is a super tool to decrease error caused by float with STLs intrinsic rounds  
+/// \section introduction_sec What for?
+/// Rational is a super tool to reduce floating point arithmetic errors
 /// \section install_bigsec How to install
 /// \subsection dependencies_sec Dependecies
 /// \li C++ 17
@@ -33,13 +33,16 @@
 /// \li The documentation is located in :
 /// 	- [path to build]/doc/doc-doxygen/html/index.html or 
 /// 	- or [path to build]/INTERFACE/doc/doc-doxygen/html/index.html
+/// \section UnitTests and Demo
+/// \li Unitary Tests provided by google lib are available at /build/myTest/myUnitTests
+/// \li A demo in french langage is available at /build/myCode/Rational_Demo
 /// \section Credits
 /// \li Big thanks to Jules Fouchy, Matteo Leclercq and Guy Luong for the big help they provided us
 /// \li Shout out to Elise Massa who recommended overleaf.com in order to make our project report
 /// \li Finally, huge thanks to Vincent Nozick aka "le maxi crack" who supported us during the whole semester
 
 int NBITERDEFAULT = 10;
-float MAXERRORDEFAULT = 0.0001;
+float MAXFLOATERRORDEFAULT = 0.0001;
 
 /// \class Rational
 /// \brief template class defining a number by its rational form, template type MUST BE an integral
@@ -323,7 +326,7 @@ namespace rational{
 	constexpr Rational<T>::Rational(const A& value){
 		static_assert(std::is_integral_v<T>, "T template must be integers");
 		Rational<T> r = toRational(value,NBITERDEFAULT);
-		if (std::abs(r.toFloat()-(float)value)>MAXERRORDEFAULT) throw std::invalid_argument("Conversion failed, try double for value's type");
+		if (std::abs(r.toFloat()-(float)value)>MAXFLOATERRORDEFAULT) throw std::invalid_argument("Conversion failed, try double for value's type");
 		_n=r._n;
 		_d=r._d;
 	}
